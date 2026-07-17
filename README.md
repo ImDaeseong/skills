@@ -10,7 +10,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `_sha
 
 1. 이 저장소를 그대로 clone 또는 다운로드해서 원하는 위치에 둡니다.
 2. `genie/`, `biz-council/`, `design-report/` 폴더를 각자 쓰는 에이전트 호스트의 스킬 디렉터리에 연결합니다 (예: Claude Code라면 `~/.claude/skills/` 아래에 심볼릭 링크하거나 복사).
-3. 아무 요청이든 **"지니야" / genie**를 부르면, `_shared/ROUTING.md`를 읽고 알맞은 전문 스킬로 자동 연결됩니다. 스킬 이름을 몰라도 됩니다.
+3. 아무 요청이든 **"지니야" / genie**를 부르면, `_shared/ROUTING.md`를 읽고 알맞은 전문 스킬과 호출 방법을 알려줍니다. 스킬 이름을 몰라도 됩니다.
 4. 특정 스킬을 바로 쓰고 싶으면 이름으로 직접 호출해도 됩니다 (예: "biz-council로 이 아이디어 검증해줘").
 5. 아직 없는 분야(기획/마케팅/제조/판매 등)를 요청하면 genie가 "없다"고 정직하게 답하고, 새로 만들지 물어봅니다 — 만들 때도 항상 같은 절차(GitHub에서 별점 높은 실제 후보 조사 → 라이선스 확인 → 방법론만 발췌해 원문 그대로 베끼지 않고 재작성 → `_shared/ROUTING.md`에 한 줄 추가)를 따릅니다.
 6. `_shared/CORE-LAWS.md`는 모든 스킬이 공유하는 규칙(추측 금지, GitHub 라이브러리는 별점순 채택, 코드로 구현될 경우의 구조 원칙)입니다 — 새 스킬을 추가하거나 수정할 때 이 파일을 참조하세요.
@@ -20,7 +20,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `_sha
 
 1. Clone or download this repository as-is.
 2. Point your agent host's skills directory at `genie/`, `biz-council/`, and `design-report/` (e.g. for Claude Code, symlink or copy them under `~/.claude/skills/`).
-3. Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes to the right specialist skill automatically. You don't need to know skill names.
+3. Call **`genie`** for anything — it reads `_shared/ROUTING.md` and tells you which specialist skill to invoke. You don't need to know skill names.
 4. You can also invoke a specific skill directly by name (e.g. "validate this idea with biz-council").
 5. If you ask for a domain that doesn't exist yet (planning/marketing/manufacturing/sales/etc.), `genie` says so honestly and offers to build one — always via the same process: find real GitHub candidates ranked by stars → check their license → extract methodology and rewrite it in original wording (never copy verbatim) → add one row to `_shared/ROUTING.md`.
 6. `_shared/CORE-LAWS.md` holds the rules every skill shares (no speculation, GitHub libraries ranked by real star counts, code-architecture principles if a design doc is ever implemented) — read it before adding or editing any skill.
@@ -30,7 +30,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `_sha
 
 ## Entry point
 
-Call **`genie`** for anything — it reads `_shared/ROUTING.md` and hands off to the right specialist skill below. It does not solve requests itself, and it says so honestly when no specialist exists yet for a given domain (see `genie/SKILL.md`).
+Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you to the right specialist skill below. It does not solve requests itself, and it says so honestly when no specialist exists yet for a given domain (see `genie/SKILL.md`).
 
 ## Shared foundation
 
@@ -41,7 +41,7 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and hands off to
 
 | Skill | What it does |
 |---|---|
-| [`genie/`](genie/SKILL.md) | Router / single entry point. Matches a request to a specialist skill and hands off; never fabricates capability it doesn't have. |
+| [`genie/`](genie/SKILL.md) | Router / single entry point. Matches a request to a specialist skill and tells the host/user what to invoke; never fabricates capability it doesn't have. |
 | [`biz-council/`](biz-council/SKILL.md) | Researches real user signal (Reddit, X, YouTube, TikTok, Instagram Reels, Hacker News, Polymarket, web + a Korean-web supplement), runs it through a 5-advisor council for multi-angle judgment, then produces a precise, evidence-cited business/product design document. |
 | [`design-report/`](design-report/SKILL.md) | Gives a visual artifact a deliberate design direction, and/or formats structured findings (e.g. a `biz-council` document) into a DOCX/PPTX/XLSX/PDF report. |
 
@@ -51,13 +51,13 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and hands off to
 
 | Project | Link | Stars (checked) | License | Role |
 |---|---|---|---|---|
-| **last30days** | [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | not checked (pre-dates the star-checking discipline; re-verify before relying on this row) | MIT | **Runtime dependency of `biz-council`.** Not present in this folder — cloned into `~/Desktop/skills/last30days` on first use if missing. |
-| **llm-council** | [aiwithremy/claude-skills-llm-council](https://github.com/aiwithremy/claude-skills-llm-council) (fork of [karpathy/llm-council](https://github.com/karpathy/llm-council)) | not checked | Unconfirmed — **neither repo has a LICENSE file** (verified directly, not from a secondary source); both default to all-rights-reserved | Methodology reference only for `biz-council`'s council step. Not vendored, not redistributed verbatim — `biz-council` describes the approach in its own words and fetches the original live via WebFetch rather than storing a copy. |
-| **gstack** | [github.com/garrytan/gstack](https://github.com/garrytan/gstack) | not checked | MIT | Methodology reference only for `biz-council`'s design-doc step (`/spec`, `/plan-ceo-review` question frameworks). Its own runtime is intentionally excluded. |
-| **anthropics/skills** | [github.com/anthropics/skills](https://github.com/anthropics/skills) | 161,994 (checked 2026-07-17 via GitHub API) | Unconfirmed — **no LICENSE file in the repo root** (verified directly: `GET /repos/anthropics/skills/license` returns 404; `THIRD_PARTY_NOTICES.md` covers only bundled third-party libraries, not the skill content). Defaults to all-rights-reserved. | `design-report`'s primary design + report-format reference, description-only. |
+| **last30days** | [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 52.5k (checked 2026-07-17 via GitHub page) | MIT | **Runtime dependency of `biz-council`.** Not tracked in this repo — cloned into `~/Desktop/skills/last30days` on first use if missing, and ignored by `.gitignore`. |
+| **llm-council** | [aiwithremy/claude-skills-llm-council](https://github.com/aiwithremy/claude-skills-llm-council) (fork of [karpathy/llm-council](https://github.com/karpathy/llm-council)) | not verified in this pass | Unconfirmed — **neither repo has a LICENSE file** (verified directly, not from a secondary source); both default to all-rights-reserved | Methodology reference only for `biz-council`'s council step. Not vendored, not redistributed verbatim — `biz-council` describes the approach in its own words and fetches the original live via WebFetch rather than storing a copy. |
+| **gstack** | [github.com/garrytan/gstack](https://github.com/garrytan/gstack) | not verified in this pass | MIT | Methodology reference only for `biz-council`'s design-doc step (`/spec`, `/plan-ceo-review` question frameworks). Its own runtime is intentionally excluded. |
+| **anthropics/skills** | [github.com/anthropics/skills](https://github.com/anthropics/skills) | 162k (checked 2026-07-17 via GitHub page) | Mixed: README says many skills are Apache 2.0, while `docx`/`pdf`/`pptx`/`xlsx` are source-available, not open source. Treat referenced document skills as `[LICENSE-UNCONFIRMED]` for redistribution. | `design-report`'s primary design + report-format reference, description-only. |
 | **tfriedel/claude-office-skills** | [github.com/tfriedel/claude-office-skills](https://github.com/tfriedel/claude-office-skills) | 787 (checked 2026-07-17 via GitHub API) | Unconfirmed — no LICENSE file (verified) | `design-report`'s fallback reference for DOCX/PPTX/XLSX/PDF generation. |
 | **Helena Liu / Product Camps** | [youtube.com/@HELENA-LIU](https://www.youtube.com/@HELENA-LIU) | n/a (YouTube channel) | n/a | Original source that surfaced `last30days`, `llm-council`, and `gstack` as "free AI employees" in a video; motivated this whole workspace. |
 
 ## Why the originals aren't kept locally
 
-`llm-council` and `gstack` were cloned only to read their SKILL.md methodology, which is now folded into `biz-council/SKILL.md` by reference and summary — keeping the full repos added no further value. `last30days` is a real runtime dependency (not just methodology), so it isn't vendored either; `biz-council` re-clones it on demand instead, which avoids this folder silently drifting out of sync with upstream fixes. `anthropics/skills` has no LICENSE file (verified directly, not assumed) — `design-report` references its docx/pdf/pptx/xlsx and frontend-design skills without vendoring, by design, not by oversight.
+`llm-council` and `gstack` were cloned only to read their SKILL.md methodology, which is now folded into `biz-council/SKILL.md` by reference and summary — keeping the full repos added no further value. `last30days` is a real runtime dependency (not just methodology), so it is not tracked here; `biz-council` re-clones it on demand and `.gitignore` keeps that local runtime copy out of this repo. `anthropics/skills` is mixed-license/source-available depending on subfolder — `design-report` references its docx/pdf/pptx/xlsx and frontend-design skills without vendoring, by design, not by oversight.
