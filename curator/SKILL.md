@@ -21,6 +21,7 @@ This skill introduces no new heavy dependency — it composes two engines alread
 - **marketingskills `social`** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), 40,401★ (checked 2026-07-18), MIT license (already documented in this repo's README via `distribution`). Its `social` skill already covers video hooks, TikTok/Reels/Shorts scripting, and social listening at production quality — Step 3 routes into it rather than reimplementing script-writing craft here.
 - **hardikpandya/stop-slop** — [github.com/hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop), 14,006★ (checked 2026-07-18 via direct GitHub HTML verification), MIT license. Reference for Step 3's prose quality — a skill specifically for catching and removing predictable "AI tells" (stock phrases, structures, rhythms) from written output, applied to the hot-take script before it's considered final. Reinforces this skill's existing "honest opinion, not a hedge" principle with a concrete pattern-catalog rather than a vague instruction to "sound authentic."
 - **Not reimplemented here, routed instead:** footage sourcing, voiceover synthesis, and video rendering are `video-producer`'s job (see `../video-producer/SKILL.md`, which adopts `heygen-com/hyperframes` as primary — 35,961★, Apache-2.0 — with `remotion-dev/remotion` noted as license-gated and `RayVentura/ShortGPT` as a full-pipeline option). This skill stops at the written script and hands off rather than reimplementing rendering.
+- **Zubair Trabzada, social-automation video** — (YouTube, 2026-07-06) — not a GitHub repo. Higgsfield/Blotato (the MCP tools demoed) are proprietary, not adopted. Source of Step 3's brand-voice-file addition — a persisted tone/vocabulary document for ongoing accounts, the same persistence principle `design-report`'s `DESIGN.md` applies to visual style, applied here to writing voice instead.
 
 ## Core Laws
 
@@ -53,6 +54,8 @@ Resolve `marketingskills` the same way `distribution` does (see `../distribution
 - The specific niche + honest opinion + analogy from Step 2
 
 `social`'s own instructions (platform-specific format, hook patterns, etc.) take precedence over anything summarized here.
+
+**If this is an ongoing account, not a one-off script, persist a brand-voice file** — a short document capturing the user's actual tone, vocabulary, phrases they'd never say, and 2-3 examples of writing that already sounds like them (framing surfaced from a Zubair Trabzada social-automation video, 2026-07-06). This is the same persistence principle `design-report`'s `DESIGN.md` applies to visual style: build it once, reference it every time, so voice stays consistent across pieces instead of being re-derived (and drifting toward generic AI phrasing) on each new script. The running "taste file" from Step 4 tracks what *worked*; the voice file is a separate, more stable document for what the account *sounds like* — don't conflate the two or skip the voice file just because a taste file already exists.
 
 **Before calling the script final, pass it through a stop-slop check** (see Attribution) — the same predictable AI phrasing that makes a design read as generic makes a hot take read as generic too, and a script full of "AI tells" undercuts the whole point of a curator's raw, specific voice.
 

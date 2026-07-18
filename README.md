@@ -140,6 +140,7 @@ Not vendored into this repo — methodology reference only, or a runtime depende
 |---|---|---|---|---|
 | **hardikpandya/stop-slop** | [github.com/hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | 14,006 (checked 2026-07-18) | MIT | Step 3's prose-quality check — catches "AI tells" before a hot-take script is called final. Surfaced from a Matt Wolfe "9 free AI skills" video (2026-06-25). |
 | **RayVentura/ShortGPT** | [github.com/RayVentura/ShortGPT](https://github.com/RayVentura/ShortGPT) | 7,708 (checked 2026-07-18 via GitHub API) | MIT | Evaluated, explicitly excluded from `curator` itself — footage sourcing/voiceover/video rendering is `video-producer`'s job, not a curation-judgment task. `curator` routes finished scripts there. |
+| **Zubair Trabzada — social-automation video** | (YouTube, 2026-07-06) | n/a | n/a | Higgsfield/Blotato (the MCP tools demoed) are proprietary, not adopted — but the persisted brand-voice-file concept was a genuine gap: nothing kept writing tone/vocabulary consistent across pieces the way `design-report`'s `DESIGN.md` does for visual style. Added to Step 3, explicitly distinguished from Step 4's separate "taste file" (what worked vs. what it sounds like). |
 
 ### video-producer
 
