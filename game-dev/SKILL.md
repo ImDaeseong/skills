@@ -36,6 +36,10 @@ Ask (AskUserQuestion) if not already clear from the request:
 - **Godot, Unity, Phaser, PixiJS, Three.js, Bevy, pygame, LÖVE, Roblox** — route to the matching skill inside `gamedev-skills/awesome-gamedev-agent-skills` (see Attribution) via its master router rather than reimplementing engine-specific knowledge here.
 - **If no matching engine skill exists for a niche/newer engine** — say so per LAW 0 rather than improvising API calls from general training-data familiarity; a wrong Blueprint node name or a hallucinated Godot API silently breaks a build in a way that's expensive to debug later.
 
+## Step 2.5: Lock the game-design content before wiring gameplay
+
+Run `vibe-coder`'s Step 3 plan gate (see that skill) with game-specific content as the subject matter — a one-page design doc covering the unit/entity tree (stats, roles), resource/economy structure, and enemy/AI behavior patterns, reviewed and signed off before any gameplay code is written. No dedicated GitHub game-design-document methodology cleared this workspace's evidence bar (searched 2026-07-19: the highest-starred candidates were a 601★ curated link list and single-digit/low-tens-star personal templates, and the AI-assisted `game-design-doc-generator` at 1★ doesn't even cover unit/economy/behavior content) — reuse the already-evidenced `vibe-coder` plan-gate methodology (`obra/superpowers`, 256,647★, see `vibe-coder` Attribution) instead of citing a source this weak.
+
 ## Step 3: Build the asset pipeline before wiring gameplay
 
 1. Confirm what's needed: placeholder/programmer art is fine for a prototype validating mechanics; production-ready sprites/models are a separate, heavier request — don't default to the expensive path when the actual need is "does this feel right."
