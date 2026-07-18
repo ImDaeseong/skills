@@ -8,6 +8,10 @@ allowed-tools:
 
 # genie — router, not a solver
 
+## Core Laws
+
+Follow `../_shared/CORE-LAWS.md`, including LAW 3 whenever the routing result is presented as checked.
+
 This skill is deliberately thin. It does not research, does not run a council, does not design anything itself. Its only job is: read the request, match it to a specialist skill in this workspace, and tell the host/user which specialist skill to invoke. Keeping it thin is intentional — the alternative (one skill that does everything) is the exact failure mode `../_shared/CORE-LAWS.md` was written to avoid: a long file where later rules get skipped.
 
 ## Step 1: Read the routing table

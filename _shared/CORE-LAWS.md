@@ -33,3 +33,15 @@ Any skill in this workspace that produces a technical/build section must specify
 4. Any library named in a technical section carries its LAW 1 evidence (star count + check date) next to the name.
 
 No skill in this workspace writes actual source files unless the user explicitly asks for an implementation pass separate from whatever document/design it's producing.
+
+## LAW 3 — Verification loops must close
+
+Whenever a skill validates, retries, or fixes work, run a bounded verification loop:
+
+1. Start with `[LOOP-START] goal: ___ / exit criteria: ___ / max iterations: 2` and state the current phase, concrete checks, blockers, and human-review HOLD conditions.
+2. Every check must produce fresh PASS/FAIL evidence from a tool call or file read. Do not treat an unsupported statement as verification.
+3. After a defect is fixed, add or update a durable regression check (test, schema/type/lint check, validation script, or an explicit repeatable manual check when automation is infeasible).
+4. If the same item fails twice, change approach. If it fails three times, the same location is edited three times, or a fix creates a new failure elsewhere, stop at HOLD.
+5. Stop as soon as every exit criterion passes. Close with `[LOOP-END] result: ___ / gate: __%`; if any HOLD condition remains, say so instead of claiming completion.
+
+For read-only routing or one-pass lookup work, the loop may contain one iteration, but the evidence and closing declaration are still required when the skill claims the result was checked.
