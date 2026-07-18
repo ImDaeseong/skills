@@ -1,6 +1,6 @@
 ---
 name: distribution
-description: "Find where attention already exists for an idea/product, build trust before selling, and produce a distribution plan with multiple concrete channel angles — not a single 'post about it' suggestion. MANDATORY TRIGGERS: 'distribution plan', 'how do I market this', 'where should I promote this', 'launch this product', 'growth ideas', 'marketing plan', 'find my audience'. Wraps coreyhaines31/marketingskills (MIT, 40k+★) as a runtime dependency — routes to its `marketing-ideas`, `launch`, `community-marketing`, `co-marketing`, `directory-submissions`, `public-relations`, and `prospecting` skills rather than reimplementing them. Do not trigger on copy/CRO/SEO/ads execution detail — route those directly to the matching marketingskills specialist instead of through this wrapper."
+description: "Find where attention already exists for an idea/product, build trust before selling, and produce a distribution plan with multiple concrete channel angles — not a single 'post about it' suggestion. MANDATORY TRIGGERS: 'distribution plan', 'how do I market this', 'where should I promote this', 'launch this product', 'growth ideas', 'marketing plan', 'find my audience'. Routes to marketingskills specialists for execution detail rather than reimplementing them. Do not trigger on copy/CRO/SEO/ads execution detail — route those directly to the matching marketingskills specialist instead."
 allowed-tools:
   - Bash
   - Read

@@ -1,6 +1,6 @@
 ---
 name: personal-memory
-description: "Set up a persistent personal memory system so Claude knows the user across sessions instead of starting cold every time — a staged roadmap from the built-in Memory feature, to a CLAUDE.md rules file, to an Obsidian-backed LLM wiki, to a self-consolidating knowledge base. MANDATORY TRIGGERS: 'set up my second brain', 'make Claude remember me', 'persistent memory for Claude', 'Obsidian + Claude', 'LLM wiki', 'how do I get Claude to know my context every session'. Distinct from `agent-builder` (designs an autonomous business worker's memory) and `vibe-coder` (a human's live coding-session discipline) — this is a human's own general-purpose, cross-session personal memory setup, not scoped to coding or to a built worker."
+description: "Set up a persistent personal memory system so Claude knows the user across sessions instead of starting cold every time — a staged roadmap from the built-in Memory feature, to a CLAUDE.md rules file, to an Obsidian-backed LLM wiki, to a self-consolidating knowledge base. MANDATORY TRIGGERS: 'set up my second brain', 'make Claude remember me', 'persistent memory for Claude', 'Obsidian + Claude', 'LLM wiki', 'how do I get Claude to know my context every session'. Distinct from `agent-builder` (a worker's memory) and `vibe-coder` (a live coding session) — this is general-purpose personal memory, not scoped to coding."
 allowed-tools:
   - Read
   - Write

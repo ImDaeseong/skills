@@ -1,6 +1,6 @@
 ---
 name: video-producer
-description: "Turn a script or asset list (e.g. from `curator`) into an actual rendered video — intros, transitions, B-roll, lower thirds, animated infographics, talking-head segments — using HTML/motion-based rendering rather than a closed-source editor. MANDATORY TRIGGERS: 'render this as a video', 'make this into a short video', 'build a video intro', 'animate this infographic', 'add lower thirds/transitions to this'. Fills the video-assembly gap `curator` explicitly stops short of (`curator` produces the script; this skill produces the file). Do not trigger for a single static image — that's `design-report`'s job."
+description: "Turn a script or asset list into an actual rendered video — intros, transitions, B-roll, lower thirds, animated infographics — using HTML/motion-based rendering rather than a closed-source editor. MANDATORY TRIGGERS: 'render this as a video', 'make this into a short video', 'build a video intro', 'animate this infographic', 'add lower thirds/transitions to this'. `curator` produces the script; this skill produces the file. Do not trigger for a single static image — that's `design-report`'s job."
 allowed-tools:
   - Read
   - Write

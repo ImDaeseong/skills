@@ -1,6 +1,6 @@
 ---
 name: biz-council
-description: "Research what real users actually say (Reddit, X, YouTube, TikTok, Instagram Reels, Hacker News, Polymarket, web), run the findings through a 5-advisor council for multi-angle judgment, then produce a precise business/product design document. If multiple candidate ideas are still open, scores them (growing/low-competition/personal-fit) before proceeding. MANDATORY TRIGGERS: 'biz council this', 'research and council this', 'design a business around X', 'validate this business idea with real data', 'give me a startup idea in X', 'help me pick which idea to build'. Fuses three source projects: last30days (real-user research engine), llm-council (Karpathy's multi-advisor methodology), gstack /spec + /plan-ceo-review (design-doc discipline). Do NOT trigger on trivial questions with one right answer."
+description: "Research what real users actually say (Reddit, X, YouTube, TikTok, Reels, Hacker News, Polymarket, web), run the findings through a 5-advisor council for multi-angle judgment, then produce a business/product design document. If multiple candidate ideas are still open, scores them (growing/low-competition/personal-fit) first. MANDATORY TRIGGERS: 'biz council this', 'research and council this', 'design a business around X', 'validate this business idea with real data', 'give me a startup idea in X', 'help me pick which idea to build'. Do NOT trigger on trivial questions with one right answer."
 allowed-tools:
   - Bash
   - Read

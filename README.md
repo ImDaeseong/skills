@@ -1,6 +1,6 @@
 # skills
 
-Claude Skills workspace. Each subfolder is a skill (`SKILL.md` + supporting files) usable by Claude Code / Cowork / other agent hosts.
+Claude Skills workspace. Each subfolder is a skill (`SKILL.md` + supporting files) written for Claude Code / Cowork. Other Agent Skills-compatible hosts may be able to load these, but `allowed-tools` names Claude-specific tools (e.g. `AskUserQuestion`, `Task`, `Bash`) — a strict host that only permits `name`/`description` in frontmatter, or that maps tool names differently, may need those translated before a skill runs correctly.
 
 All original content tracked in this repository is [MIT licensed](LICENSE). Third-party projects it references are not included or relicensed; review [NOTICE.md](NOTICE.md) and the "Referenced sites" section before installing or reusing external material.
 

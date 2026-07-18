@@ -1,6 +1,6 @@
 ---
 name: curator
-description: "Watch a topic/niche for what's actually happening right now (new models, launches, news), judge why it matters for a specific audience, and produce a short-form hot-take script with a hook, an analogy, and a title — grounded in real signal, not a generic recap. MANDATORY TRIGGERS: 'curate this for me', 'what's the hot take on X', 'make a short video about this news', 'give me a 7-day content sprint', 'react to this launch'. Reuses last30days (real-signal research, already integrated for biz-council) for Step 1 and marketingskills' `social` skill (already integrated for distribution) for Step 3 — does not duplicate either. Do not trigger for evergreen/non-timely content strategy — route that to `distribution` → `content-strategy` instead."
+description: "Watch a topic/niche for what's actually happening right now (new models, launches, news), judge why it matters for a specific audience, and produce a short-form hot-take script with a hook, an analogy, and a title — grounded in real signal, not a generic recap. MANDATORY TRIGGERS: 'curate this for me', 'what's the hot take on X', 'make a short video about this news', 'give me a 7-day content sprint', 'react to this launch'. Do not trigger for evergreen/non-timely content strategy — route that to `distribution` → `content-strategy` instead."
 allowed-tools:
   - Bash
   - Read

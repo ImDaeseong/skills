@@ -1,6 +1,6 @@
 ---
 name: agent-builder
-description: "Design a small, production-disciplined AI worker: explicit goal, context sources, tools/permissions, memory policy, and self-verification — then make an evidence-checked cloud-vs-local model routing call (Claude/frontier vs Ollama-backed local model). MANDATORY TRIGGERS: 'build me an agent for X', 'design an AI worker', 'should this run locally or in the cloud', 'daily briefing agent', 'local model for this task'. Fuses humanlayer/12-factor-agents (control-flow/context discipline) with a source-checked Ollama routing decision. Do not trigger on a single one-off prompt that doesn't need to run repeatedly or hold state/tools/permissions."
+description: "Design a small, production-disciplined AI worker: explicit goal, context sources, tools/permissions, memory policy, self-verification, then an evidence-checked cloud-vs-local model routing call. MANDATORY TRIGGERS: 'build me an agent for X', 'design an AI worker', 'should this run locally or in the cloud', 'daily briefing agent', 'local model for this task'. Do not trigger on a single one-off prompt that doesn't need to run repeatedly or hold state/tools/permissions."
 allowed-tools:
   - Read
   - Write
