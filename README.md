@@ -2,13 +2,13 @@
 
 Claude Skills workspace. Each subfolder is a skill (`SKILL.md` + supporting files) usable by Claude Code / Cowork / other agent hosts.
 
-This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `_shared/`, this README) is [MIT licensed](LICENSE). Third-party projects it references are NOT covered by that license — check the "Referenced sites" section below before reusing anything derived from them.
+This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`, `_shared/`, this README) is [MIT licensed](LICENSE). Third-party projects it references are NOT covered by that license — check the "Referenced sites" section below before reusing anything derived from them.
 
 ---
 
 ## 사용법 (한글)
 
-1. **설치.** 이 저장소를 그대로 clone/다운로드한 뒤, 8개 스킬 폴더(`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`)를 쓰는 에이전트 호스트의 스킬 디렉터리에 연결합니다 (Claude Code라면 `~/.claude/skills/` 아래에 심볼릭 링크하거나 복사).
+1. **설치.** 이 저장소를 그대로 clone/다운로드한 뒤, 9개 스킬 폴더(`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`)를 쓰는 에이전트 호스트의 스킬 디렉터리에 연결합니다 (Claude Code라면 `~/.claude/skills/` 아래에 심볼릭 링크하거나 복사).
 2. **호출.** 요청 내용을 모르면 **"지니야" / genie**를 부르세요 — `_shared/ROUTING.md`를 읽고 알맞은 전문 스킬과 호출 방법을 알려줍니다. 스킬 이름을 알면 바로 호출해도 됩니다 (예: "biz-council로 이 아이디어 검증해줘").
 3. **빈 도메인.** 아직 없는 분야(기획/제조/판매/재무운영 등)를 요청하면 genie가 "없다"고 정직하게 답하고 새로 만들지 물어봅니다 — 만들 때도 항상 같은 절차(GitHub에서 별점 높은 실제 후보 조사 → 라이선스 확인 → 방법론만 발췌해 원문 그대로 베끼지 않고 재작성 → `_shared/ROUTING.md`에 한 줄 추가)를 따릅니다. 근거가 부족하면 "만들지 않고 왜 안 만들었는지"를 기록합니다 — 재무운영이 그 사례입니다.
 4. **공유 규칙.** `_shared/CORE-LAWS.md`(LAW 0 추측 금지, LAW 1 별점순 라이브러리 채택, LAW 2 코드 구현 시 구조 원칙, LAW 3 검증 루프 형식, LAW 4 스킬 작성법 자체)를 모든 스킬이 공유합니다 — 새 스킬을 추가·수정할 때 이 파일을 먼저 참조하세요.
@@ -16,7 +16,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agen
 
 ## Usage (English)
 
-1. **Install.** Clone or download this repository as-is, then point your agent host's skills directory at all 8 skill folders (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`) — for Claude Code, symlink or copy them under `~/.claude/skills/`.
+1. **Install.** Clone or download this repository as-is, then point your agent host's skills directory at all 9 skill folders (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`) — for Claude Code, symlink or copy them under `~/.claude/skills/`.
 2. **Invoke.** Call **`genie`** for anything — it reads `_shared/ROUTING.md` and tells you which specialist skill to invoke. You don't need to know skill names, but you can also call one directly by name (e.g. "validate this idea with biz-council").
 3. **Missing domains.** If you ask for a domain that doesn't exist yet (planning/manufacturing/sales/financial operations/etc.), `genie` says so honestly and offers to build one — always via the same process: find real GitHub candidates ranked by stars → check their license → extract methodology and rewrite it in original wording (never copy verbatim) → add one row to `_shared/ROUTING.md`. When the evidence doesn't clear the bar, the deferral itself gets recorded (financial operations is the example — see the table below).
 4. **Shared rules.** `_shared/CORE-LAWS.md` holds LAW 0 (no speculation), LAW 1 (GitHub libraries ranked by real star counts, license-gated), LAW 2 (code-architecture principles if a design doc becomes code), LAW 3 (a formal verification-loop contract), and LAW 4 (how to author a skill itself) — read it before adding or editing any skill.
@@ -49,6 +49,7 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you t
 | [`curator/`](curator/SKILL.md) | Watches a niche for what's timely (`last30days`), forms a specific honest-opinion angle for a named audience, scripts it via `marketingskills`' `social` skill, checks it against `stop-slop` before calling it final. Composes already-integrated engines instead of duplicating them. |
 | [`vibe-coder/`](vibe-coder/SKILL.md) | Workflow discipline for a human coding alongside AI agents on their own project — build the harness deliberately, task-to-tool routing, a reviewed-plan gate before implementation (Research→Plan→Execute→Review→Ship), Context7 for doc freshness, terse replies once approved, verification+review before "done." Distinct from `agent-builder` (that designs autonomous business workers; this is the human's own live coding-session discipline). |
 | [`video-producer/`](video-producer/SKILL.md) | Turns a script/asset list (e.g. from `curator`) into an actual rendered video — intros, transitions, lower thirds, animated infographics — via `hyperframes` (HTML→deterministic MP4, Apache-2.0), with `ShortGPT` for footage/voiceover sourcing when the request needs a full auto-pipeline. Fills the video-assembly gap `curator` explicitly stops short of. |
+| [`personal-memory/`](personal-memory/SKILL.md) | Stages a human's own cross-session Claude memory setup — built-in Memory feature → `CLAUDE.md` rules file → Obsidian+LLM-wiki (`claude-obsidian`) → self-consolidating vault — one stage at a time, matched to actual need rather than jumping to the heaviest setup. Distinct from `agent-builder` (a business worker's memory) and `vibe-coder` (coding-session discipline). |
 
 **Not yet built:** planning, manufacturing, sales, financial operations (cash-flow/runway discipline). `genie` will say so rather than improvise if one of these is requested — see `_shared/ROUTING.md` "Not yet built" for how a new one gets added. Financial operations and planning were both actively evaluated and deferred, not just unconsidered — see the table below.
 
@@ -151,6 +152,18 @@ Not vendored into this repo — methodology reference only, or a runtime depende
 | **heygen-com/hyperframes** | [github.com/heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | 35,961 (checked 2026-07-18) | Apache 2.0 (verified via GitHub API license endpoint) | Primary reference — "write HTML, render video, built for agents." Surfaced from a Matt Wolfe "9 free AI skills" video (2026-06-25); a follow-up "AI VFX" video from the same channel (2026-07-09) prompted actually building this skill rather than continuing to log the gap as excluded. |
 | **remotion-dev/remotion** | [github.com/remotion-dev/remotion](https://github.com/remotion-dev/remotion) | 53,523 (checked 2026-07-18) | **Source-available, not open source** — verified directly against `LICENSE.md`: free only for individuals/non-profits/for-profit orgs with ≤3 employees, paid Company License required above that. `[LICENSE-UNCONFIRMED]` per LAW 1. | License-gated alternative — higher stars than hyperframes but not adopted as primary because of the license, not the star count. |
 | **Matt Wolfe, AI VFX techniques** | (YouTube, 2026-07-09) | n/a | n/a | Revisited after an initial "no action" pass under-applied the proprietary-tool filter — Runway/Gemini/Veo themselves are proprietary, but the output-shape categories (intro/transition/background-composite/B-roll/logo-reveal/motion-graphic/talking-head) and "mostly human-made, AI as enhancement layer" restraint principle were genuine, non-duplicative additions to Step 1. |
+
+### personal-memory
+
+New skill (2026-07-18) — earlier turns in this session dismissed several "personal learning"/"second brain" videos as out of scope because no existing skill covered that domain; corrected after explicit user feedback ("there is no target-scope restriction — evaluate and classify, don't invent limiting criteria"). A real GitHub search then found a genuinely different, dominant, actively-maintained niche from anything already integrated, justifying a new skill rather than a deferral.
+
+| Project | Link | Stars (checked) | License | Role |
+|---|---|---|---|---|
+| **AgriciDaniel/claude-obsidian** | [github.com/AgriciDaniel/claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian) | 9,545 (checked 2026-07-18 via GitHub API) | MIT | Primary reference — self-organizing AI second brain for Obsidian + Claude Code, built on Karpathy's "LLM Wiki" pattern. |
+| **eugeniughelbur/obsidian-second-brain** | [github.com/eugeniughelbur/obsidian-second-brain](https://github.com/eugeniughelbur/obsidian-second-brain) | 3,346 (checked 2026-07-18 via GitHub API, most recently active candidate) | MIT | Step 4's consolidation-agent reference ("maintain the vault while you sleep"). |
+| **breferrari/obsidian-mind** | [github.com/breferrari/obsidian-mind](https://github.com/breferrari/obsidian-mind) | 3,361 (checked 2026-07-18 via GitHub API) | MIT | Alternative — persistent memory across Claude Code, Codex, and Gemini CLI, not just Claude. |
+| **MarkusPfundstein/mcp-obsidian** | [github.com/MarkusPfundstein/mcp-obsidian](https://github.com/MarkusPfundstein/mcp-obsidian) | 4,094 (checked 2026-07-18 via GitHub API) | MIT | Connectivity layer (MCP server for Obsidian's REST API) the other candidates build on — named for Step 3. |
+| **Jay Choi, "클로드를 완벽한 세컨드브레인으로 만드는 4단계"** | (YouTube, 2026-07-14) | n/a | n/a | Source of this skill's 4-stage structure (Memory feature → CLAUDE.md → Obsidian+LLM-wiki → self-consolidation). The video's own named "Hermes Agent" tool is an unrelated, unverified personal project (not a GitHub repo, and not the same thing as this user's own `hermes-agents` repository) — not adopted; the two verified GitHub candidates above cover the same consolidation stage instead. |
 
 ### Origin story and cross-cutting evaluations
 
