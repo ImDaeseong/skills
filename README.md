@@ -28,6 +28,10 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agen
 
 Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you to the right specialist skill below. It does not solve requests itself, and it says so honestly when no specialist exists yet for a given domain (see `genie/SKILL.md`).
 
+## Verification guard
+
+`scripts/validate_workspace.ps1` checks every skill against the structural rules in this README (LAW references, routing, permissions, and — the check that caught a real 47-instance defect once already — no evidence date may be later than today). Run it by hand any time: `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`. It also runs automatically as a pre-commit hook, but git hooks are never tracked by git, so install it once per clone: `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`.
+
 ## Shared foundation
 
 - [`_shared/CORE-LAWS.md`](_shared/CORE-LAWS.md) — **LAW 0** (no speculation + canonical evidence tags), **LAW 1** (GitHub library selection ranked by real star counts, license-gated), **LAW 2** (UI/logic separation, class structure, explicit success/failure returns — if a design doc becomes code), **LAW 3** (every validate/retry/fix pass runs a bounded, evidence-based verification loop with a stated exit and HOLD condition), **LAW 4** (how to author a skill itself — description as trigger, progressive disclosure, state the non-obvious; sourced from Anthropic's own engineering guidance). Every skill below references this instead of duplicating it.
