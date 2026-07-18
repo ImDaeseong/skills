@@ -15,9 +15,9 @@ allowed-tools:
 
 ## Attribution
 
-This skill does not reimplement marketing execution — it resolves and routes into a real, actively-maintained skill library rather than rewriting 46 specialist skills' worth of content from scratch.
+This skill does not reimplement marketing execution — it resolves and routes into a real, actively-maintained skill library rather than rewriting 47 specialist skills' worth of content from scratch.
 
-- **marketingskills** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), 40,401★ (checked 2026-07-18 via GitHub API, pushed within the last day), MIT license (verified via GitHub API license endpoint). By Corey Haines. Contains 46 individual `SKILL.md` specialist skills (already in Agent Skills spec format) covering SEO, CRO, copy, paid, growth/retention, sales/GTM, and strategy. This skill treats it as a **runtime dependency**, resolved/cloned on demand exactly like `biz-council` does for `last30days` — never vendored into this repo, never copied verbatim.
+- **marketingskills** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), 40,401★ (checked 2026-07-18 via GitHub API, pushed within the last day), MIT license (verified via GitHub API license endpoint). By Corey Haines. Contains 47 individual `SKILL.md` specialist skills (recounted 2026-07-18 via direct folder listing — grew from 46 since the star count was last checked; already in Agent Skills spec format) covering SEO, CRO, copy, paid, growth/retention, sales/GTM, and strategy. This skill treats it as a **runtime dependency**, resolved/cloned on demand exactly like `biz-council` does for `last30days` — never vendored into this repo, never copied verbatim.
 
 ## Core Laws
 

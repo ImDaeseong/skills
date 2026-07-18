@@ -32,7 +32,15 @@ Ask (AskUserQuestion) if not already clear from the request:
 
 Don't default to the heaviest tool (a full auto-pipeline) when the actual need is a simple rendered clip from content that already exists. **Default to restraint**: per the same source, the strongest results come from mostly human-made content (footage, voice, edit) with AI VFX added as a small enhancement layer — not from generating the whole piece with AI. If the request is "make the whole video with AI," say that's a different, weaker-quality mode than "add an AI effect to my existing edit," and confirm which one is actually wanted.
 
-## Step 2: Route to the right renderer
+## Step 2: Confirm the renderer is actually available, then route to it
+
+Before assuming a tool can be invoked, check for it — this skill still doesn't install anything, but it also doesn't silently assume a tool is present when it isn't:
+
+- **hyperframes**: check with `command -v hyperframes` or `npx hyperframes --version` (adjust to however the project's own setup exposes it — a local `node_modules/.bin/hyperframes`, a global install, etc.). If not found, tell the user it's not installed, link the Attribution repo, and ask whether to proceed once they've installed it or fall back to a lighter path (e.g. WebFetch-reading its usage docs to hand-write the invocation once they confirm it's set up).
+- **ShortGPT**: check with `pip show shortgpt` or `python -c "import shortgpt"` (or the project's actual invocation method). Same fallback if missing — name it, don't assume it, don't install it unasked.
+- If neither check is possible in the current environment (no shell access, sandboxed host), say so explicitly and ask the user to confirm installation status themselves (AskUserQuestion) rather than proceeding on an unverified assumption.
+
+Once availability is confirmed:
 
 - **HTML/CSS-drivable content with animation** (lower thirds, animated infographics, transitions, data-driven charts-to-video, talking points overlays) — use **hyperframes** (see Attribution). Write the HTML/CSS describing the frame(s), let it render the deterministic MP4.
 - **Content needing sourced voiceover and/or stock footage**, not just rendering already-written material — use **ShortGPT** (see Attribution) for that specific gap, or say explicitly that this skill doesn't source those and ask the user to supply them.
