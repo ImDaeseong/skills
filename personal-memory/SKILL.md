@@ -53,3 +53,7 @@ Only add this once the vault has enough volume that browsing it manually is alre
 ## What this skill does not do
 
 It does not design an autonomous business worker's memory policy — that's `agent-builder` Step 1 item 4. It does not cover coding-session-specific context discipline (Context7, git worktrees, subagent isolation) — that's `vibe-coder`. It does not install Obsidian or any MCP server; it names real, verified candidates and lets the user choose and install. It does not recommend jumping straight to Stage 4 — most users get most of the value at Stage 2 or 3, and the later stages should be earned by actual note volume, not adopted because they sound more advanced.
+
+## Durable-learning promotion guard
+
+Do not promote an AI-generated summary directly into durable memory. Store the primary-source link, distinguish source facts from the user's interpretation, and require source comparison plus delayed active recall before marking a learning note as understood. Keep failed or uncertain recall visible for the next review instead of letting fluent prose masquerade as mastery. Promote only the corrected note and attach one application or decision showing how the knowledge was used.

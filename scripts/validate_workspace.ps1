@@ -87,6 +87,29 @@ foreach ($token in @('Third-party MCP safety guard', 'read-only access', 'least 
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing MCP safety guard: $token") }
 }
 
+$curatorText = Get-Content -LiteralPath (Join-Path $Root 'curator\SKILL.md') -Raw
+foreach ($token in @('Learning-content comprehension guard', 'primary source', 'closed-source active recall', 'counterexamples', 'Re-test after a delay', 'independent validation')) {
+    if (-not $curatorText.Contains($token)) { $errors.Add("curator missing learning-comprehension guard: $token") }
+}
+
+$personalMemoryText = Get-Content -LiteralPath (Join-Path $Root 'personal-memory\SKILL.md') -Raw
+foreach ($token in @('Durable-learning promotion guard', 'primary-source link', 'delayed active recall', 'fluent prose masquerade as mastery', 'application or decision')) {
+    if (-not $personalMemoryText.Contains($token)) { $errors.Add("personal-memory missing durable-learning guard: $token") }
+}
+
+foreach ($token in @('Agent-architecture evidence guard', 'creator-authored terms unverified', 'measured baseline', 'evaluation set', 'retrieval quality', 'latency and cost budgets', 'self-modifying agent', 'isolated tests and human review')) {
+    if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing architecture-evidence guard: $token") }
+}
+
+foreach ($token in @('Repeated-loop control guard', 'orchestration across repeated harnessed runs', 'idempotency keys', 'measurable progress signal', 'budget exhaustion', 'contradictory verifier results', 'aggregate budget', 'validated checkpoint', 'state transition and approval')) {
+    if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing repeated-loop guard: $token") }
+}
+
+$readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
+foreach ($token in @('scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'all 9 skills', 'earnings claims', 'active learning', 'idempotency', 'delayed active recall')) {
+    if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
+}
+
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object { Write-Error $_ }
     exit 1

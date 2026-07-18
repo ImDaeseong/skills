@@ -84,3 +84,7 @@ If the user asks for a sprint rather than a single piece: repeat Steps 1-3 once 
 ## What this skill does not do
 
 It does not source footage, synthesize voiceover, or render video itself — that's `video-producer`'s job (route the finished script to it when the user wants an actual rendered file, not just the written script). It does not write evergreen/non-timely content strategy — that routes to `distribution` → `content-strategy`. It does not fabricate a "trend" when Step 1 comes back empty.
+
+## Learning-content comprehension guard
+
+When curating educational content, do not treat an AI summary as evidence that the source was understood. Read the primary source, state the learner's aim, compress it in original words, then run closed-source active recall before comparing against the source. Ask AI for questions, counterexamples, and critique after the learner answers—not for a replacement answer first. Re-test after a delay and require one concrete application with feedback. Label a named framework as creator-authored unless the whole framework has independent validation; evaluate its components separately against primary research.
