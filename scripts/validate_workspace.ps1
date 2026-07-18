@@ -4,7 +4,23 @@ param(
 )
 
 $errors = [System.Collections.Generic.List[string]]::new()
-$skillFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Filter 'SKILL.md'
+
+# Exclude gitignored runtime-dependency clones (e.g. last30days/, marketingskills/) from
+# the workspace scan - these are third-party skills cloned on demand per README, not this
+# workspace's own 12 skills, and must not be validated against this repo's own policy.
+$gitignorePath = Join-Path $Root '.gitignore'
+$ignoredTopLevelDirs = @()
+if (Test-Path -LiteralPath $gitignorePath) {
+    $ignoredTopLevelDirs = Get-Content -LiteralPath $gitignorePath |
+        Where-Object { $_ -match '^\S+/$' } |
+        ForEach-Object { $_.TrimEnd('/') }
+}
+
+$skillFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Filter 'SKILL.md' | Where-Object {
+    $relative = $_.FullName.Substring($Root.Length).TrimStart('\', '/')
+    $topLevelDir = ($relative -split '[\\/]')[0]
+    $topLevelDir -notin $ignoredTopLevelDirs
+}
 
 foreach ($file in $skillFiles) {
     $text = Get-Content -LiteralPath $file.FullName -Raw

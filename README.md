@@ -14,6 +14,7 @@ All original content tracked in this repository is [MIT licensed](LICENSE). Thir
 4. **공유 규칙.** `_shared/CORE-LAWS.md`(LAW 0 추측 금지, LAW 1 별점순 라이브러리 채택, LAW 2 코드 구현 시 구조 원칙, LAW 3 검증 루프 형식, LAW 4 스킬 작성법 자체)를 모든 스킬이 공유합니다 — 새 스킬을 추가·수정할 때 이 파일을 먼저 참조하세요.
 5. **런타임 의존성.** `last30days`와 `marketingskills`는 라이선스가 명확(MIT)해서 필요 시 자동으로 다시 clone되지만, `llm-council`/`anthropics/skills`처럼 라이선스가 불명확한 참고 자료는 이 저장소에 절대 복사(vendoring)하지 않습니다 — 링크와 방법론 설명만 있습니다.
 6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 커밋 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`과 `powershell.exe -NoProfile -File scripts/validate_links.ps1`을 실행하세요. 검사는 12개 스킬의 구조·권한·라우팅·날짜와 수익 주장, MCP, 학습·기억, 에이전트 아키텍처, 반복 루프, 금융 행동 안전 가드를 확인합니다. 커밋 훅과 GitHub Actions에서도 검증합니다.
+7. **개별 스킬 사용법.** 각 스킬을 언제/어떻게 호출하는지, 무엇을 입력해야 하고 무엇을 받는지, 알려진 제약(예: `last30days`의 Windows 미지원)까지 스킬별로 정리한 상세 가이드는 [`USAGE.md`](USAGE.md)를 참조하세요.
 
 ## Usage (English)
 
@@ -23,6 +24,7 @@ All original content tracked in this repository is [MIT licensed](LICENSE). Thir
 4. **Shared rules.** `_shared/CORE-LAWS.md` holds LAW 0 (no speculation), LAW 1 (GitHub libraries ranked by real star counts, license-gated), LAW 2 (code-architecture principles if a design doc becomes code), LAW 3 (a formal verification-loop contract), and LAW 4 (how to author a skill itself) — read it before adding or editing any skill.
 5. **Runtime dependencies.** `last30days` and `marketingskills` have clear licenses (MIT) so they're auto-cloned on demand when missing; anything with an unclear license (`llm-council`, `anthropics/skills`) is never vendored into this repo — only linked and described in this skill's own words.
 6. **Verify.** After the first clone, install the hook with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`. Before committing, run `powershell.exe -NoProfile -File scripts/validate_workspace.ps1` and `powershell.exe -NoProfile -File scripts/validate_links.ps1`. They validate all 12 skills, permissions, routing, dates, claim attribution, MCP, learning and memory, architecture, repeated loops, financial actions, and local links. The hook and GitHub Actions run these checks again.
+7. **Per-skill usage.** For exactly when/how to invoke each skill, what to give it, what it returns, and known limitations (e.g. `last30days`'s Windows gap), see [`USAGE.md`](USAGE.md).
 
 ---
 
@@ -66,7 +68,7 @@ Not vendored into this repo — methodology reference only, or a runtime depende
 
 | Project | Link | Stars (checked) | License | Role |
 |---|---|---|---|---|
-| **last30days** | [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 52.5k (checked 2026-07-17 via GitHub page) | MIT | **Runtime dependency of `biz-council` and `curator`.** Not tracked in this repo — cloned into `~/Desktop/skills/last30days` on first use if missing, and ignored by `.gitignore`. |
+| **last30days** | [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 52.7k (rechecked 2026-07-19 via GitHub page — v3.16.0) | MIT | **Runtime dependency of `biz-council` and `curator`.** Not tracked in this repo — cloned into `~/Desktop/skills/last30days` on first use if missing, and ignored by `.gitignore`. **Known Windows gap (confirmed 2026-07-19 via this workspace's own use + the upstream README's own words):** "Windows support is deferred until per-platform manifest entry points are sorted out." On Windows, X/Twitter needs live browser cookies the engine can't extract in a non-interactive session, YouTube needs `yt-dlp` (the tool's own error message suggests `brew install`, macOS-only), and Digg/arXiv/Techmeme need `npx`/Node.js — often unavailable too. GitHub issue [#823](https://github.com/mvanhorn/last30days-skill/issues/823) tracks a Windows-specific Node-shim process/RAM problem. Practical effect: a Windows run is usually limited to Reddit/Hacker News/GitHub/web — real evidence, but roughly half the tool's designed source coverage. See [`USAGE.md`](USAGE.md#biz-council) for the full note. |
 | **marketingskills** | [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | 40,401 (checked 2026-07-18 via GitHub API) | MIT | **Runtime dependency of `distribution` and `curator` (its `social` skill).** Not tracked in this repo — cloned into `~/Desktop/skills/marketingskills` on first use if missing, and ignored by `.gitignore`, same pattern as `last30days`. |
 
 ### biz-council
