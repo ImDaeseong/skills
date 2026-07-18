@@ -1,11 +1,10 @@
 ---
 name: biz-council
-description: "Research what real users actually say (Reddit, X, YouTube, TikTok, Instagram Reels, Hacker News, Polymarket, web), run the findings through a 5-advisor council for multi-angle judgment, then produce a precise business/product design document. MANDATORY TRIGGERS: 'biz council this', 'research and council this', 'design a business around X', 'validate this business idea with real data'. Fuses three source projects: last30days (real-user research engine), llm-council (Karpathy's multi-advisor methodology), gstack /spec + /plan-ceo-review (design-doc discipline). Do NOT trigger on trivial questions with one right answer."
+description: "Research what real users actually say (Reddit, X, YouTube, TikTok, Instagram Reels, Hacker News, Polymarket, web), run the findings through a 5-advisor council for multi-angle judgment, then produce a precise business/product design document. If multiple candidate ideas are still open, scores them (growing/low-competition/personal-fit) before proceeding. MANDATORY TRIGGERS: 'biz council this', 'research and council this', 'design a business around X', 'validate this business idea with real data', 'give me a startup idea in X', 'help me pick which idea to build'. Fuses three source projects: last30days (real-user research engine), llm-council (Karpathy's multi-advisor methodology), gstack /spec + /plan-ceo-review (design-doc discipline). Do NOT trigger on trivial questions with one right answer."
 allowed-tools:
   - Bash
   - Read
-  - Grep
-  - Glob
+  - Write
   - WebSearch
   - WebFetch
   - AskUserQuestion
@@ -17,11 +16,13 @@ Most "AI business idea" output is the model's own guess dressed up as analysis. 
 
 ## Attribution
 
-This skill fuses three source projects and does not reimplement any of them:
+This skill fuses three core source projects (methodology it directly runs on) plus two additional references (an evaluated alternative, and an optional tool) — it does not reimplement any of them:
 
 - **last30days** — [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill), MIT license. Research engine, called as-is in Step 1.
 - **llm-council** — [github.com/aiwithremy/claude-skills-llm-council](https://github.com/aiwithremy/claude-skills-llm-council), adapted from Andrej Karpathy's original [github.com/karpathy/llm-council](https://github.com/karpathy/llm-council). Methodology (advisor roles, peer-review, chairman synthesis) referenced in Step 2. **Neither repo has a LICENSE file (verified directly against both repos' root contents, not a secondary source) — both default to all-rights-reserved.** This skill describes the methodology in its own words rather than reproducing either repo's text, and fetches the original live via WebFetch rather than vendoring a local copy (see Step 2). Fine for personal local use; before public redistribution of this workspace, treat the advisor-role concept as the only borrowed idea (not copyrightable expression) and keep this file's own wording as the sole source of the actual instructions.
-- **gstack** — [github.com/garrytan/gstack](https://github.com/garrytan/gstack), MIT license. Only the `/spec` and `/plan-ceo-review` *question frameworks* are borrowed in Step 3 — gstack's own runtime (`~/.gstack/`, `gstack-config`, telemetry binaries) is intentionally excluded; those binaries don't exist outside a gstack install and would error or silently no-op if invoked here.
+- **gstack** — [github.com/garrytan/gstack](https://github.com/garrytan/gstack), **122,463★** (checked 2026-07-19 via direct GitHub HTML verification — GitHub API was rate-limited at check time, so the star counter was read directly from the repo page's `aria-label`, not estimated), MIT license (verified same way). Corrects an earlier "not verified in this pass" placeholder in this table — LAW 0 requires a real number, not a deferred check that never got done. Only the `/spec` and `/plan-ceo-review` *question frameworks* are borrowed in Step 3 — gstack's own runtime (`~/.gstack/`, `gstack-config`, telemetry binaries) is intentionally excluded; those binaries don't exist outside a gstack install and would error or silently no-op if invoked here.
+- **compound-engineering-plugin** — [github.com/EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin), 23,194★ (checked 2026-07-19 via direct GitHub HTML verification), MIT license. Evaluated per LAW 1 as an alternative research-to-roadmap reference (its `ce-plan` skill turns research into a structured plan) — surfaced from a podcast demo (Matt Van Horn/Greg Isenberg, 2026-02-05, the same Matt Van Horn who built `last30days`). Ranks well below gstack by star count, so gstack remains the primary Step 3 reference; noted here as the documented second candidate rather than a single unexplained pick, per LAW 1.
+- **Firecrawl** — [github.com/firecrawl/firecrawl](https://github.com/firecrawl/firecrawl), 152,409★ (checked 2026-07-18 via GitHub API), AGPL-3.0 license (verified via GitHub API license endpoint). Optional bulk-scraping tool named in Step 1.3 — used as an external API/tool call when a key is configured, not vendored or self-hosted by this skill.
 
 ---
 
@@ -63,7 +64,11 @@ Never guess a path instead of running this resolution/clone sequence.
 2. Label every finding from this supplement `[KR-WEB - via WebSearch, not last30days engine]` so the final doc never implies engine-level coverage that doesn't exist.
 3. If WebSearch returns nothing usable, say so explicitly rather than padding with generic claims about "Korean users."
 
-**1.3 Evidence gate — do not proceed on empty research.** Before moving to Step 2, check: did 1.1 and/or 1.2 return at least a handful of real, citable items? If both came back empty or "nothing solid this window," STOP. Do not run the council on zero evidence — that just produces five confident-sounding guesses. Tell the user research came back thin and ask whether to: narrow/rephrase the topic, supply their own context/data manually, or proceed anyway with everything downstream tagged `[LOW-EVIDENCE]`.
+**1.3 Bulk-scraping upgrade (optional — Firecrawl).** WebFetch handles single pages; if the research needs many pages from one domain (a competitor's full site, a target's own content archive to characterize), and a Firecrawl API key is available in the environment, prefer it over looping WebFetch calls. See Attribution for license/verification. If no key is configured, say so and fall back to WebFetch/WebSearch — do not assume Firecrawl is available.
+
+**1.4 Evidence gate — do not proceed on empty research.** Before moving to Step 2, check: did 1.1 and/or 1.2 return at least a handful of real, citable items? If both came back empty or "nothing solid this window," STOP. Do not run the council on zero evidence — that just produces five confident-sounding guesses. Tell the user research came back thin and ask whether to: narrow/rephrase the topic, supply their own context/data manually, or proceed anyway with everything downstream tagged `[LOW-EVIDENCE]`.
+
+**1.5 Idea selection (only when the user hasn't committed to one candidate yet).** If Step 1.1 research surfaced several viable directions rather than one named idea to validate, don't silently pick one or run the council on all of them at once. Score each candidate against three criteria and show the scoring, don't just assert a winner: **growing** (the trend data from 1.1 actually shows growth, not just presence), **low competition** (the research didn't surface a crowded field of existing solutions), **personal fit** (the user actually understands or cares about this space — a technically strong idea nobody wants to operate tends to stall). Ask the user to confirm the pick (AskUserQuestion) before proceeding to Step 2 — this is a judgment call, not something to decide for them.
 
 ## Step 2: Council — 5-advisor multi-angle judgment
 

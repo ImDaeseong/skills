@@ -1,2 +1,5 @@
 # Runtime dependency cloned on demand by biz-council; not vendored.
 last30days/
+
+# Runtime dependency cloned on demand by distribution; not vendored.
+marketingskills/

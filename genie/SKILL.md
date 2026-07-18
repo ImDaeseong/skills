@@ -3,7 +3,6 @@ name: genie
 description: "Single entry point for this skills workspace. MANDATORY TRIGGERS: '지니야', 'genie', 'help me with my business', any request that doesn't name a specific skill but clearly needs research/analysis/design/report/planning work. Reads the routing table, picks the right specialist skill (or says none exists yet), and tells the host/user which specialist skill to invoke. Do not do the specialist work itself — it routes, it doesn't solve."
 allowed-tools:
   - Read
-  - Glob
   - AskUserQuestion
 ---
 
