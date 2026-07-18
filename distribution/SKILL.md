@@ -21,7 +21,7 @@ This skill does not reimplement marketing execution — it resolves and routes i
 
 ## Core Laws
 
-This skill follows `../_shared/CORE-LAWS.md` (LAW 0 no-speculation + tag vocabulary, LAW 1 evidence-ranked library selection, LAW 2 code-architecture-if-implemented).
+Follow `../_shared/CORE-LAWS.md` in full.
 
 ---
 

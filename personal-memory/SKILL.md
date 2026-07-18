@@ -22,7 +22,7 @@ Restarting from zero every session is a choice, not a limitation — the gap bet
 
 ## Core Laws
 
-Follows `../_shared/CORE-LAWS.md` in full (LAW 0 no-speculation, LAW 1 evidence-ranked selection, LAW 3 verification loops).
+Follow `../_shared/CORE-LAWS.md` in full.
 
 ## Step 1: Diagnose the current stage before adding anything
 

@@ -12,7 +12,7 @@ allowed-tools:
 
 ## Core Laws
 
-Follows `../_shared/CORE-LAWS.md` in full — LAW 0 (no speculation, use the canonical tags), LAW 1 (evidence-ranked library selection), LAW 2 (code architecture if implemented).
+Follow `../_shared/CORE-LAWS.md` in full.
 
 ## Attribution (LAW 1 evidence, checked via GitHub/GitHub page on the date below)
 

@@ -24,14 +24,11 @@ fi
 # hook content is pure ASCII) to guarantee no BOM.
 Set-Content -Path $hookPath -Value $hookContent -Encoding ascii -NoNewline
 
-# Git for Windows spawns hooks via its bundled sh, which refuses to run a script without the
-# POSIX executable bit -- Set-Content alone does not set it. bash.exe (shipped with Git for
-# Windows) is the reliable way to set it from PowerShell.
-$bash = Get-Command bash.exe -ErrorAction SilentlyContinue
-if (-not $bash) {
-    Write-Warning "bash.exe not found on PATH -- could not set the executable bit. Run 'chmod +x .git/hooks/pre-commit' manually (e.g. from Git Bash)."
-} else {
-    & $bash.Source -c "chmod +x '$($hookPath -replace '\\','/')'"
+# Validate through Git itself. Looking up bash.exe can select Windows' WSL app alias instead
+# of Git for Windows' bundled shell and falsely report success without a usable hook.
+git hook run pre-commit
+if ($LASTEXITCODE -ne 0) {
+    throw "Installed pre-commit hook failed its validation run."
 }
 
 Write-Host "Installed pre-commit hook at $hookPath"

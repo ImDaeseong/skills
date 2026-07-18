@@ -21,7 +21,7 @@ A script is not a video. This skill closes the gap `curator` deliberately leaves
 
 ## Core Laws
 
-Follows `../_shared/CORE-LAWS.md` in full (LAW 0 no-speculation, LAW 1 evidence-ranked selection — see the license gate above for LAW 1 applied to a high-star-but-restricted-license candidate, LAW 2, LAW 3 verification loops).
+Follow `../_shared/CORE-LAWS.md` in full.
 
 ## Step 1: Confirm what's actually needed before rendering anything
 

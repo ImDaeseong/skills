@@ -26,7 +26,7 @@ This skill introduces no new heavy dependency — it composes two engines alread
 
 ## Core Laws
 
-This skill follows `../_shared/CORE-LAWS.md` (LAW 0 no-speculation, LAW 1 evidence-ranked selection, LAW 2 code-architecture-if-implemented).
+Follow `../_shared/CORE-LAWS.md` in full.
 
 ---
 
