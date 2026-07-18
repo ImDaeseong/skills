@@ -45,7 +45,7 @@ Before writing any HTML/CSS/component code for a deck, landing page, or prototyp
 
 1. Identify target format (DOCX/PPTX/XLSX/PDF) from the request.
 2. Check what's actually available in this session/host (an installed Office MCP tool, a Python environment with the relevant library, or the user has one of the Attribution-table skills installed separately) — do not assume a tool exists; verify with a tool call (e.g., check for an MCP resource, or `command -v` for a CLI dependency) before promising output in that format.
-3. If nothing is available, say so and ask whether to install one of the Attribution-table options (respecting the license notes above) or produce a plain Markdown report instead.
+3. If nothing is available, say so and ask whether to install one of the Attribution-table options (respecting the license notes above) or produce a plain Markdown report instead. **If the report is meant to be visually reviewed rather than read as plain text** (a spec, a design review, a dashboard-style summary), consider an HTML Artifact instead of a flat document — higher information density and visual structure than markdown, at the cost of more tokens to generate; offer it as an option, don't default to it silently.
 4. Structure the report content around whatever it's summarizing (e.g. a `biz-council` document's six sections) — do not add sections the source material doesn't support.
 
 ## What this skill does not do

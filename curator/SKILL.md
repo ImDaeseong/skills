@@ -19,7 +19,8 @@ This skill introduces no new heavy dependency — it composes two engines alread
 
 - **last30days** — [github.com/mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill), MIT license (already documented in this repo's README). Reused as-is in Step 1 for "what's actually happening" — same resolution/clone pattern as `biz-council` Step 1, not re-described here.
 - **marketingskills `social`** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), 40,401★ (checked 2026-07-18), MIT license (already documented in this repo's README via `distribution`). Its `social` skill already covers video hooks, TikTok/Reels/Shorts scripting, and social listening at production quality — Step 3 routes into it rather than reimplementing script-writing craft here.
-- **Evaluated and excluded:** [github.com/RayVentura/ShortGPT](https://github.com/RayVentura/ShortGPT), 7,708★ (checked 2026-07-18), MIT license. Covers footage sourcing, voiceover synthesis, and video rendering — a production/rendering tool, not a curation-judgment tool. Out of scope for this skill (which stops at a written script), noted here so a future skill covering actual video assembly doesn't re-research this from zero.
+- **hardikpandya/stop-slop** — [github.com/hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop), 14,006★ (checked 2026-07-19 via direct GitHub HTML verification), MIT license. Reference for Step 3's prose quality — a skill specifically for catching and removing predictable "AI tells" (stock phrases, structures, rhythms) from written output, applied to the hot-take script before it's considered final. Reinforces this skill's existing "honest opinion, not a hedge" principle with a concrete pattern-catalog rather than a vague instruction to "sound authentic."
+- **Not reimplemented here, routed instead:** footage sourcing, voiceover synthesis, and video rendering are `video-producer`'s job (see `../video-producer/SKILL.md`, which adopts `heygen-com/hyperframes` as primary — 35,961★, Apache-2.0 — with `remotion-dev/remotion` noted as license-gated and `RayVentura/ShortGPT` as a full-pipeline option). This skill stops at the written script and hands off rather than reimplementing rendering.
 
 ## Core Laws
 
@@ -53,6 +54,8 @@ Resolve `marketingskills` the same way `distribution` does (see `../distribution
 
 `social`'s own instructions (platform-specific format, hook patterns, etc.) take precedence over anything summarized here.
 
+**Before calling the script final, pass it through a stop-slop check** (see Attribution) — the same predictable AI phrasing that makes a design read as generic makes a hot take read as generic too, and a script full of "AI tells" undercuts the whole point of a curator's raw, specific voice.
+
 ## Step 4: 7-day sprint (when requested)
 
 If the user asks for a sprint rather than a single piece: repeat Steps 1-3 once per day for 7 days, keeping a running "taste file" — the hooks, analogies, and titles that worked, so later days can reference earlier ones instead of starting cold each time. Store the taste file wherever the user is already keeping working notes for this task; do not invent a new persistent-storage location without asking.
@@ -76,4 +79,4 @@ If the user asks for a sprint rather than a single piece: repeat Steps 1-3 once 
 
 ## What this skill does not do
 
-It does not source footage, synthesize voiceover, or render video (see ShortGPT note in Attribution — that's a separate, unbuilt capability). It does not write evergreen/non-timely content strategy — that routes to `distribution` → `content-strategy`. It does not fabricate a "trend" when Step 1 comes back empty.
+It does not source footage, synthesize voiceover, or render video itself — that's `video-producer`'s job (route the finished script to it when the user wants an actual rendered file, not just the written script). It does not write evergreen/non-timely content strategy — that routes to `distribution` → `content-strategy`. It does not fabricate a "trend" when Step 1 comes back empty.

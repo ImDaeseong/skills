@@ -45,3 +45,14 @@ Whenever a skill validates, retries, or fixes work, run a bounded verification l
 5. Stop as soon as every exit criterion passes. Close with `[LOOP-END] result: ___ / gate: __%`; if any HOLD condition remains, say so instead of claiming completion.
 
 For read-only routing or one-pass lookup work, the loop may contain one iteration, but the evidence and closing declaration are still required when the skill claims the result was checked.
+
+## LAW 4 — How to author a skill in this workspace (progressive disclosure)
+
+Per Anthropic's own engineering guidance ([anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)):
+
+1. **The `description` field is a trigger, not a summary.** It must state both *what* the skill does and *when* to use it — this is the only part of a skill loaded into context by default (~30-50 tokens), and it's what the model matches a request against before deciding whether to load the rest. Every skill's `MANDATORY TRIGGERS` phrasing already follows this; keep doing it for new skills.
+2. **Progressive disclosure has three levels:** name+description (always loaded) → the full `SKILL.md` body (loaded only once triggered) → referenced files/scripts/assets (loaded only when the skill's own steps actually need them). If a skill's Attribution or reference material grows large enough to dominate the file, consider splitting the rarely-needed detail into a `references/` subfile the skill points to, rather than inlining everything — this workspace hasn't needed to yet, but don't let a skill grow unbounded without reconsidering the split.
+3. **State the non-obvious, not the obvious.** A step that just restates what any competent model would already do wastes the context budget this whole law exists to protect — every instruction should carry information the model wouldn't otherwise have (a specific source, a specific constraint, a specific pitfall).
+4. **Apply the deletion test before calling a skill finished** (per Matt Pocock's own analysis of his 29-skill `mattpocock/skills` repo, already cited in `vibe-coder`'s Attribution): for every sentence, ask whether removing it would change the agent's behavior. If not, delete it — a popular, heavily-used skill's body compresses toward the minimum that actually changes behavior, not the maximum that sounds thorough. Run this after writing a new step, not only at initial authoring.
+
+Do not restructure existing skills into multi-file `references/` layouts speculatively — apply point 2 only when a skill's own growth actually warrants it.

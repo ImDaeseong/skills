@@ -24,6 +24,9 @@ This skill does not reimplement any of these — it composes their converging me
 - **shanraisshan/claude-code-best-practice** — [github.com/shanraisshan/claude-code-best-practice](https://github.com/shanraisshan/claude-code-best-practice), 62,989★ (checked 2026-07-19), MIT license. Primary reference for Step 1's four harness components (its own CONCEPTS table names Commands/Rules/Skills/Hooks/MCP as the distinct building blocks) — beyond just the discovery-path role credited elsewhere in this file.
 - **DietrichGebert/ponytail** — [github.com/DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail), 85,215★ (checked 2026-07-19), MIT license. Reference for Step 3's YAGNI emphasis — a dedicated, measured skill for minimal-code discipline ("the best code is the code you never wrote"; ~54% less code on average, up to 94%, per its own benchmark against a fair agentic baseline — cited as its claim, not independently re-verified here).
 - **JuliusBrussee/caveman** — [github.com/JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman), 90,347★ (checked 2026-07-19), MIT license. Reference for Step 4's output-token economy — cuts reply verbosity (~65% fewer output tokens per its own benchmark) while keeping code/commands/errors byte-exact; distinct from Context7 (which is about input-context freshness, not output length).
+- **Egonex-AI/Understand-Anything** — [github.com/Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything), 74,921★ (checked 2026-07-19), MIT license. Reference for Step 3.1's fast-onboarding option — a multi-agent pipeline that builds an interactive knowledge graph of an unfamiliar codebase (files, functions, classes, dependencies) instead of reading files one at a time to reconstruct the architecture.
+- **gsd-build/get-shit-done** — [github.com/gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done), 64,762★ (checked 2026-07-19 via direct GitHub HTML verification), MIT license. Reference for Step 4's context-isolation technique — solves "context rot" (quality degradation as a long session's context window fills) by giving each spawned subagent a fresh, isolated context window and handing off between phases via a structured plan artifact rather than shared conversation history.
+- **Thariq Shihipar, "A Field Guide to Fable: Finding Your Unknowns"** — (X article + AI Engineer World's Fair keynote, 2026-07-07) — not a GitHub repo; source of Step 5's implementation-notes-on-deviation and human-comprehension-check additions. Named Anthropic Claude Code technical staff, cited as a technique source rather than an OSS methodology.
 
 ## Core Laws
 
@@ -54,7 +57,7 @@ If unsure which category a task falls in, ask (AskUserQuestion) rather than gues
 
 Per the converged shape across all four primary references (see Attribution):
 
-1. **Read existing project context first** (`CLAUDE.md`/`AGENTS.md`, any prior plan artifact from a previous Step 3 run) — a plan written without checking what's already established repeats decisions or contradicts them. Get the real spec out loud next — what is this actually trying to do, not just the literal request text.
+1. **Read existing project context first** (`CLAUDE.md`/`AGENTS.md`, any prior plan artifact from a previous Step 3 run) — a plan written without checking what's already established repeats decisions or contradicts them. For a large or unfamiliar codebase where reading files one at a time doesn't build a full picture fast enough, build a knowledge-graph map first (see Attribution, `Understand-Anything`) rather than guessing at the architecture from a partial read. Get the real spec out loud next — what is this actually trying to do, not just the literal request text.
 2. Chunk the design into review-sized pieces the user can actually read and sign off on — not one giant unreadable plan dump.
 3. Write the implementation plan explicitly emphasizing **TDD (red/green)**, **YAGNI**, and **DRY** — these three constraints are what keep an autonomous multi-hour execution run from drifting.
 4. Do not start execution until the user has signed off on the plan. A plan nobody reviewed is not a gate, it's a formality.
@@ -65,11 +68,14 @@ Per the converged shape across all four primary references (see Attribution):
 - **Run long-lived processes (dev servers, watchers) as background tasks** so the agent can read logs directly during debugging instead of the user copy-pasting terminal output back and forth.
 - **Use git worktrees to isolate parallel work streams** when more than one task is running concurrently — prevents one in-flight change from corrupting another's working tree.
 - **Subagent-driven execution with inspection at each step**, not one uninspected end-to-end run — per superpowers' model, review happens as each engineering task completes, not only at the very end.
+- **Give each subagent a fresh, isolated context window rather than sharing the bloated main session** (see Attribution, `get-shit-done`) — a long-running main session degrades ("context rot") as it fills; a subagent spawned with only the specific task's context stays reliable even when the orchestrating session is large. Hand off between phases with a structured artifact (the plan from Step 3), not by relying on the subagent inheriting the full conversation history.
 - **Keep replies terse once the plan is approved** (see `caveman`, Attribution) — full prose explanations of every edit cost output tokens for no benefit once the human has already signed off on the plan; code, commands, and error text stay byte-exact, only the surrounding narration shrinks.
 
 ## Step 5: Verification + review gate before calling anything done
 
 Run LAW 3's verification loop and any stricter active-project rules. Also run an actual code-review pass (self-review against the plan from Step 3, or an available AI review tool) before the branch is considered finished, not just "tests pass." A green test suite and a reviewed diff are different checks; both are required.
+
+Two more checks (see Attribution, Thariq's "Field Guide to Fable"): **log implementation notes whenever execution deviates from the Step 3 plan** — don't silently improvise and don't stop to re-litigate the plan for every small deviation, just record what changed and why so the review step isn't reconstructing it from the diff alone. And **verify the human's understanding, not just the agent's output** — a short comprehension check (what did this change do, why this approach) before merging catches the case where the code is correct but the human approving it doesn't actually know what they just shipped.
 
 ## Output
 
