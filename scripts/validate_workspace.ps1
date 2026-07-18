@@ -105,7 +105,7 @@ foreach ($token in @('Repeated-loop control guard', 'orchestration across repeat
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing repeated-loop guard: $token") }
 }
 
-foreach ($token in @('Financial-action safety guard', 'self-reported', 'walk-forward', 'out-of-sample', 'slippage', 'no withdrawal permission', 'daily-loss', 'circuit breaker', 'operator kill switch', 'immutable audit logs')) {
+foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest percentage as money earned', 'buy-and-hold', 'walk-forward', 'out-of-sample', 'funding costs', 'leverage', 'parameter searches', 'When comparing models', 'effort setting', 'result variance', 'slippage', 'no withdrawal permission', 'daily-loss', 'circuit breaker', 'operator kill switch', 'immutable audit logs')) {
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing financial-action guard: $token") }
 }
 
@@ -129,7 +129,11 @@ if (-not (Test-Path -LiteralPath $workflowPath)) {
 }
 
 if ($errors.Count -gt 0) {
-    $errors | ForEach-Object { Write-Error $_ }
+    $errors | ForEach-Object {
+        $message = $_.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+        Write-Output "::error title=Workspace validation::$message"
+        Write-Error $_
+    }
     exit 1
 }
 
