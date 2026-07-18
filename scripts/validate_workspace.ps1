@@ -118,7 +118,15 @@ $licenseText = Get-Content -LiteralPath (Join-Path $Root 'LICENSE') -Raw
 if (-not $licenseText.StartsWith('MIT License')) { $errors.Add('LICENSE is not the standard MIT license') }
 if ($licenseText.Contains('This license covers')) { $errors.Add('third-party notice must not be appended to LICENSE') }
 if (-not (Test-Path -LiteralPath (Join-Path $Root 'NOTICE.md'))) { $errors.Add('missing NOTICE.md') }
-if (-not (Test-Path -LiteralPath (Join-Path $Root '.github\workflows\validate.yml'))) { $errors.Add('missing GitHub validation workflow') }
+$workflowPath = Join-Path $Root '.github\workflows\validate.yml'
+if (-not (Test-Path -LiteralPath $workflowPath)) {
+    $errors.Add('missing GitHub validation workflow')
+} else {
+    $workflowText = Get-Content -LiteralPath $workflowPath -Raw
+    foreach ($token in @('actions/checkout@v5', 'Korea Standard Time', '-AsOfDate $asOfDate', './scripts/validate_links.ps1')) {
+        if (-not $workflowText.Contains($token)) { $errors.Add("GitHub validation workflow is stale: $token") }
+    }
+}
 
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object { Write-Error $_ }

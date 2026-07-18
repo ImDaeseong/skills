@@ -11,10 +11,12 @@ jobs:
   validate:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Validate workspace
         shell: pwsh
-        run: ./scripts/validate_workspace.ps1
+        run: |
+          $asOfDate = [TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTime]::UtcNow, 'Korea Standard Time').Date
+          ./scripts/validate_workspace.ps1 -AsOfDate $asOfDate
       - name: Check local Markdown links
         shell: pwsh
         run: ./scripts/validate_links.ps1
