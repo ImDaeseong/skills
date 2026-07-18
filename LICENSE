@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-This license covers the original content of this repository (SKILL.md files
-under genie/, biz-council/, design-report/, and the _shared/ core-laws and
-routing files, plus this README). It does NOT cover, and does not grant any
-rights to, the separately-licensed or unlicensed third-party projects
-referenced (not vendored) in README.md — see that file's "Referenced sites"
-table for each one's actual license status before redistributing anything
-derived from them.

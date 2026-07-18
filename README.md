@@ -2,7 +2,7 @@
 
 Claude Skills workspace. Each subfolder is a skill (`SKILL.md` + supporting files) usable by Claude Code / Cowork / other agent hosts.
 
-This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`, `_shared/`, this README) is [MIT licensed](LICENSE). Third-party projects it references are NOT covered by that license — check the "Referenced sites" section below before reusing anything derived from them.
+All original content tracked in this repository is [MIT licensed](LICENSE). Third-party projects it references are not included or relicensed; review [NOTICE.md](NOTICE.md) and the "Referenced sites" section before installing or reusing external material.
 
 ---
 
@@ -13,7 +13,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agen
 3. **빈 도메인.** 아직 없는 분야(기획/제조/판매/재무운영 등)를 요청하면 genie가 "없다"고 정직하게 답하고 새로 만들지 물어봅니다 — 만들 때도 항상 같은 절차(GitHub에서 별점 높은 실제 후보 조사 → 라이선스 확인 → 방법론만 발췌해 원문 그대로 베끼지 않고 재작성 → `_shared/ROUTING.md`에 한 줄 추가)를 따릅니다. 근거가 부족하면 "만들지 않고 왜 안 만들었는지"를 기록합니다 — 재무운영이 그 사례입니다.
 4. **공유 규칙.** `_shared/CORE-LAWS.md`(LAW 0 추측 금지, LAW 1 별점순 라이브러리 채택, LAW 2 코드 구현 시 구조 원칙, LAW 3 검증 루프 형식, LAW 4 스킬 작성법 자체)를 모든 스킬이 공유합니다 — 새 스킬을 추가·수정할 때 이 파일을 먼저 참조하세요.
 5. **런타임 의존성.** `last30days`와 `marketingskills`는 라이선스가 명확(MIT)해서 필요 시 자동으로 다시 clone되지만, `llm-council`/`anthropics/skills`처럼 라이선스가 불명확한 참고 자료는 이 저장소에 절대 복사(vendoring)하지 않습니다 — 링크와 방법론 설명만 있습니다.
-6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 변경 사항을 커밋하기 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`을 실행하세요. 검사는 9개 스킬의 이름·CORE-LAWS 선언·도구 권한·라우팅·날짜와 수익 주장, MCP, 능동학습, 장기기억, 에이전트 아키텍처, 반복 루프 안전 가드를 확인합니다. 실제 커밋 시에도 같은 검사가 자동 실행됩니다.
+6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 커밋 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`과 `powershell.exe -NoProfile -File scripts/validate_links.ps1`을 실행하세요. 검사는 9개 스킬의 구조·권한·라우팅·날짜와 수익 주장, MCP, 학습·기억, 에이전트 아키텍처, 반복 루프, 금융 행동 안전 가드를 확인합니다. 커밋 훅과 GitHub Actions에서도 검증합니다.
 
 ## Usage (English)
 
@@ -22,7 +22,7 @@ This repository's own content (`genie/`, `biz-council/`, `design-report/`, `agen
 3. **Missing domains.** If you ask for a domain that doesn't exist yet (planning/manufacturing/sales/financial operations/etc.), `genie` says so honestly and offers to build one — always via the same process: find real GitHub candidates ranked by stars → check their license → extract methodology and rewrite it in original wording (never copy verbatim) → add one row to `_shared/ROUTING.md`. When the evidence doesn't clear the bar, the deferral itself gets recorded (financial operations is the example — see the table below).
 4. **Shared rules.** `_shared/CORE-LAWS.md` holds LAW 0 (no speculation), LAW 1 (GitHub libraries ranked by real star counts, license-gated), LAW 2 (code-architecture principles if a design doc becomes code), LAW 3 (a formal verification-loop contract), and LAW 4 (how to author a skill itself) — read it before adding or editing any skill.
 5. **Runtime dependencies.** `last30days` and `marketingskills` have clear licenses (MIT) so they're auto-cloned on demand when missing; anything with an unclear license (`llm-council`, `anthropics/skills`) is never vendored into this repo — only linked and described in this skill's own words.
-6. **Verify.** After the first clone, install the hook with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`. Before committing changes, run `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`. It validates all 9 skills, full CORE-LAWS declarations, tool permissions, routing and dates, plus guards for earnings claims, MCP permissions, active learning, durable memory, agent architecture, and repeated loops. The same validation runs automatically on commit.
+6. **Verify.** After the first clone, install the hook with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`. Before committing, run `powershell.exe -NoProfile -File scripts/validate_workspace.ps1` and `powershell.exe -NoProfile -File scripts/validate_links.ps1`. They validate all 9 skills, permissions, routing, dates, claim attribution, MCP, learning and memory, architecture, repeated loops, financial actions, and local links. The hook and GitHub Actions run these checks again.
 
 ---
 
@@ -32,7 +32,7 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you t
 
 ## Verification guard
 
-`scripts/validate_workspace.ps1` checks every skill against the structural and safety rules in this README: full CORE-LAWS declarations, required tools, routing integrity, evidence dates, claim attribution, MCP approval, learning/memory promotion, architecture evidence, and bounded repeated-loop control. Run it by hand any time: `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`. It also runs automatically as a pre-commit hook, but installed hook files are local to each clone, so install the tracked hook launcher once per clone: `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`. The launcher uses `git hook run pre-commit`, avoiding shell-alias ambiguity on Windows.
+`scripts/validate_workspace.ps1` checks structural and safety rules; `scripts/validate_links.ps1` checks local Markdown links. Run both before committing. The pre-commit hook runs workspace validation locally, and `.github/workflows/validate.yml` runs both checks on pushes and pull requests. Install the local hook once per clone with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`.
 
 ## Shared foundation
 

@@ -1,0 +1,20 @@
+name: Validate skills
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate workspace
+        shell: pwsh
+        run: ./scripts/validate_workspace.ps1
+      - name: Check local Markdown links
+        shell: pwsh
+        run: ./scripts/validate_links.ps1

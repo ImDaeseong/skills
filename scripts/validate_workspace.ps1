@@ -105,10 +105,20 @@ foreach ($token in @('Repeated-loop control guard', 'orchestration across repeat
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing repeated-loop guard: $token") }
 }
 
+foreach ($token in @('Financial-action safety guard', 'self-reported', 'walk-forward', 'out-of-sample', 'slippage', 'no withdrawal permission', 'daily-loss', 'circuit breaker', 'operator kill switch', 'immutable audit logs')) {
+    if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing financial-action guard: $token") }
+}
+
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'all 9 skills', 'earnings claims', 'active learning', 'idempotency', 'delayed active recall')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 9 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
+
+$licenseText = Get-Content -LiteralPath (Join-Path $Root 'LICENSE') -Raw
+if (-not $licenseText.StartsWith('MIT License')) { $errors.Add('LICENSE is not the standard MIT license') }
+if ($licenseText.Contains('This license covers')) { $errors.Add('third-party notice must not be appended to LICENSE') }
+if (-not (Test-Path -LiteralPath (Join-Path $Root 'NOTICE.md'))) { $errors.Add('missing NOTICE.md') }
+if (-not (Test-Path -LiteralPath (Join-Path $Root '.github\workflows\validate.yml'))) { $errors.Add('missing GitHub validation workflow') }
 
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object { Write-Error $_ }
