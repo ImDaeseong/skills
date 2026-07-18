@@ -31,11 +31,17 @@ $requiredTools = @{
     'video-producer'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
 }
 foreach ($file in $skillFiles) {
-    $text = Get-Content -LiteralPath $file.FullName -Raw
-    $allowedBlock = [regex]::Match($text, '(?ms)^allowed-tools:\s*(.*?)^---$').Groups[1].Value
+    $lines = Get-Content -LiteralPath $file.FullName
+    $allowedTools = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+    $inAllowedTools = $false
+    foreach ($line in $lines) {
+        if ($line -eq 'allowed-tools:') { $inAllowedTools = $true; continue }
+        if ($inAllowedTools -and $line -eq '---') { break }
+        if ($inAllowedTools -and $line -match '^\s*-\s+(.+?)\s*$') { [void]$allowedTools.Add($Matches[1]) }
+    }
     if (-not $requiredTools.ContainsKey($file.Directory.Name)) { $errors.Add("required-tools policy missing for skill: $($file.Directory.Name)") }
     foreach ($tool in $requiredTools[$file.Directory.Name]) {
-        if ($allowedBlock -notmatch "(?m)^\s*-\s+$([regex]::Escape($tool))\s*$") {
+        if (-not $allowedTools.Contains($tool)) {
             $errors.Add("missing required tool ${tool}: $($file.FullName)")
         }
     }
