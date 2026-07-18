@@ -170,6 +170,37 @@ New skill (2026-07-18) — earlier turns in this session dismissed several "pers
 | **MarkusPfundstein/mcp-obsidian** | [github.com/MarkusPfundstein/mcp-obsidian](https://github.com/MarkusPfundstein/mcp-obsidian) | 4,094 (checked 2026-07-18 via GitHub API) | MIT | Connectivity layer (MCP server for Obsidian's REST API) the other candidates build on — named for Step 3. |
 | **Jay Choi, "클로드를 완벽한 세컨드브레인으로 만드는 4단계"** | (YouTube, 2026-07-14) | n/a | n/a | Source of this skill's 4-stage structure (Memory feature → CLAUDE.md → Obsidian+LLM-wiki → self-consolidation). The video's own named "Hermes Agent" tool was not adopted for Step 4 — not because Hermes-named products are inherently unverified (see the `NousResearch/hermes-agent` row above: a real, 216,464★, MIT-licensed project), but because this specific video didn't identify its tool as that repo or any other checkable GitHub project. The two verified GitHub candidates above cover the same consolidation stage instead; revise this entry if a later pass confirms which project the video actually used. |
 
+### game-dev
+
+New skill (2026-07-18) — evaluated after an explicit "collect/verify/reflect GitHub info for games and apps" request. A real GitHub search found a dominant first-party candidate for Unreal specifically, justifying a new skill rather than folding game engine work into `vibe-coder`'s general coding discipline.
+
+| Project | Link | Stars (checked) | License | Role |
+|---|---|---|---|---|
+| **EpicGames/unreal-engine-skills-for-claude-code-plugin** | [github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin](https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin) | 140 (checked 2026-07-18 via direct GitHub HTML verification) | MIT | Primary reference for Unreal Engine work — official first-party plugin from Epic Games itself; modest star count outweighed by vendor-authorship credibility, same reasoning as `anthropics/skills` in `design-report`. |
+| **gamedev-skills/awesome-gamedev-agent-skills** | [github.com/gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) | 300 (checked 2026-07-18 via direct GitHub HTML verification) | Apache 2.0 (verified via LICENSE file) | Secondary reference for Godot/Unity/Phaser/etc. — 66 version-pinned skills plus a master router. |
+| **stablyai/orca** | [github.com/stablyai/orca](https://github.com/stablyai/orca) | 90,606 (checked 2026-07-18 via GitHub API) | MIT | Parallel-iteration reference for comparing gameplay-feel variants across isolated worktrees. Independently surfaced earlier in the same session from unrelated YouTube fact-checking turns before this skill existed. |
+| **Chong-U (chongdashu), "vibe code 2D games" workflow** | (X thread + tutorial video, 2026-01-23) | n/a | n/a | Source of the PhaserJS + Playwright-testing pairing ("verify by playing, not by reading the render code"), generalized past Phaser to any engine with a live, drivable build. Also independently verified earlier in the same session as a real, creator-confirmed workflow. |
+
+### biz-ops
+
+New skill (2026-07-18) — evaluated after a request to cover "ERP, CRM, SCM, finance" business-program information. No dominant candidate exists for literal ERP/CRM/SCM software integration (see `_shared/ROUTING.md` "Not yet built" for that explicit deferral), but a strong, actively-maintained candidate exists for the adjacent finance/commercial/operations-advisory work, justifying a new skill scoped to that ground instead.
+
+| Project | Link | Stars (checked) | License | Role |
+|---|---|---|---|---|
+| **alirezarezvani/claude-skills** | [github.com/alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 22,733 (checked 2026-07-18 via direct GitHub HTML verification) | MIT | Primary reference — its Finance (4 skills: DCF/budgeting/forecasting, SaaS metrics coach, investment advisor), Commercial (8 skills: pricing/deal-desk/RFP/partnerships), and Business Operations (7 skills: vendor management/procurement/process mapping) categories map directly onto this skill's three-domain scope. Actively maintained (wave-3 domain overhaul, 2026-06-11). |
+| **cluster-software/agent-crm** | [github.com/cluster-software/agent-crm](https://github.com/cluster-software/agent-crm) | 111 (checked 2026-07-18 via direct GitHub HTML verification) — far below this workspace's evidence bar | Not checked — star count alone already disqualifies it from primary-reference status, so license wasn't verified | Named only as a low-confidence, early-stage option for literal CRM-system access (a16z Speedrun-backed) if a request specifically needs live CRM data rather than deal/pricing strategy; flagged to the user rather than treated as equivalent evidence. Verify its license before actually installing it. |
+
+### writing
+
+New skill (2026-07-18) — evaluated after a request to reflect a "글 작성" (writing) skill. A single candidate dominated by roughly 12x over the next-closest, built on a citable primary source (Wikipedia's own AI-writing-signs guide) rather than one author's taste.
+
+| Project | Link | Stars (checked) | License | Role |
+|---|---|---|---|---|
+| **blader/humanizer** | [github.com/blader/humanizer](https://github.com/blader/humanizer) | 29,755 (checked 2026-07-18 via direct GitHub HTML verification) | MIT (per the skill's own frontmatter) | Primary reference, by a wide margin. 33 catalogued AI-writing patterns with before/after examples, built on Wikipedia's "Signs of AI writing" (WikiProject AI Cleanup), plus an explicit false-positive checklist to avoid over-editing legitimately clean prose. |
+| **conorbronsdon/avoid-ai-writing** | [github.com/conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | 2,441 (checked 2026-07-18 via GitHub API) | MIT | Secondary cross-check reference on the same problem — an order of magnitude thinner evidence, not adopted as primary. |
+| **AgriciDaniel/claude-blog** | [github.com/AgriciDaniel/claude-blog](https://github.com/AgriciDaniel/claude-blog) | 1,411 (checked 2026-07-18 via GitHub API) | MIT | Structural reference (5-gate blog-delivery workflow) for drafting from scratch, distinct from `humanizer`'s prose-polish role. |
+| **haowjy/creative-writing-skills** | [github.com/haowjy/creative-writing-skills](https://github.com/haowjy/creative-writing-skills) | 332 (checked 2026-07-18 via GitHub API) | Apache 2.0 | Fiction/creative-writing reference, named separately since it's a different craft than nonfiction AI-pattern removal. |
+
 ### Origin story and cross-cutting evaluations
 
 | Project | Link | Stars (checked) | License | Role |
