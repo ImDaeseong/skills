@@ -61,7 +61,7 @@ If this can't be answered from what the user already knows, use WebFetch to chec
 
 Read `$MKTG_SKILL_DIR`'s own `README.md` skill table and select the specialists that match the request — do not reimplement their content here. The most common routes for a distribution question:
 
-- **`marketing-ideas`** — broad brainstorm across 139 catalogued tactics when the user doesn't know where to start.
+- **`marketing-ideas`** — broad brainstorm across 139 catalogued tactics when the user doesn't know where to start. (Upstream's own `README.md` category summary says "140 SaaS marketing ideas" — that's a stale rounding in the summary line, not the actual count: the skill's own opening sentence, its category table's sequential numbering [ends at 137-139], and its full commit history [checked 2026-07-18, no renumbering commit exists past the Jan 2026 "Fix marketing-ideas numbering to be sequential" cleanup] all agree on 139. Cite 139, not the README's 140, if this is re-checked later.)
 - **`launch`** — a specific launch/release/Product Hunt/waitlist moment.
 - **`community-marketing`** — building/leveraging an online community for ongoing growth.
 - **`co-marketing`** — partnership-based distribution (the "borrow someone else's audience" angle).
