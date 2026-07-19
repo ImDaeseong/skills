@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "genie-skills",
+  "owner": {
+    "name": "ImDaeseong"
+  },
+  "description": "Claude Skills workspace: a genie router plus 13 specialist skills for research, design, coding discipline, memory, and content work.",
+  "plugins": [
+    {
+      "name": "genie",
+      "source": "./genie",
+      "skills": ["./"],
+      "description": "Router / single entry point. Matches a request to a specialist skill and tells the host/user what to invoke."
+    },
+    {
+      "name": "biz-council",
+      "source": "./biz-council",
+      "skills": ["./"],
+      "description": "Researches real user signal, scores candidate ideas, runs a 5-advisor council, produces an evidence-cited business/product design document."
+    },
+    {
+      "name": "design-report",
+      "source": "./design-report",
+      "skills": ["./"],
+      "description": "Gives a visual artifact a deliberate design direction, persisted as a portable DESIGN.md token file; also formats findings into DOCX/PPTX/XLSX/PDF."
+    },
+    {
+      "name": "agent-builder",
+      "source": "./agent-builder",
+      "skills": ["./"],
+      "description": "Designs a production-disciplined AI worker: goal, context, tools/permissions, memory, verification."
+    },
+    {
+      "name": "distribution",
+      "source": "./distribution",
+      "skills": ["./"],
+      "description": "Finds where target-audience attention already exists and produces concrete trust-first channel angles."
+    },
+    {
+      "name": "curator",
+      "source": "./curator",
+      "skills": ["./"],
+      "description": "Watches a niche for what's timely, forms a specific honest-opinion angle, and scripts it for social."
+    },
+    {
+      "name": "vibe-coder",
+      "source": "./vibe-coder",
+      "skills": ["./"],
+      "description": "Workflow discipline for pair-programming with AI coding agents: task-to-tool routing, plan gate, verification before done."
+    },
+    {
+      "name": "video-producer",
+      "source": "./video-producer",
+      "skills": ["./"],
+      "description": "Turns a script/asset list into an actual rendered video: intros, transitions, lower thirds, animated infographics."
+    },
+    {
+      "name": "personal-memory",
+      "source": "./personal-memory",
+      "skills": ["./"],
+      "description": "Stages a human's cross-session memory setup from built-in Memory through a self-consolidating Obsidian/LLM wiki."
+    },
+    {
+      "name": "game-dev",
+      "source": "./game-dev",
+      "skills": ["./"],
+      "description": "Builds/extends a 2D or 3D game with an AI agent driving the actual engine, gated by a one-page design doc."
+    },
+    {
+      "name": "biz-ops",
+      "source": "./biz-ops",
+      "skills": ["./"],
+      "description": "Runs the back-office of an already-existing business: financial analysis, commercial deal work, business operations."
+    },
+    {
+      "name": "writing",
+      "source": "./writing",
+      "skills": ["./"],
+      "description": "Writes/edits prose to read as a specific human wrote it, via a catalogued AI-writing-pattern check."
+    },
+    {
+      "name": "social-carousel",
+      "source": "./social-carousel",
+      "skills": ["./"],
+      "description": "Chains real trend research into a specific honest angle, exported as an Instagram/LinkedIn multi-slide carousel."
+    }
+  ]
+}
