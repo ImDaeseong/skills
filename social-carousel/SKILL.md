@@ -28,17 +28,7 @@ Follow `../_shared/CORE-LAWS.md` in full.
 
 ## Step 1: Resolve the trend-research engine — do not assume it exists
 
-```bash
-LAST30DAYS_SKILL_MD=$(find "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.agents/skills" ~/Desktop/skills -maxdepth 4 -iname "SKILL.md" -path "*last30days*" 2>/dev/null | head -1)
-if [ -z "$LAST30DAYS_SKILL_MD" ]; then
-  echo "last30days not found locally."
-else
-  LAST30DAYS_SKILL_DIR=$(dirname "$LAST30DAYS_SKILL_MD")
-  echo "Resolved last30days at: $LAST30DAYS_SKILL_DIR"
-fi
-```
-
-If not found, ask the user (AskUserQuestion): clone `https://github.com/mvanhorn/last30days-skill` into `~/Desktop/skills/last30days` now, or proceed on WebSearch-only evidence (weaker, must be labeled `[LOW-EVIDENCE]`). Once resolved, Read that `SKILL.md` and follow it exactly — same discipline as `biz-council` Step 1.0/1.1, including the Korean-web supplement (`[KR-WEB - via WebSearch, not last30days engine]`) if the target audience is Korean. **Evidence gate**: if research comes back empty, stop and say so rather than inventing a topic — a carousel built on a guessed trend is the exact failure this step exists to prevent.
+Resolve and run `last30days` exactly as `biz-council` Step 1.0/1.1 does (find `LAST30DAYS_SKILL_DIR` under `~/Desktop/skills`, `~/.claude/skills`, etc.; offer to clone `https://github.com/mvanhorn/last30days-skill` if missing; never assume a path) — same convention `curator` Step 1 follows, not re-described here. Include the Korean-web supplement (`[KR-WEB - via WebSearch, not last30days engine]`) if the target audience is Korean, or proceed on WebSearch-only evidence if the user declines to clone (weaker, must be labeled `[LOW-EVIDENCE]`). **Evidence gate**: if research comes back empty, stop and say so rather than inventing a topic — a carousel built on a guessed trend is the exact failure this step exists to prevent.
 
 ## Step 2: Resolve the carousel-builder engine — do not assume it exists
 

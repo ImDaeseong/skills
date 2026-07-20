@@ -45,7 +45,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Trigger:** "distribution plan", "how do I market this", "where should I promote this", "launch this product", "growth ideas".
 **Give it:** The product/idea and its target audience.
 **Get back:** 3-5 concrete, named channel angles (not "try social media"), each with why the audience is already there, the trust-building move before any ask, and which `marketingskills` specialist to use for execution detail.
-**Runtime dependency: `marketingskills`** (cloned to `~/Desktop/skills/marketingskills` on first use, MIT license, 47 specialist skills). No Windows-specific issue known for this one — it's a pure-Python/text skill library, not a browser-cookie/media-CLI tool like `last30days`.
+**Runtime dependency: `marketingskills`** (cloned to `~/Desktop/skills/marketingskills` on first use, MIT license, 47 specialist skills). `[ASSUMPTION - unverified, confirm with user]` on Windows compatibility — it appears to be a pure-Python/text skill library rather than a browser-cookie/media-CLI tool like `last30days`, but no upstream issue search has actually confirmed the absence of a Windows-specific gap the way `last30days`'s was (see that entry above).
 
 ## curator
 

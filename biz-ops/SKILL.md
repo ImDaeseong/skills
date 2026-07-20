@@ -48,6 +48,14 @@ A DCF, forecast, or SaaS-metrics output is a number someone may act on. Before p
 - If the underlying skill's script (e.g. `metrics_calculator.py`) is available, run it rather than hand-computing the same metric from scratch — a maintained calculator is less error-prone than a fresh derivation, same reasoning `agent-builder`'s Step 1.5 uses for choosing a maintained rubric tool over describing one from scratch.
 - Label a projection as a projection, not a fact — "forecast" and "actual" are different claims, and a business-operations output that blurs them is exactly the kind of unlabeled-guess failure LAW 0 exists to prevent.
 
+## Live-CRM connection guard
+
+If a request actually needs a live CRM data store rather than deal/pricing strategy advice, and `cluster-software/agent-crm` (or any other live CRM/ERP connection) gets wired up, follow `agent-builder`'s Third-party MCP safety guard in full before connecting it: verify the official source, enumerate exact read/write capabilities, start with read-only access and least privilege, and require explicit human approval for any create/update/delete action against real customer records.
+
+## Human sign-off guard before external transmission
+
+This skill's outputs (a priced proposal, an RFP response, partnership terms) are drafts until a human sends them — nothing in this skill authorizes actually transmitting a commercial output to a real counterparty. Require explicit human approval before any pricing, RFP response, or partnership terms generated here is sent, emailed, or otherwise externally transmitted. A wrong number caught before sending costs nothing; the same number after it reaches a counterparty is an external commitment.
+
 ## What this skill does not do
 
 It does not validate whether a new business/product idea should exist (that's `biz-council`). It does not manage a founder's personal cash-runway/burn discipline — see `../_shared/ROUTING.md`'s "Not yet built" entry for why that specific niche was evaluated and deferred separately (no dominant OSS match for that exact scope, even though this skill covers adjacent ground). It does not connect to or operate a literal ERP or SCM software platform — see Attribution above; it covers the operations-advisory and process side, not systems integration. It does not fabricate a CRM/ERP integration where none exists — if the request needs one, name `cluster-software/agent-crm` with its actual (low) star count rather than presenting it as equivalent-strength evidence to the primary reference.
