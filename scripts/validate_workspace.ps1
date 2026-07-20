@@ -93,6 +93,9 @@ foreach ($route in $routes) {
 
 $datePattern = '(?<!\d)(20\d{2}-\d{2}-\d{2})(?!\d)'
 foreach ($file in Get-ChildItem -LiteralPath $Root -Recurse -File -Filter '*.md') {
+    $relative = $file.FullName.Substring($Root.Length).TrimStart('\', '/')
+    $topLevelDir = ($relative -split '[\\/]')[0]
+    if ($topLevelDir -in $ignoredTopLevelDirs) { continue }
     $lineNumber = 0
     foreach ($line in Get-Content -LiteralPath $file.FullName) {
         $lineNumber++
