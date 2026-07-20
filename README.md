@@ -13,7 +13,7 @@ All original content tracked in this repository is [MIT licensed](LICENSE). Thir
 3. **빈 도메인.** 아직 없는 분야(기획/제조/판매/재무운영 등)를 요청하면 genie가 "없다"고 정직하게 답하고 새로 만들지 물어봅니다 — 만들 때도 항상 같은 절차(GitHub에서 별점 높은 실제 후보 조사 → 라이선스 확인 → 방법론만 발췌해 원문 그대로 베끼지 않고 재작성 → `_shared/ROUTING.md`에 한 줄 추가)를 따릅니다. 근거가 부족하면 "만들지 않고 왜 안 만들었는지"를 기록합니다 — 재무운영이 그 사례입니다.
 4. **공유 규칙.** `_shared/CORE-LAWS.md`(LAW 0 추측 금지, LAW 1 별점순 라이브러리 채택, LAW 2 코드 구현 시 구조 원칙, LAW 3 검증 루프 형식, LAW 4 스킬 작성법 자체)를 모든 스킬이 공유합니다 — 새 스킬을 추가·수정할 때 이 파일을 먼저 참조하세요.
 5. **런타임 의존성.** `last30days`와 `marketingskills`는 라이선스가 명확(MIT)해서 필요 시 자동으로 다시 clone되지만, `llm-council`/`anthropics/skills`처럼 라이선스가 불명확한 참고 자료는 이 저장소에 절대 복사(vendoring)하지 않습니다 — 링크와 방법론 설명만 있습니다.
-6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 커밋 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`과 `powershell.exe -NoProfile -File scripts/validate_links.ps1`을 실행하세요. 검사는 12개 스킬의 구조·권한·라우팅·날짜와 수익 주장, MCP, 학습·기억, 에이전트 아키텍처, 반복 루프, 금융 행동 안전 가드를 확인합니다. 커밋 훅과 GitHub Actions에서도 검증합니다.
+6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 커밋 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`과 `powershell.exe -NoProfile -File scripts/validate_links.ps1`을 실행하세요. 검사는 13개 스킬의 구조·권한·라우팅·날짜와 수익 주장, MCP, 학습·기억, 에이전트 아키텍처, 반복 루프, 금융 행동 안전 가드를 확인합니다. 커밋 훅과 GitHub Actions에서도 검증합니다.
 7. **개별 스킬 사용법.** 각 스킬을 언제/어떻게 호출하는지, 무엇을 입력해야 하고 무엇을 받는지, 알려진 제약(예: `last30days`의 Windows 미지원)까지 스킬별로 정리한 상세 가이드는 [`USAGE.md`](USAGE.md)를 참조하세요.
 
 ## Usage (English)

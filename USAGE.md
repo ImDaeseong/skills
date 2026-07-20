@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 12 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 13 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -95,6 +95,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A draft, or a request to write from scratch, plus a voice sample if you want it matched.
 **Get back:** Prose edited against 33 catalogued AI-writing patterns (`blader/humanizer`) with an explicit false-positive checklist so it doesn't over-edit already-clean writing.
 **Dependency:** References `humanizer`/`avoid-ai-writing`/etc. in its own words — does not clone or vendor them.
+
+## social-carousel
+
+**Trigger:** "make a carousel", "instagram carousel", "linkedin carousel", "slide post", "turn this trend into a post", "carousel about X".
+**Give it:** A niche/topic to find a real trend angle for (or a trend you've already identified), plus target platform (Instagram vs. LinkedIn) if known.
+**Get back:** A multi-slide carousel exported as individual PNGs at exact platform dimensions, built on trend research rather than a guessed topic — output files for you to review and post yourself (never auto-posted).
+**Runtime dependency: `last30days`** — same Windows limitation as `biz-council` above applies here too (same underlying engine call). **Runtime dependency: `open-carrusel`** (Instagram, default) or `carousel-generator` (LinkedIn) — requires Node.js locally; the first invocation may ask to clone and run `npm run setup`.
 
 ---
 
