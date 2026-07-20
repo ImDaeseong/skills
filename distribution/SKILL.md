@@ -18,6 +18,7 @@ allowed-tools:
 This skill does not reimplement marketing execution — it resolves and routes into a real, actively-maintained skill library rather than rewriting 47 specialist skills' worth of content from scratch.
 
 - **marketingskills** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), 40,401★ (checked 2026-07-18 via GitHub API, pushed within the last day), MIT license (verified via GitHub API license endpoint). By Corey Haines. Contains 47 individual `SKILL.md` specialist skills (recounted 2026-07-18 via direct folder listing — grew from 46 since the star count was last checked; already in Agent Skills spec format) covering SEO, CRO, copy, paid, growth/retention, sales/GTM, and strategy. This skill treats it as a **runtime dependency**, resolved/cloned on demand exactly like `biz-council` does for `last30days` — never vendored into this repo, never copied verbatim.
+- **Greg Isenberg, "AI Agents are the new SaaS"** — (YouTube podcast, 2026-07-02) — not a GitHub repo, cited as a content-format framing rather than an OSS methodology. Same episode is cited in `agent-builder` and `biz-council`'s Attribution for its agent-design and pricing framing respectively; this entry covers its distribution-specific technique. Source of Step 2a: for an AI-agent product specifically, a "workflow teardown" (show the painful manual way a task is done today, then the same task done by the agent, ending on the specific pain it removes) is the content format the episode names as winning distribution for this product category — added as a candidate content angle, not a replacement for Step 2's channel-discovery work.
 
 ## Core Laws
 
@@ -56,6 +57,8 @@ Before picking channels, answer this from real signal, not assumption:
 3. What existing communities have "show off your project" days/threads (many subreddits and Discords do — name them if known, WebFetch to confirm if not)?
 
 If this can't be answered from what the user already knows, use WebFetch to check community rules/norms directly rather than guessing self-promotion policies. For scraping many pages from one domain (e.g. a full competitor site or the user's own past content to characterize their brand voice), Firecrawl — [github.com/firecrawl/firecrawl](https://github.com/firecrawl/firecrawl), 152,409★ (checked 2026-07-18 via GitHub API), AGPL-3.0 — is a stronger option than looping WebFetch, when an API key is configured; otherwise fall back to WebFetch/WebSearch and say so.
+
+**2a Workflow teardown, when the product is an AI agent.** If the idea being distributed is an agent doing a job end-to-end (not a self-serve tool), add the "workflow teardown" as a candidate content angle (framing surfaced from a Greg Isenberg "AI Agents are the new SaaS" episode, 2026-07-02, see Attribution): show the painful manual version of the task, then the same task done by the agent, ending on the specific pain point it removes — rather than an abstract feature announcement. This is one content angle among the several Step 5 requires, not a substitute for Step 2's channel-discovery work above.
 
 ## Step 3: Route into the marketingskills library
 
