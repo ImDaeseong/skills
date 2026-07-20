@@ -91,7 +91,7 @@ Per the converged shape across all four primary references (see Attribution):
 
 ## Step 5: Verification + review gate before calling anything done
 
-Run LAW 3's verification loop and any stricter active-project rules. Also run an actual code-review pass (self-review against the plan from Step 3, or an available AI review tool) before the branch is considered finished, not just "tests pass." A green test suite and a reviewed diff are different checks; both are required.
+Run LAW 3's verification loop and any stricter active-project rules — this is the loop-engineering layer of the development stage (see `agent-builder`'s Repeated-loop control guard for the term's origin and full halt/budget/producer-verifier discipline; not restated here to avoid duplicating the same paragraph across skills). Also run an actual code-review pass (self-review against the plan from Step 3, or an available AI review tool) before the branch is considered finished, not just "tests pass." A green test suite and a reviewed diff are different checks; both are required.
 
 Two more checks (see Attribution, Thariq's "Field Guide to Fable"): **log implementation notes whenever execution deviates from the Step 3 plan** — don't silently improvise and don't stop to re-litigate the plan for every small deviation, just record what changed and why so the review step isn't reconstructing it from the diff alone. And **verify the human's understanding, not just the agent's output** — a short comprehension check (what did this change do, why this approach) before merging catches the case where the code is correct but the human approving it doesn't actually know what they just shipped.
 
