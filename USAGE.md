@@ -8,7 +8,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
-3. **Some skills clone an external tool at runtime** (marked "Runtime dependency" below) — the first invocation may ask permission to `git clone` a separate GitHub repo into `~/Desktop/skills/`. This is normal; see [`README.md`](README.md#why-the-originals-arent-kept-locally) for why those aren't vendored into this repo.
+3. **Some skills clone an external tool at runtime** (marked "Runtime dependency" below) — the first invocation may ask permission to `git clone` a separate GitHub repo into `~/Desktop/skills/`. This is normal; see [`ATTRIBUTION.md`](ATTRIBUTION.md#why-the-originals-arent-kept-locally) for why those aren't vendored into this repo.
 
 ---
 
