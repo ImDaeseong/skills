@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 13 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 14 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -102,6 +102,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A niche/topic to find a real trend angle for (or a trend you've already identified), plus target platform (Instagram vs. LinkedIn) if known.
 **Get back:** A multi-slide carousel exported as individual PNGs at exact platform dimensions, built on trend research rather than a guessed topic — output files for you to review and post yourself (never auto-posted).
 **Runtime dependency: `last30days`** — same Windows limitation as `biz-council` above applies here too (same underlying engine call). **Runtime dependency: `open-carrusel`** (Instagram, default) or `carousel-generator` (LinkedIn) — requires Node.js locally; the first invocation may ask to clone and run `npm run setup`.
+
+## prompt-craft
+
+**Trigger:** "write me a better prompt", "how do I prompt X", "prompt engineering", "improve this prompt", "system prompt for X", "best way to prompt ChatGPT/Claude/Gemini".
+**Give it:** The task the prompt needs to accomplish, the target model (if known), and an existing prompt if one is already underperforming.
+**Get back:** A technique picked deliberately for the task shape (zero-shot/few-shot/CoT/ReAct/structured output), checked against the target model's own current vendor docs when a specific model is named (since static guides lag behind new releases), plus a short note on what was applied and why.
+**Dependency:** Does not install or clone anything — references `dair-ai/Prompt-Engineering-Guide` and `Jeffallan/claude-skills`' `prompt-engineer` skill as methodology, and reads vendor docs live via WebFetch/WebSearch when freshness matters.
 
 ---
 

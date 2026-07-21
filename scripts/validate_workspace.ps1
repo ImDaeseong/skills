@@ -7,7 +7,7 @@ $errors = [System.Collections.Generic.List[string]]::new()
 
 # Exclude gitignored runtime-dependency clones (e.g. last30days/, marketingskills/) from
 # the workspace scan - these are third-party skills cloned on demand per README, not this
-# workspace's own 12 skills, and must not be validated against this repo's own policy.
+# workspace's own skills, and must not be validated against this repo's own policy.
 $gitignorePath = Join-Path $Root '.gitignore'
 $ignoredTopLevelDirs = @()
 if (Test-Path -LiteralPath $gitignorePath) {
@@ -45,6 +45,7 @@ $requiredTools = @{
     'game-dev'        = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'genie'           = @('Read', 'AskUserQuestion')
     'personal-memory' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'prompt-craft'    = @('Read', 'Write', 'Edit', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'social-carousel' = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'vibe-coder'      = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'video-producer'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
@@ -139,7 +140,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 13 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 14 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
