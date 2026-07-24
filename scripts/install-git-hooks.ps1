@@ -16,6 +16,13 @@ if [ $? -ne 0 ]; then
     echo "pre-commit: workspace validation failed (see above). Fix the flagged entries before committing."
     exit 1
 fi
+
+powershell.exe -NoProfile -File scripts/validate_links.ps1
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "pre-commit: link validation failed (see above). Fix the flagged links before committing."
+    exit 1
+fi
 '@
 
 # -Encoding utf8 (Windows PowerShell 5.1) writes a UTF-8 BOM by default. A BOM before the
