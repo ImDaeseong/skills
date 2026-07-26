@@ -30,14 +30,14 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 **Trigger:** "design this", "make it look good", "turn this into a report", "make a deck", "export as PDF/PPTX/DOCX", "design system", "DESIGN.md", "wireframe this".
 **Give it:** A visual artifact to design (deck/landing page/prototype) and/or structured findings to format into a document.
-**Get back:** Clarifying questions → a low-fidelity pass → a persisted `DESIGN.md` token file (colors/typography/motion/mascot) that carries across later artifacts in the project, and/or a DOCX/PPTX/XLSX/PDF report.
+**Get back:** Clarifying questions → a low-fidelity pass → a persisted `DESIGN.md` token file (colors/typography/motion/mascot) that carries across later artifacts in the project, and/or a DOCX/PPTX/XLSX/PDF report. If a generated PPTX still looks AI-made, a named second-pass fix (export as PPTX, import into a slide-design tool, unify font/palette, add design elements and animation) instead of just re-prompting.
 **Dependency:** References several GitHub design skills (see its own Attribution) but does not auto-clone any of them — for DOCX/PPTX/XLSX/PDF output it checks whether an Office-generation tool is actually available in the session first and says so if not.
 
 ## agent-builder
 
 **Trigger:** "build me an agent for X", "design an AI worker", "should this run locally or in the cloud", "daily briefing agent", "manage a team of agents".
 **Give it:** What you want a worker to do (or let it extract that from an unstructured context dump).
-**Get back:** A worker design doc (goal/context/tools/memory/verification, five mandatory fields) after first observing 10-20 real cases of how a human currently does the task, plus a checked cloud-vs-local model routing decision; if you actually need several workers running continuously, an operations control-plane recommendation (Paperclip/Harbour/AgentField).
+**Get back:** A worker design doc (goal/context/tools/memory/verification, five mandatory fields) after first observing 10-20 real cases of how a human currently does the task, plus a checked cloud-vs-local model routing decision. A small fixed sequence of roles run once per job (e.g. research → write → image → assemble) is routed to Claude Code's own sub-agents + a `CLAUDE.md` runbook, not a framework; only when you actually need several workers running continuously does it recommend an operations control-plane (Paperclip/Harbour/AgentField).
 **Dependency:** Does not install or clone anything — names real tools (Ollama, Paperclip, promptfoo, etc.) and lets you install what you choose.
 
 ## distribution
