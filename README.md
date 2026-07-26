@@ -60,7 +60,7 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you t
 | [`social-carousel/`](social-carousel/SKILL.md) | Chains real trend research (`last30days`, reused from `biz-council`/`curator`/`distribution`) into a specific honest angle, then exports it as an Instagram/LinkedIn multi-slide carousel at exact platform dimensions via `open-carrusel` (MIT). Does not auto-post — hands back slide files for the user to review and publish. |
 | [`prompt-craft/`](prompt-craft/SKILL.md) | Writes or improves a standalone LLM prompt — picks a technique (zero-shot/few-shot/CoT/ReAct/structured output) via `dair-ai/Prompt-Engineering-Guide`, checks the target model's own current vendor docs before trusting a technique that may be outdated, and diagnoses an underperforming prompt's actual failure mode before rewriting. Distinct from `agent-builder` (persistent worker design) and `vibe-coder` (coding-session discipline). |
 
-**Not yet built:** planning, manufacturing, sales, financial operations (cash-flow/runway discipline). `genie` will say so rather than improvise if one of these is requested — see `_shared/ROUTING.md` "Not yet built" for how a new one gets added. Financial operations and planning were both actively evaluated and deferred, not just unconsidered — see [`ATTRIBUTION.md`](ATTRIBUTION.md).
+**Not yet built:** planning, manufacturing, sales, financial operations (cash-flow/runway discipline). `genie` will say so rather than improvise if one of these is requested — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for how a new one gets added. Financial operations and planning were both actively evaluated and deferred, not just unconsidered — see [`ATTRIBUTION.md`](ATTRIBUTION.md).
 
 ## Attribution
 

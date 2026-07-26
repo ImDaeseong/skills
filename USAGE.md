@@ -16,7 +16,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 **Trigger:** "지니야", "genie", or any request that doesn't name a specific skill.
 **Give it:** Your request in plain language, however unstructured.
-**Get back:** Which specialist skill to invoke, or an honest "not built yet" if no skill covers the domain (see `_shared/ROUTING.md` "Not yet built").
+**Get back:** Which specialist skill to invoke, or an honest "not built yet" if no skill covers the domain (see [`_shared/DEFERRED.md`](_shared/DEFERRED.md)).
 **Dependency:** None — reads `_shared/ROUTING.md` only.
 
 ## biz-council
@@ -114,4 +114,4 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## Not yet built
 
-Planning, manufacturing, sales, and financial operations (cash-flow/runway discipline) have no skill yet. `genie` says so honestly rather than improvising — see [`_shared/ROUTING.md`](_shared/ROUTING.md) "Not yet built" for what was actually evaluated and why each was deferred (thin GitHub evidence, not just unconsidered).
+Planning, manufacturing, sales, and financial operations (cash-flow/runway discipline) have no skill yet. `genie` says so honestly rather than improvising — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for what was actually evaluated and why each was deferred (thin GitHub evidence, not just unconsidered).
