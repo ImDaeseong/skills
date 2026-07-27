@@ -16,11 +16,30 @@ if (Test-Path -LiteralPath $gitignorePath) {
         ForEach-Object { $_.TrimEnd('/') }
 }
 
-$skillFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Filter 'SKILL.md' | Where-Object {
-    $relative = $_.FullName.Substring($Root.Length).TrimStart('\', '/')
-    $topLevelDir = ($relative -split '[\\/]')[0]
-    $topLevelDir -notin $ignoredTopLevelDirs
+# Scoped enumeration: skip ignored top-level dirs (e.g. last30days/) entirely rather than
+# recursing into them and filtering afterward - recursing in can hit inaccessible nested paths
+# (e.g. .pytest_cache) and, since PermissionDenied is a non-terminating error here, the script
+# would otherwise keep running and still print PASS despite never having scanned those files.
+function Get-ScopedFiles {
+    param([string]$Root, [string[]]$IgnoredTopLevelDirs, [string]$Filter)
+    $results = [System.Collections.Generic.List[System.IO.FileInfo]]::new()
+    foreach ($item in Get-ChildItem -LiteralPath $Root -Force) {
+        if ($item.PSIsContainer) {
+            if ($item.Name -in $IgnoredTopLevelDirs) { continue }
+            try {
+                Get-ChildItem -LiteralPath $item.FullName -Recurse -File -Filter $Filter -ErrorAction Stop |
+                    ForEach-Object { $results.Add($_) }
+            } catch {
+                $errors.Add("directory scan failed: $($item.FullName): $_")
+            }
+        } elseif ($item.Name -like $Filter) {
+            $results.Add($item)
+        }
+    }
+    return $results
 }
+
+$skillFiles = Get-ScopedFiles -Root $Root -IgnoredTopLevelDirs $ignoredTopLevelDirs -Filter 'SKILL.md'
 
 foreach ($file in $skillFiles) {
     $text = Get-Content -LiteralPath $file.FullName -Raw
@@ -93,10 +112,7 @@ foreach ($route in $routes) {
 }
 
 $datePattern = '(?<!\d)(20\d{2}-\d{2}-\d{2})(?!\d)'
-foreach ($file in Get-ChildItem -LiteralPath $Root -Recurse -File -Filter '*.md') {
-    $relative = $file.FullName.Substring($Root.Length).TrimStart('\', '/')
-    $topLevelDir = ($relative -split '[\\/]')[0]
-    if ($topLevelDir -in $ignoredTopLevelDirs) { continue }
+foreach ($file in (Get-ScopedFiles -Root $Root -IgnoredTopLevelDirs $ignoredTopLevelDirs -Filter '*.md')) {
     $lineNumber = 0
     foreach ($line in Get-Content -LiteralPath $file.FullName) {
         $lineNumber++

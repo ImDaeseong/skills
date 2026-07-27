@@ -12,11 +12,24 @@ if (Test-Path -LiteralPath $gitignorePath) {
         ForEach-Object { $_.TrimEnd('/') }
 }
 
-Get-ChildItem -LiteralPath $root -Recurse -File -Filter '*.md' | Where-Object {
-    $relative = $_.FullName.Substring($root.Length).TrimStart('\', '/')
-    $topLevelDir = ($relative -split '[\\/]')[0]
-    $topLevelDir -notin $ignoredTopLevelDirs
-} | ForEach-Object {
+# Scoped enumeration: skip ignored top-level dirs (e.g. last30days/) entirely rather than
+# recursing into them and filtering afterward - avoids ever touching inaccessible nested paths.
+function Get-ScopedFiles {
+    param([string]$Root, [string[]]$IgnoredTopLevelDirs, [string]$Filter)
+    $results = [System.Collections.Generic.List[System.IO.FileInfo]]::new()
+    foreach ($item in Get-ChildItem -LiteralPath $Root -Force) {
+        if ($item.PSIsContainer) {
+            if ($item.Name -in $IgnoredTopLevelDirs) { continue }
+            Get-ChildItem -LiteralPath $item.FullName -Recurse -File -Filter $Filter |
+                ForEach-Object { $results.Add($_) }
+        } elseif ($item.Name -like $Filter) {
+            $results.Add($item)
+        }
+    }
+    return $results
+}
+
+Get-ScopedFiles -Root $root -IgnoredTopLevelDirs $ignoredTopLevelDirs -Filter '*.md' | ForEach-Object {
     $base = $_.DirectoryName
     $text = Get-Content -LiteralPath $_.FullName -Raw
     foreach ($match in [regex]::Matches($text, '\[[^\]]+\]\(([^)]+)\)')) {
