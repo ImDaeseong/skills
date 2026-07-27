@@ -36,6 +36,10 @@ Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you t
 
 `scripts/validate_workspace.ps1` checks structural and safety rules; `scripts/validate_links.ps1` checks local Markdown links. Run both before committing. The pre-commit hook runs workspace validation locally, and `.github/workflows/validate.yml` runs both checks on pushes and pull requests. Install the local hook once per clone with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`.
 
+`scripts/test_validators_ignore_scan.ps1` is a regression test guarding both validators against re-entering gitignored top-level dirs (e.g. `last30days/`) during their scan; it also runs in `.github/workflows/validate.yml`.
+
+**Scope note:** `last30days/` is a third-party clone (see [`ATTRIBUTION.md`](ATTRIBUTION.md)), not this workspace's own code, and its own `pytest` suite is POSIX-oriented (the upstream project's own CI runs `ubuntu-latest` only). Running its tests on Windows locally can surface failures unrelated to this workspace; they are not part of this repo's pass/fail criteria, which is scoped to `scripts/validate_workspace.ps1`, `scripts/validate_links.ps1`, and `scripts/test_validators_ignore_scan.ps1`.
+
 **What "PASS" actually means:** `validate_workspace.ps1` confirms each required guard phrase (e.g. `biz-council`'s claim-quality gate, `agent-builder`'s financial-action guard) is *present in the text* of the relevant `SKILL.md`, plus structural checks (frontmatter, routing, tool lists, no future-dated evidence). It cannot and does not check whether a skill actually followed LAW 0 (no fabricated claims) or LAW 1 (real star counts/licenses) on a given real request — that's a text-presence check, not a behavioral one. Treat a PASS as "the rules are written down correctly," not "every claim in every skill has been fact-checked"; the latter is what `ATTRIBUTION.md`'s citations and LAW 4 point 7's evaluation scenarios are for, and both stay manual.
 
 ## Shared foundation

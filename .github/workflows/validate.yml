@@ -20,3 +20,6 @@ jobs:
       - name: Check local Markdown links
         shell: powershell
         run: ./scripts/validate_links.ps1
+      - name: Regression test - validators skip ignored dirs
+        shell: powershell
+        run: ./scripts/test_validators_ignore_scan.ps1
