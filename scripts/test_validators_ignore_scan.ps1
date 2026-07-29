@@ -14,8 +14,8 @@ if (Test-Path -LiteralPath $testDir) {
 $user = "$env:USERDOMAIN\$env:USERNAME"
 
 try {
-    New-Item -ItemType Directory -Path $blockedDir -Force | Out-Null
-    Set-Content -LiteralPath (Join-Path $blockedDir 'file.md') -Value '# blocked' -Encoding utf8
+    New-Item -ItemType Directory -Path $blockedDir -Force -ErrorAction Stop | Out-Null
+    Set-Content -LiteralPath (Join-Path $blockedDir 'file.md') -Value '# blocked' -Encoding utf8 -ErrorAction Stop
     icacls $blockedDir /deny "${user}:(RX)" /T /C 2>&1 | Out-Null
 
     # Merge stderr into the captured stream: the actual regression signal is that the old code
