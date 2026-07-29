@@ -26,6 +26,10 @@ Restarting from zero every session is a choice, not a limitation — the gap bet
 
 Follow `../_shared/CORE-LAWS.md` in full.
 
+## Note: switching AI vendors is a different problem than the Stage 0-4 roadmap
+
+If the actual ask is "I already have history in ChatGPT and want to move to Claude/Gemini" rather than "help me start building a memory system," that's vendor portability, not staging — point to the real current mechanism instead of routing into Step 1. Verified 2026-07-29: Claude has an experimental **memory import** (structured preference/summary import only — it cannot ingest a raw ChatGPT chat-history export). Gemini separately supports importing a **full chat-history ZIP export** (up to 5GB) from ChatGPT or Claude — the only vendor-supported way in 2026 to move actual conversation content rather than a summarized memory, though unavailable in the EEA/UK/Switzerland. ChatGPT itself has no import feature (export only). Point the user at the target vendor's own current import docs before walking through clicks, since consumer AI products change this faster than this skill file does.
+
 ## Step 1: Diagnose the current stage before adding anything
 
 Ask (AskUserQuestion) or infer from what's already in place — don't build a heavier stage than the user needs:
