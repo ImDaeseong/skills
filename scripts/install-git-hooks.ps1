@@ -45,6 +45,14 @@ if [ `$? -ne 0 ]; then
 fi
 "@
 
+# A custom core.hooksPath can point at a directory that doesn't exist yet (nothing
+# creates it automatically) -- Set-Content then fails with DirectoryNotFoundException
+# instead of writing the hook.
+$hookDir = Split-Path -Parent $hookPath
+if ($hookDir -and -not (Test-Path -LiteralPath $hookDir)) {
+    New-Item -ItemType Directory -Path $hookDir -Force | Out-Null
+}
+
 # -Encoding utf8 (Windows PowerShell 5.1) writes a UTF-8 BOM by default. A BOM before the
 # "#!/bin/sh" shebang breaks it -- git then fails with a misleading "cannot spawn ... No such
 # file or directory" that looks like a missing-executable-bit problem but isn't. Use ascii (the
