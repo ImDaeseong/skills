@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 13 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 15 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -83,6 +83,18 @@
       "source": "./social-carousel",
       "skills": ["./"],
       "description": "Chains real trend research into a specific honest angle, exported as an Instagram/LinkedIn multi-slide carousel."
+    },
+    {
+      "name": "prompt-craft",
+      "source": "./prompt-craft",
+      "skills": ["./"],
+      "description": "Writes or improves a standalone LLM prompt, picking a technique and checking the target model's own current vendor docs."
+    },
+    {
+      "name": "erp-fundamentals",
+      "source": "./erp-fundamentals",
+      "skills": ["./"],
+      "description": "Industry-agnostic ERP knowledge baseline before speccing: universal module taxonomy plus a verified standard per vertical."
     }
   ]
 }

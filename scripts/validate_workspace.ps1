@@ -112,6 +112,21 @@ foreach ($route in $routes) {
     if ($route -notin $specialists) { $errors.Add("orphan route: $route") }
 }
 
+$marketplacePath = Join-Path $Root '.claude-plugin\marketplace.json'
+if (-not (Test-Path -LiteralPath $marketplacePath)) {
+    $errors.Add('missing .claude-plugin/marketplace.json')
+} else {
+    $marketplace = Get-Content -LiteralPath $marketplacePath -Raw | ConvertFrom-Json
+    $marketplacePlugins = $marketplace.plugins.name
+    $allSkillNames = $skillFiles.Directory.Name
+    foreach ($skill in $allSkillNames) {
+        if ($skill -notin $marketplacePlugins) { $errors.Add("skill missing from marketplace.json: $skill") }
+    }
+    foreach ($plugin in $marketplacePlugins) {
+        if ($plugin -notin $allSkillNames) { $errors.Add("marketplace.json plugin has no matching skill folder: $plugin") }
+    }
+}
+
 $datePattern = '(?<!\d)(20\d{2}-\d{2}-\d{2})(?!\d)'
 foreach ($file in (Get-ScopedFiles -Root $Root -IgnoredTopLevelDirs $ignoredTopLevelDirs -Filter '*.md')) {
     $lineNumber = 0
