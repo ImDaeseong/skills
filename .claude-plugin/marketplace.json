@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 14 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 15 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -95,6 +95,12 @@
       "source": "./erp-fundamentals",
       "skills": ["./"],
       "description": "Industry-agnostic ERP knowledge baseline before speccing: universal module taxonomy plus a verified standard per vertical."
+    },
+    {
+      "name": "ai-adoption-scout",
+      "source": "./ai-adoption-scout",
+      "skills": ["./"],
+      "description": "Maps real, dated AI-usage signal onto the user's own task/team/business and ranks concrete adoption ideas by feasibility."
     }
   ]
 }

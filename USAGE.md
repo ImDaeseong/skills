@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 15 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 16 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -116,6 +116,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The industry/vertical the ERP is for, if known (manufacturing, general accounting, trade/import-export, retail/apparel, or a specific platform like SAP/NetSuite) — it asks if not stated.
 **Get back:** The universal module baseline (General Ledger, AP/AR, Procurement, Inventory, Order Management, HR/Payroll, master data) plus the verified standard that applies to the stated vertical (ISA-95, GAAP/IFRS, Incoterms/HS, GS1), to use as the acceptance-criteria seed for a proper spec pass. It does not produce the spec itself, connect to any real ERP software, or replace `biz-ops`'s ongoing back-office work once an ERP already exists.
 **Dependency:** None — original content sourced from cited vendor/standards documentation (see its own Attribution), not an external package.
+
+## ai-adoption-scout
+
+**Trigger:** "다른 사람들은 AI를 어떻게 쓰나", "AI 활용 아이디어", "AI 도입 사례", "where else could we use AI", "AI use case ideas for my team", "how are other companies using AI".
+**Give it:** Your actual task/team/business context, what's already in place, and any hard constraints (cost, data sensitivity, ruled-out tools).
+**Get back:** Real, dated AI-usage signal for your domain (`last30days` + named usage reports over WebSearch), then 3-5 ranked adoption ideas (ready now / needs setup / needs more evidence) — never a generic three-example list. Hands off to `design-report` only if you want a stakeholder-ready document.
+**Runtime dependency: `last30days`** — same Windows limitation as `biz-council` above applies here too (same underlying engine call).
 
 ---
 
