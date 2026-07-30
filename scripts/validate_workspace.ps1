@@ -55,20 +55,21 @@ foreach ($token in @('LAW 3', 'LAW 4', '[LOOP-START]', '[LOOP-END]', 'max iterat
 }
 
 $requiredTools = @{
-    'agent-builder'   = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
-    'biz-council'     = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion', 'Task')
-    'biz-ops'         = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'curator'         = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
-    'design-report'   = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'distribution'    = @('Read', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
-    'game-dev'        = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'genie'           = @('Read', 'AskUserQuestion')
-    'personal-memory' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'prompt-craft'    = @('Read', 'Write', 'Edit', 'WebFetch', 'WebSearch', 'AskUserQuestion')
-    'social-carousel' = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
-    'vibe-coder'      = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'video-producer'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
-    'writing'         = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
+    'agent-builder'    = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
+    'biz-council'      = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion', 'Task')
+    'biz-ops'          = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'curator'          = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
+    'design-report'    = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'distribution'     = @('Read', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
+    'erp-fundamentals' = @('Read', 'AskUserQuestion')
+    'game-dev'         = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'genie'            = @('Read', 'AskUserQuestion')
+    'personal-memory'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'prompt-craft'     = @('Read', 'Write', 'Edit', 'WebFetch', 'WebSearch', 'AskUserQuestion')
+    'social-carousel'  = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
+    'vibe-coder'       = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'video-producer'   = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
 }
 foreach ($file in $skillFiles) {
     $lines = Get-Content -LiteralPath $file.FullName
@@ -156,7 +157,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 14 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 15 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
