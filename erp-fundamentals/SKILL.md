@@ -18,7 +18,7 @@ A request to "build an ERP" arrives with no spec, no confirmed industry, and no 
   - Accounting: **US GAAP** (FASB) and **IFRS** (IASB, required or permitted in 110+ countries per Deloitte's GAAP-vs-IFRS comparison).
   - Trade/customs: **Incoterms 2020** (ICC) and the **Harmonized System (HS Code)** (WCO, 200+ countries).
   - Retail/apparel/distribution: **GS1** barcode/EDI/traceability (1M+ companies, 6B+ transactions/day per gs1.org, incl. GS1 US's Apparel & General Merchandise guidelines).
-- **Vendor-specific reference (if the request names a specific platform)** — Oracle's own **SuiteCloud Agent Skills v1.0** for NetSuite (`oracle/netsuite-suitecloud-sdk`, 315★, UPL-1.0, Oracle's own org, confirmed via `docs.oracle.com` 2026-07-29) and two SAP-specific community collections, `secondsky/sap-skills` (392★, GPL-3.0) and `marianfoo/sap-ai-mcp-servers` (396★, MIT) — all still far below this workspace's usual 22,733★ bar, named here only as a starting point if a request specifically needs SAP/NetSuite conventions rather than generic ERP structure.
+- **Vendor-specific reference (if the request names a specific platform)** — Oracle's own **SuiteCloud Agent Skills v1.0** for NetSuite (`oracle/netsuite-suitecloud-sdk`, UPL-1.0, Oracle's own org, confirmed via `docs.oracle.com` 2026-07-29) and two SAP-specific community collections, `secondsky/sap-skills` (GPL-3.0) and `marianfoo/sap-ai-mcp-servers` (MIT) — all still far below this workspace's usual bar, named here only as a starting point if a request specifically needs SAP/NetSuite conventions rather than generic ERP structure.
 
 ## Core Laws
 
