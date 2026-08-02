@@ -101,6 +101,12 @@
       "source": "./ai-adoption-scout",
       "skills": ["./"],
       "description": "Maps real, dated AI-usage signal onto the user's own task/team/business and ranks concrete adoption ideas by feasibility."
+    },
+    {
+      "name": "filing-analyst",
+      "source": "./filing-analyst",
+      "skills": ["./"],
+      "description": "Reads a public company's own regulatory filing (SEC EDGAR / DART) into a cited business decoder, multi-year change read, and reverse-DCF implied-growth-rate read."
     }
   ]
 }

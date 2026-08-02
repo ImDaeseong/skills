@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 16 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 17 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -123,6 +123,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** Your actual task/team/business context, what's already in place, and any hard constraints (cost, data sensitivity, ruled-out tools).
 **Get back:** Real, dated AI-usage signal for your domain (`last30days` + named usage reports over WebSearch), then 3-5 ranked adoption ideas (ready now / needs setup / needs more evidence) — never a generic three-example list. Hands off to `design-report` only if you want a stakeholder-ready document.
 **Runtime dependency: `last30days`** — same Windows limitation as `biz-council` above applies here too (same underlying engine call).
+
+## filing-analyst
+
+**Trigger:** "10-K 분석", "사업보고서 분석", "이 회사 뭐하는 회사야", "역DCF", "reverse DCF", "implied growth rate".
+**Give it:** A ticker/company name and market (US or Korea); a current share price if no live-quote tool is available in-session; earnings-call transcripts if you want the change-comparison step to include tone, since this skill has no transcript source of its own.
+**Get back:** A one-page cited business/segment decoder, a multi-year comparison of what changed in the filing's own language, and a reverse-DCF implied-growth-rate read — every figure cites its filing page/section, and every output ends with an explicit not-investment-advice disclaimer.
+**Dependency:** SEC EDGAR (`data.sec.gov`) needs no API key but requires a `User-Agent` header identifying the requester, capped at 10 requests/second. DART (Korean filings) requires a free personal API key from `opendart.fss.or.kr` — the skill will ask for it if missing rather than fabricating filing content.
 
 ---
 
