@@ -31,13 +31,30 @@ function Get-ScopedFiles {
 
 Get-ScopedFiles -Root $root -IgnoredTopLevelDirs $ignoredTopLevelDirs -Filter '*.md' | ForEach-Object {
     $base = $_.DirectoryName
-    $text = Get-Content -LiteralPath $_.FullName -Raw
-    foreach ($match in [regex]::Matches($text, '\[[^\]]+\]\(([^)]+)\)')) {
+    # -Encoding utf8: PowerShell 5.1's Get-Content default encoding for a
+    # BOM-less file falls back to the system locale codepage (cp949 on
+    # Korean Windows), which garbles non-ASCII (Korean) filenames extracted
+    # from link text so they no longer match the real Unicode path on disk.
+    # (Found live in a sibling repo's copy of this script, 2026-08-03.)
+    $text = Get-Content -LiteralPath $_.FullName -Raw -Encoding utf8
+    # [^)\n]+ (not [^)]+): a target must not span a newline. Without this, a
+    # literal "](" appearing inside a fenced code block (e.g. a shell command
+    # that greps for markdown link syntax) makes the capture run away across
+    # unrelated paragraphs hunting for the next ")", producing a multi-line
+    # garbage "path" that crashes Test-Path with "illegal characters in path".
+    # (Found live in a sibling repo's validate_links.ps1 copy, 2026-08-03.)
+    foreach ($match in [regex]::Matches($text, '\[[^\]]+\]\(([^)\n]+)\)')) {
         $target = $match.Groups[1].Value
         if ($target -match '^https?://') { continue }
         $targetPath = $target -replace '#.*$', ''
         if ($targetPath -eq '') { continue }
-        if (-not (Test-Path -LiteralPath (Join-Path $base $targetPath))) {
+        try {
+            $exists = Test-Path -LiteralPath (Join-Path $base $targetPath)
+        } catch {
+            $errors.Add("unresolvable link target (invalid path characters): $($_.FullName) -> $target")
+            continue
+        }
+        if (-not $exists) {
             $errors.Add("broken local link: $($_.FullName) -> $target")
         }
     }
