@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 15 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 17 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -107,6 +107,12 @@
       "source": "./filing-analyst",
       "skills": ["./"],
       "description": "Reads a public company's own regulatory filing (SEC EDGAR / DART) into a cited business decoder, multi-year change read, and reverse-DCF implied-growth-rate read."
+    },
+    {
+      "name": "managing-up",
+      "source": "./managing-up",
+      "skills": ["./"],
+      "description": "Drafts a message to a manager/lead about a specific decision, with real trade-off options instead of a flat refusal, grounded in HBR's 'Managing Your Boss' and Frei's critique of solutions-only reporting."
     }
   ]
 }

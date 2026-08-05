@@ -66,6 +66,7 @@ $requiredTools = @{
     'filing-analyst'   = @('Read', 'Write', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'game-dev'         = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'genie'            = @('Read', 'AskUserQuestion')
+    'managing-up'      = @('Read', 'Write', 'AskUserQuestion')
     'personal-memory'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'prompt-craft'     = @('Read', 'Write', 'Edit', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'social-carousel'  = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
@@ -174,7 +175,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 17 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 18 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 

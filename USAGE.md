@@ -133,6 +133,15 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ---
 
+## managing-up
+
+**Trigger:** "팀장한테 어떻게 말해야", "매니징 업", "managing up", "일정 조정 요청", "상사 설득", "convince my manager", "push back on this deadline", "trade-off options for my manager".
+**Give it:** The actual situation (what triggered this), the real technical/operational risk in specific terms, what decision you want your manager to make, and — if you know it — what your manager is actually accountable for this cycle. If you don't know the last one, say so; the skill drafts around the acknowledged gap instead of inventing a plausible-sounding KPI.
+**Get back:** A draft message with 2-3 trade-off options (each with a real cost/risk attached, not vague terms), opening on the shared goal in your manager's own terms and ending with a specific one-line ask — not a flat refusal, and not a template with unfilled placeholders. Every number in the draft traces back to what you stated.
+**Dependency:** None — self-contained, no external library or API. Distinct from `writing` (general tone/voice editing, not manager-specific negotiation).
+
+---
+
 ## Not yet built
 
 Planning, manufacturing, sales, and financial operations (cash-flow/runway discipline) have no skill yet. `genie` says so honestly rather than improvising — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for what was actually evaluated and why each was deferred (thin GitHub evidence, not just unconsidered).
