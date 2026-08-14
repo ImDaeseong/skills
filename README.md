@@ -1,78 +1,70 @@
 # skills
 
-Claude Skills workspace. Each subfolder is a skill (`SKILL.md` + supporting files) written for Claude Code / Cowork. Other Agent Skills-compatible hosts may be able to load these, but `allowed-tools` names Claude-specific tools (e.g. `AskUserQuestion`, `Task`, `Bash`) — a strict host that only permits `name`/`description` in frontmatter, or that maps tool names differently, may need those translated before a skill runs correctly.
+Claude Code/Cowork용 Agent Skills 모음입니다. 18개 전문 스킬과 요청을 적절한 스킬로 연결하는 `genie`로 구성됩니다(총 19개).
 
-All original content tracked in this repository is [MIT licensed](LICENSE). Third-party projects it references are not included or relicensed; review [NOTICE.md](NOTICE.md) and [`ATTRIBUTION.md`](ATTRIBUTION.md) before installing or reusing external material.
+> 다른 Agent Skills 호스트에서도 사용할 수 있지만, `allowed-tools`의 `AskUserQuestion`, `Task`, `Bash` 등은 Claude 전용 이름이므로 호스트에 맞게 변환해야 할 수 있습니다.
 
----
+## 빠른 시작
 
-## 사용법 (한글)
+1. 저장소를 clone하거나 내려받습니다.
+2. 각 스킬 폴더를 에이전트의 스킬 디렉터리에 연결합니다. Claude Code는 `~/.claude/skills/` 아래에 복사하거나 심볼릭 링크를 만듭니다.
+3. 무엇을 호출할지 모르겠다면 **`genie`**를 사용합니다. `genie`는 [`_shared/ROUTING.md`](_shared/ROUTING.md)를 읽고 알맞은 전문 스킬을 안내합니다.
+4. 스킬 이름을 안다면 직접 호출해도 됩니다. 예: “`biz-council`로 이 사업 아이디어를 검증해 줘.”
 
-1. **설치.** 이 저장소를 그대로 clone/다운로드한 뒤, 19개 스킬 폴더(`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`, `game-dev/`, `biz-ops/`, `writing/`, `social-carousel/`, `prompt-craft/`, `erp-fundamentals/`, `ai-adoption-scout/`, `filing-analyst/`, `managing-up/`, `book-distiller/`)를 쓰는 에이전트 호스트의 스킬 디렉터리에 연결합니다 (Claude Code라면 `~/.claude/skills/` 아래에 심볼릭 링크하거나 복사).
-2. **호출.** 요청 내용을 모르면 **"지니야" / genie**를 부르세요 — `_shared/ROUTING.md`를 읽고 알맞은 전문 스킬과 호출 방법을 알려줍니다. 스킬 이름을 알면 바로 호출해도 됩니다 (예: "biz-council로 이 아이디어 검증해줘").
-3. **빈 도메인.** 아직 없는 분야(기획/제조/판매/재무운영 등)를 요청하면 genie가 "없다"고 정직하게 답하고 새로 만들지 물어봅니다 — 만들 때도 항상 같은 절차(GitHub에서 별점 높은 실제 후보 조사 → 라이선스 확인 → 방법론만 발췌해 원문 그대로 베끼지 않고 재작성 → `_shared/ROUTING.md`에 한 줄 추가)를 따릅니다. 근거가 부족하면 "만들지 않고 왜 안 만들었는지"를 기록합니다 — 재무운영이 그 사례입니다.
-4. **공유 규칙.** `_shared/CORE-LAWS.md`(LAW 0 추측 금지, LAW 1 별점순 라이브러리 채택, LAW 2 코드 구현 시 구조 원칙, LAW 3 검증 루프 형식, LAW 4 스킬 작성법 자체)를 모든 스킬이 공유합니다 — 새 스킬을 추가·수정할 때 이 파일을 먼저 참조하세요.
-5. **런타임 의존성.** `last30days`와 `marketingskills`는 라이선스가 명확(MIT)해서 필요 시 자동으로 다시 clone되지만, `llm-council`/`anthropics/skills`처럼 라이선스가 불명확한 참고 자료는 이 저장소에 절대 복사(vendoring)하지 않습니다 — 링크와 방법론 설명만 있습니다.
-6. **검증.** 최초 clone 후 `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`로 훅을 설치하고, 커밋 전에 `powershell.exe -NoProfile -File scripts/validate_workspace.ps1`과 `powershell.exe -NoProfile -File scripts/validate_links.ps1`을 실행하세요. 검사는 19개 스킬의 구조·권한·라우팅·날짜와 수익 주장, MCP, 학습·기억, 에이전트 아키텍처, 반복 루프, 금융 행동 안전 가드를 확인합니다. 커밋 훅과 GitHub Actions에서도 검증합니다.
-7. **개별 스킬 사용법.** 각 스킬을 언제/어떻게 호출하는지, 무엇을 입력해야 하고 무엇을 받는지, 알려진 제약(예: `last30days`의 Windows 미지원)까지 스킬별로 정리한 상세 가이드는 [`USAGE.md`](USAGE.md)를 참조하세요.
+스킬별 입력, 출력, 호출 예시와 제약은 [`USAGE.md`](USAGE.md)를 참고하세요.
 
-## Usage (English)
+## 검증
 
-1. **Install.** Clone or download this repository as-is, then point your agent host's skills directory at all 19 skill folders (`genie/`, `biz-council/`, `design-report/`, `agent-builder/`, `distribution/`, `curator/`, `vibe-coder/`, `video-producer/`, `personal-memory/`, `game-dev/`, `biz-ops/`, `writing/`, `social-carousel/`, `prompt-craft/`, `erp-fundamentals/`, `ai-adoption-scout/`, `filing-analyst/`, `managing-up/`, `book-distiller/`) — for Claude Code, symlink or copy them under `~/.claude/skills/`.
-2. **Invoke.** Call **`genie`** for anything — it reads `_shared/ROUTING.md` and tells you which specialist skill to invoke. You don't need to know skill names, but you can also call one directly by name (e.g. "validate this idea with biz-council").
-3. **Missing domains.** If you ask for a domain that doesn't exist yet (planning/manufacturing/sales/financial operations/etc.), `genie` says so honestly and offers to build one — always via the same process: find real GitHub candidates ranked by stars → check their license → extract methodology and rewrite it in original wording (never copy verbatim) → add one row to `_shared/ROUTING.md`. When the evidence doesn't clear the bar, the deferral itself gets recorded (financial operations is the example — see the table below).
-4. **Shared rules.** `_shared/CORE-LAWS.md` holds LAW 0 (no speculation), LAW 1 (GitHub libraries ranked by real star counts, license-gated), LAW 2 (code-architecture principles if a design doc becomes code), LAW 3 (a formal verification-loop contract), and LAW 4 (how to author a skill itself) — read it before adding or editing any skill.
-5. **Runtime dependencies.** `last30days` and `marketingskills` have clear licenses (MIT) so they're auto-cloned on demand when missing; anything with an unclear license (`llm-council`, `anthropics/skills`) is never vendored into this repo — only linked and described in this skill's own words.
-6. **Verify.** After the first clone, install the hook with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`. Before committing, run `powershell.exe -NoProfile -File scripts/validate_workspace.ps1` and `powershell.exe -NoProfile -File scripts/validate_links.ps1`. They validate all 19 skills, permissions, routing, dates, claim attribution, MCP, learning and memory, architecture, repeated loops, financial actions, and local links. The hook and GitHub Actions run these checks again.
-7. **Per-skill usage.** For exactly when/how to invoke each skill, what to give it, what it returns, and known limitations (e.g. `last30days`'s Windows gap), see [`USAGE.md`](USAGE.md).
+최초 clone 후 Git hook을 한 번 설치합니다.
 
----
+```powershell
+powershell.exe -NoProfile -File scripts/install-git-hooks.ps1
+```
 
-## Entry point
+커밋 전에는 다음 세 검사를 실행합니다.
 
-Call **`genie`** for anything — it reads `_shared/ROUTING.md` and routes you to the right specialist skill below. It does not solve requests itself, and it says so honestly when no specialist exists yet for a given domain (see `genie/SKILL.md`).
+```powershell
+powershell.exe -NoProfile -File scripts/validate_workspace.ps1
+powershell.exe -NoProfile -File scripts/validate_links.ps1
+powershell.exe -NoProfile -File scripts/test_validators_ignore_scan.ps1
+```
 
-## Verification guard
+- `validate_workspace.ps1`: all 19 skills의 구조, 이름, 도구 권한, 라우팅, 날짜와 안전 가드를 검사합니다.
+- `validate_links.ps1`: 로컬 Markdown 링크를 검사합니다.
+- `test_validators_ignore_scan.ps1`: 검증기가 gitignored 제3자 디렉터리에 진입하지 않는지 회귀 검사합니다.
+- 같은 검사는 [GitHub Actions](.github/workflows/validate.yml)에서도 실행됩니다.
 
-`scripts/validate_workspace.ps1` checks structural and safety rules; `scripts/validate_links.ps1` checks local Markdown links. Run both before committing. The pre-commit hook runs workspace validation locally, and `.github/workflows/validate.yml` runs both checks on pushes and pull requests. Install the local hook once per clone with `powershell.exe -NoProfile -File scripts/install-git-hooks.ps1`.
+PASS는 규칙과 필수 문구가 올바르게 배치됐다는 뜻입니다. 실제 요청에서 claim attribution, idempotency, financial actions 같은 규칙을 제대로 수행했는지는 별도의 행동 검증과 사람의 검토가 필요합니다.
 
-`scripts/test_validators_ignore_scan.ps1` is a regression test guarding both validators against re-entering gitignored top-level dirs (e.g. `last30days/`) during their scan; it also runs in `.github/workflows/validate.yml`.
+## 구조
 
-**Scope note:** `last30days/` is a third-party clone (see [`ATTRIBUTION.md`](ATTRIBUTION.md)), not this workspace's own code, and its own `pytest` suite is POSIX-oriented (the upstream project's own CI runs `ubuntu-latest` only). Running its tests on Windows locally can surface failures unrelated to this workspace; they are not part of this repo's pass/fail criteria, which is scoped to `scripts/validate_workspace.ps1`, `scripts/validate_links.ps1`, and `scripts/test_validators_ignore_scan.ps1`.
+- [`genie/`](genie/SKILL.md): 단일 진입점과 라우터
+- [`_shared/CORE-LAWS.md`](_shared/CORE-LAWS.md): 모든 스킬이 따르는 공통 원칙과 검증 루프
+- [`_shared/ROUTING.md`](_shared/ROUTING.md): 요청과 전문 스킬의 연결표
+- [`_shared/DEFERRED.md`](_shared/DEFERRED.md): 아직 제공하지 않는 영역과 보류 근거
+- [`USAGE.md`](USAGE.md): 스킬별 상세 사용법
+- [`ATTRIBUTION.md`](ATTRIBUTION.md): 외부 프로젝트의 출처, 라이선스와 채택 근거
 
-**What "PASS" actually means:** `validate_workspace.ps1` confirms each required guard phrase (e.g. `biz-council`'s claim-quality gate, `agent-builder`'s financial-action guard) is *present in the text* of the relevant `SKILL.md`, plus structural checks (frontmatter, routing, tool lists, no future-dated evidence). It cannot and does not check whether a skill actually followed LAW 0 (no fabricated claims) or LAW 1 (real star counts/licenses) on a given real request — that's a text-presence check, not a behavioral one. Treat a PASS as "the rules are written down correctly," not "every claim in every skill has been fact-checked"; the latter is what `ATTRIBUTION.md`'s citations and LAW 4 point 7's evaluation scenarios are for, and both stay manual.
+## 제공 스킬
 
-## Shared foundation
-
-- [`_shared/CORE-LAWS.md`](_shared/CORE-LAWS.md) — **LAW 0** (no speculation + canonical evidence tags), **LAW 1** (GitHub library selection ranked by real star counts, license-gated), **LAW 2** (UI/logic separation, class structure, explicit success/failure returns — if a design doc becomes code), **LAW 3** (every validate/retry/fix pass runs a bounded, evidence-based verification loop with a stated exit and HOLD condition), **LAW 4** (how to author a skill itself — description as trigger, progressive disclosure, state the non-obvious; sourced from Anthropic's own engineering guidance). Every skill below references this instead of duplicating it.
-- [`_shared/ROUTING.md`](_shared/ROUTING.md) — the table `genie` reads to dispatch requests.
-
-## My skills
-
-| Skill | What it does |
+| 영역 | 스킬 |
 |---|---|
-| [`genie/`](genie/SKILL.md) | Router / single entry point. Matches a request to a specialist skill and tells the host/user what to invoke; never fabricates capability it doesn't have. |
-| [`biz-council/`](biz-council/SKILL.md) | Researches real user signal (Reddit, X, YouTube, TikTok, Instagram Reels, Hacker News, Polymarket, web + a Korean-web supplement); if multiple candidate ideas are still open, scores them (growing/low-competition/personal-fit) before proceeding; runs the chosen idea through a 5-advisor council for multi-angle judgment, then produces a precise, evidence-cited business/product design document. |
-| [`design-report/`](design-report/SKILL.md) | Gives a visual artifact a deliberate design direction — anti-slop process via `taste-skill`/`ui-ux-pro-max-skill`, motion/interaction feel, mascot/illustration consistency, reference-image anchoring — persisted as a portable `DESIGN.md` token file (Google's open spec) so it carries across pages/media/tools instead of drifting, verified by rendering when the artifact actually renders; also formats structured findings (e.g. a `biz-council` document) into a DOCX/PPTX/XLSX/PDF report, with a named second-pass fix (export as PPTX, refine in a slide-design tool) when a generated deck still reads as AI-made. |
-| [`agent-builder/`](agent-builder/SKILL.md) | Designs a production-disciplined AI worker (goal, context, tools/permissions, memory, verification), separates reasoning patterns/RAG/MCP/frameworks from full architecture, and rejects unnecessary agentic complexity — a small fixed one-shot role sequence routes to Claude Code's own sub-agents instead of a multi-agent framework. Repeated loops require external state, idempotency, progress evidence, independent verification, bounded nested budgets, checkpoints, stop/HOLD conditions, and human approval for consequential actions. |
-| [`distribution/`](distribution/SKILL.md) | Finds where target-audience attention already exists and produces 3-5 concrete trust-first channel angles; wraps `marketingskills` as a runtime dependency for execution detail (SEO/CRO/ads/launch/PR/etc.), never reimplements it. |
-| [`curator/`](curator/SKILL.md) | Watches a niche for what's timely (`last30days`), forms a specific honest-opinion angle, and scripts it via `marketingskills`' `social` skill. Educational content must be checked against the primary source with closed-source active recall, delayed re-test, and concrete application rather than treating an AI summary as understanding. |
-| [`vibe-coder/`](vibe-coder/SKILL.md) | Workflow discipline for a human coding alongside AI agents on their own project — build the harness deliberately, task-to-tool routing, a reviewed-plan gate before implementation (Research→Plan→Execute→Review→Ship) that surfaces unknowns first (blind-spot pass, brainstorm/prototype, interview, reference) and tracks oversized scope as issue-tracker tickets, Context7 for doc freshness, terse replies once approved, verification+review before "done." Distinct from `agent-builder` (that designs autonomous business workers; this is the human's own live coding-session discipline). |
-| [`video-producer/`](video-producer/SKILL.md) | Turns a script/asset list (e.g. from `curator`) into an actual rendered video — intros, transitions, lower thirds, animated infographics — via `hyperframes` (HTML→deterministic MP4, Apache-2.0), with `ShortGPT` for footage/voiceover sourcing when the request needs a full auto-pipeline. Fills the video-assembly gap `curator` explicitly stops short of. |
-| [`personal-memory/`](personal-memory/SKILL.md) | Stages a human's cross-session memory setup from built-in Memory through a self-consolidating Obsidian/LLM wiki. AI summaries are not promoted directly: durable learning notes retain the primary-source link, separate facts from interpretation, require delayed active recall, and attach a real application or decision. |
-| [`game-dev/`](game-dev/SKILL.md) | Builds/extends a 2D or 3D game with an AI agent driving the actual engine — Unreal via Epic Games' own first-party MCP plugin, or Godot/Unity/Phaser/Three.js via a routed engine skill — locks a one-page design doc (unit/entity tree, resource/economy structure, enemy/AI behavior patterns) via `vibe-coder`'s plan gate before any gameplay code, then builds the asset/animation pipeline and verifies by playing the build (browser automation or the engine's own test harness) rather than reading the render code. |
-| [`biz-ops/`](biz-ops/SKILL.md) | Runs the back-office of an already-existing business — financial analysis (DCF/budgeting/forecasting/SaaS metrics), commercial deal work (pricing/RFP response/partnerships), business operations (vendor management/procurement/process mapping) — by routing into `alirezarezvani/claude-skills`' Finance/Commercial/Business-Operations categories rather than reimplementing them. Distinct from `biz-council` (one-time new-idea validation, not ongoing operations). |
-| [`writing/`](writing/SKILL.md) | Writes/edits prose (essays, blog posts, articles, personal writing) to read as a specific human wrote it, via `blader/humanizer`'s 33 catalogued AI-writing patterns (Wikipedia's "Signs of AI writing," em dashes, rule-of-three, inflated significance, etc.) with an explicit false-positive checklist to avoid over-editing legitimately clean prose; matches a provided voice sample rather than defaulting to a generic register. |
-| [`social-carousel/`](social-carousel/SKILL.md) | Chains real trend research (`last30days`, reused from `biz-council`/`curator`/`distribution`) into a specific honest angle, then exports it as an Instagram/LinkedIn multi-slide carousel at exact platform dimensions via `open-carrusel` (MIT). Does not auto-post — hands back slide files for the user to review and publish. |
-| [`prompt-craft/`](prompt-craft/SKILL.md) | Writes or improves a standalone LLM prompt — picks a technique (zero-shot/few-shot/CoT/ReAct/structured output) via `dair-ai/Prompt-Engineering-Guide`, checks the target model's own current vendor docs before trusting a technique that may be outdated, and diagnoses an underperforming prompt's actual failure mode before rewriting. Distinct from `agent-builder` (persistent worker design) and `vibe-coder` (coding-session discipline). |
-| [`erp-fundamentals/`](erp-fundamentals/SKILL.md) | Establishes the industry-agnostic ERP knowledge baseline before speccing — universal module taxonomy (GL/AP/AR, Procurement, Inventory, Order Management, HR, master data) plus a mapping from a stated vertical to a verified standard (ISA-95 manufacturing, GAAP/IFRS accounting, Incoterms/HS trade, GS1 retail). Not a system-integration or ongoing-ops skill — routes execution to `biz-ops` and flags literal ERP/SCM software integration as still uncovered. |
-| [`ai-adoption-scout/`](ai-adoption-scout/SKILL.md) | Maps real, dated AI-usage signal (`last30days` + named usage reports over WebSearch — never recalled from memory) onto the user's own task/team/business, ranks concrete adoption ideas by feasibility (ready now / needs setup / needs more evidence), and hands findings to `design-report` only when a stakeholder document is wanted. Distinct from `biz-council` (new-idea validation) and `agent-builder` (persistent worker design). |
-| [`filing-analyst/`](filing-analyst/SKILL.md) | Reads a public company's own regulatory filing — SEC EDGAR 10-K/10-Q (free, no API key) or Korean DART 사업보고서 (free, API key required) — into three cited outputs: a one-page business/segment decoder, a multi-year change-in-disclosure-language comparison, and a reverse-DCF read of the growth rate the current price already assumes (Mauboussin & Rappaport's "Expectations Investing" methodology). Every figure cites its filing page/section; every output carries an explicit not-investment-advice disclaimer. Distinct from `biz-ops` (DCF for the user's own business) and `biz-council` (validating a new business idea). |
-| [`managing-up/`](managing-up/SKILL.md) | Drafts a message to a manager/lead about a specific decision (deadline pushback, scope change, technical risk needing sign-off) — 2-3 trade-off options with real numbers instead of a flat refusal, grounded in Gabarro & Kotter's "Managing Your Boss" (HBR) and Frei's critique of solutions-only reporting. Every number in the draft must trace back to what the user actually stated — it does not fabricate KPIs or "X% of professionals" statistics to sound more persuasive. |
-| [`book-distiller/`](book-distiller/SKILL.md) | Turns a source document (PDF/EPUB/DOCX/HTML/Markdown/text/RTF/MOBI/AZW) into a structured on-demand skill — core mental models plus per-chapter files loaded only when queried, a glossary, patterns, and decision tables — by wrapping `book-to-skill` (MIT, source-audited) as a runtime dependency rather than dumping the whole book into context. Honors the upstream tool's own cost pre-flight, copyright (private-repo-by-default), and security-scan gates; hands the generated skill back to the user rather than auto-registering it here. Distinct from `prompt-craft` (standalone prompts) and `agent-builder` (worker design). |
+| 라우팅 | [`genie`](genie/SKILL.md) |
+| 사업·분석 | [`biz-council`](biz-council/SKILL.md), [`biz-ops`](biz-ops/SKILL.md), [`ai-adoption-scout`](ai-adoption-scout/SKILL.md), [`filing-analyst`](filing-analyst/SKILL.md), [`erp-fundamentals`](erp-fundamentals/SKILL.md) |
+| 콘텐츠·문서 | [`writing`](writing/SKILL.md), [`curator`](curator/SKILL.md), [`social-carousel`](social-carousel/SKILL.md), [`video-producer`](video-producer/SKILL.md), [`design-report`](design-report/SKILL.md), [`book-distiller`](book-distiller/SKILL.md) |
+| 개발·에이전트 | [`agent-builder`](agent-builder/SKILL.md), [`vibe-coder`](vibe-coder/SKILL.md), [`game-dev`](game-dev/SKILL.md), [`prompt-craft`](prompt-craft/SKILL.md), [`personal-memory`](personal-memory/SKILL.md) |
+| 업무 커뮤니케이션 | [`distribution`](distribution/SKILL.md), [`managing-up`](managing-up/SKILL.md) |
 
-**Not yet built:** planning, manufacturing, sales, financial operations (cash-flow/runway discipline), and literal ERP/SCM/CRM *software-system integration* (connecting to and operating SAP/NetSuite/Oracle — `erp-fundamentals` covers the knowledge baseline, not the system connection). `genie` will say so rather than improvise if one of these is requested — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for how a new one gets added. Financial operations and planning were both actively evaluated and deferred, not just unconsidered — see [`ATTRIBUTION.md`](ATTRIBUTION.md).
+현재 제공하지 않는 영역은 기획, 제조, 영업, 개인·창업자 재무 운영, ERP/SCM/CRM 시스템 연동입니다. `genie`는 지원하지 않는 요청을 임의로 처리하지 않고 한계를 알립니다.
 
-## Attribution
+## 제3자 의존성과 라이선스
 
-Every third-party project a skill references, cites, or depends on at runtime — with real star counts, license checks, and the reasoning behind each adoption/deferral — now lives in its own file: [`ATTRIBUTION.md`](ATTRIBUTION.md). Kept separate from this README so the install/usage instructions above stay short; see that file for the per-skill evidence tables and the origin-story/cross-cutting evaluation log.
+이 저장소가 직접 작성한 콘텐츠는 [MIT License](LICENSE)로 배포됩니다. 외부 프로젝트는 이 저장소의 라이선스로 재배포되지 않습니다.
+
+- `last30days`, `marketingskills`, `book-to-skill`은 필요할 때 내려받는 gitignored 런타임 의존성입니다.
+- 이들의 자체 테스트는 이 저장소의 PASS 기준에 포함되지 않습니다. 특히 `last30days` 테스트는 POSIX 환경을 전제로 하므로 Windows에서 직접 실행하면 무관한 실패가 발생할 수 있습니다.
+- 외부 자료를 설치하거나 재사용하기 전에 [`NOTICE.md`](NOTICE.md)와 [`ATTRIBUTION.md`](ATTRIBUTION.md)를 확인하세요.
+
+## English
+
+This repository contains 18 Claude-oriented specialist skills plus `genie`, the routing entry point (19 in total). See [`USAGE.md`](USAGE.md) for per-skill instructions, [`ATTRIBUTION.md`](ATTRIBUTION.md) for third-party evidence and licenses, and the verification commands above before committing.
