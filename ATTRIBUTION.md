@@ -161,6 +161,16 @@ New skill (2026-07-18) — evaluated after a request to reflect a "글 작성" (
 | **epoko77-ai/im-not-ai** (`humanize-korean`) | [github.com/epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) | 4,283 (checked 2026-08-10 via GitHub API) | MIT (verified via `/license` endpoint, `spdx_id: MIT`) | Korean-language reference — added 2026-08-10. 70 Korean-specific AI tells (번역투, mechanical parallelism, over-citation) that `humanizer`'s English/Wikipedia list doesn't cover; use for Korean text. `SKILL.md` read directly per LAW 1 point 5: local-only scripts, no external calls, explicit prompt-injection defense. |
 | **Shinwoo-Park/katfishnet** | [github.com/Shinwoo-Park/katfishnet](https://github.com/Shinwoo-Park/katfishnet) | 24 (checked 2026-08-10 via GitHub API) | `[LICENSE-UNCONFIRMED]` — no LICENSE file (`/license` returns 404), read-only, do not vendor | Korean AI-text *detection* benchmark (띄어쓰기/POS n-gram/comma features) — evidence for which Korean features distinguish machine from human writing; not installed or copied. |
 
+## book-distiller
+
+New skill (2026-08-14) — evaluated after a request to reflect `book-to-skill` into this workspace. Adopted as a runtime dependency (wrapped, not vendored), the same discipline as `curator`→`last30days` and `distribution`→`marketingskills`. The upstream repo name (`book-to-skill`) is the cloned dependency; the wrapper skill is named `book-distiller` to avoid a directory collision with that clone.
+
+| Project | Link | Stars (checked) | License | Role |
+|---|---|---|---|---|
+| **virgiliojr94/book-to-skill** | [github.com/virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill) | top-tier (checked 2026-08-14 via GitHub API; exact count not frozen per this workspace's no-fixed-star-count policy) | MIT (GitHub's detector reports `NOASSERTION`; the repo's actual `LICENSE.md`, read directly, is the standard MIT text) | Runtime dependency. Converts PDF/EPUB/DOCX/HTML/MD/text/RTF/MOBI/AZW into `SKILL.md` + per-chapter files + glossary + patterns + cheatsheet, loading chapters on demand. Cloned to `~/Desktop/skills/book-to-skill` on first use, gitignored, never vendored. |
+
+**Source-code safety audit (LAW 1 point 5), 2026-08-14:** the upstream package (`book_to_skill/`, `scripts/extract.py`, `tools/`) was cloned and read directly before adoption. All `subprocess` calls use list-form args (no `shell=True`), scoped to `pip install` (gated by `BOOK_SKILL_INSTALL_MISSING`, default `ask`) and local format converters (`pdftotext`, Calibre) on the input file. No network calls, no `os.system`/`eval`/`exec`, no env-var/credential exfiltration, no destructive commands; `git`/`gh repo create` appear only in the tool's own user-gated publishing step (`--private` default). No hidden trigger-and-payload. The vendor's "24×–51× fewer tokens" claim is self-reported (`[LOW-EVIDENCE]`), not independently benchmarked here.
+
 ## Origin story and cross-cutting evaluations
 
 | Project | Link | Stars (checked) | License | Role |

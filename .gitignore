@@ -3,3 +3,6 @@ last30days/
 
 # Runtime dependency cloned on demand by distribution; not vendored.
 marketingskills/
+
+# Runtime dependency cloned on demand by book-distiller; not vendored.
+book-to-skill/

@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 17 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 18 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -139,6 +139,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The actual situation (what triggered this), the real technical/operational risk in specific terms, what decision you want your manager to make, and — if you know it — what your manager is actually accountable for this cycle. If you don't know the last one, say so; the skill drafts around the acknowledged gap instead of inventing a plausible-sounding KPI.
 **Get back:** A draft message with 2-3 trade-off options (each with a real cost/risk attached, not vague terms), opening on the shared goal in your manager's own terms and ending with a specific one-line ask — not a flat refusal, and not a template with unfilled placeholders. Every number in the draft traces back to what you stated.
 **Dependency:** None — self-contained, no external library or API. Distinct from `writing` (general tone/voice editing, not manager-specific negotiation).
+
+## book-distiller
+
+**Trigger:** "turn this book into a skill", "이 책을 스킬로 만들어줘", "make a skill from this PDF/document", "distill this book for Claude", "book to skill", "PDF를 스킬로".
+**Give it:** A source document (PDF, EPUB, DOCX, HTML, Markdown, plain text, RTF, MOBI/AZW) and, if you have a preference, the target depth.
+**Get back:** A structured skill written from the document — core mental models, per-chapter files loaded only when a later query touches them, a glossary, design patterns, and decision tables — plus where it was written and its estimated token footprint. The upstream tool's own cost pre-flight (token/pricing estimate before generating), copyright gate (third-party books publish to a private repo only), and security scan run first; the generated skill is handed back to you, not auto-registered into this workspace.
+**Runtime dependency: `book-to-skill`** ([github.com/virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill), cloned to `~/Desktop/skills/book-to-skill` on first use, MIT license, source-audited 2026-08-14 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Python 3; some formats need optional extractors (`pdftotext`, Calibre for MOBI/AZW) which it offers to install (`--install-missing ask`, not forced). The "24×–51× fewer tokens" figure is the vendor's own self-reported claim (`[LOW-EVIDENCE]`), not independently benchmarked here. Distinct from `prompt-craft` (standalone prompts) and `agent-builder` (worker design).
 
 ---
 

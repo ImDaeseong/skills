@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 17 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 18 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -113,6 +113,12 @@
       "source": "./managing-up",
       "skills": ["./"],
       "description": "Drafts a message to a manager/lead about a specific decision, with real trade-off options instead of a flat refusal, grounded in HBR's 'Managing Your Boss' and Frei's critique of solutions-only reporting."
+    },
+    {
+      "name": "book-distiller",
+      "source": "./book-distiller",
+      "skills": ["./"],
+      "description": "Turns a source document (PDF/EPUB/DOCX/HTML/MD/text/RTF/MOBI/AZW) into a structured on-demand skill by wrapping book-to-skill (MIT) as a runtime dependency, honoring its cost/copyright/security-scan gates."
     }
   ]
 }

@@ -59,6 +59,7 @@ $requiredTools = @{
     'ai-adoption-scout' = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
     'biz-council'      = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion', 'Task')
     'biz-ops'          = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'book-distiller'   = @('Read', 'Bash', 'AskUserQuestion')
     'curator'          = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
     'design-report'    = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'distribution'     = @('Read', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
@@ -175,7 +176,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 18 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 19 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
