@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 18 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 19 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -53,6 +53,12 @@
       "source": "./video-producer",
       "skills": ["./"],
       "description": "Turns a script/asset list into an actual rendered video: intros, transitions, lower thirds, animated infographics."
+    },
+    {
+      "name": "image-motion-graphics",
+      "source": "./image-motion-graphics",
+      "skills": ["./"],
+      "description": "Turns one image, song, or script concept into layered PSD/AEP motion graphics and a visually verified render."
     },
     {
       "name": "personal-memory",

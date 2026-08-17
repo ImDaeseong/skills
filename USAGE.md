@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 19 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 20 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -67,6 +67,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A script/asset list (often from `curator`'s output).
 **Get back:** An actual rendered video file (intros, transitions, lower thirds, animated infographics) via `hyperframes`, with `ShortGPT` for footage/voiceover sourcing on a full auto-pipeline request.
 **Dependency:** Does not vendor `hyperframes`/`ShortGPT` — names them, checks availability before promising output.
+
+## image-motion-graphics
+
+**Trigger:** "이미지 한 장으로 모션그래픽", "가사와 MP3로 뮤직비디오", "가사와 WAV로 영상 만들어줘", "노래로 뮤직비디오 이미지 만들어줘", "레이어 분리 PSD", "PSD를 AEP로", "animate this still image", "turn this song into a music video".
+**Give it:** One source image; or lyrics plus an MP3/WAV song file. When the lyrics and audio are attached together, “이 노래를 뮤직비디오로 만들어줘” is enough to request the measured full-song render. Add an aspect ratio, resolution, or editable PSD/AEP endpoint only when you want to override the defaults.
+**Get back:** The requested stage of a one-scene pipeline: separable key visual, reconstructed transparent PNG layers and manifest, position-matched PSD, After Effects composition, or an inspected rendered clip.
+**Dependency:** Requires a host-native image generator for reconstructed assets and installed Photoshop/After Effects for editable PSD/AEP output. It checks VS Code/WSL and host tool availability first, then stops at the nearest honest endpoint instead of fabricating proprietary files. The background stays motion-locked; low-frame-rate motion applies only to independent foreground, rain, and lighting layers.
 
 ## personal-memory
 

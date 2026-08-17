@@ -73,6 +73,7 @@ $requiredTools = @{
     'social-carousel'  = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'vibe-coder'       = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'video-producer'   = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'image-motion-graphics' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
 }
 foreach ($file in $skillFiles) {
@@ -163,6 +164,11 @@ foreach ($token in @('Durable-learning promotion guard', 'primary-source link', 
     if (-not $personalMemoryText.Contains($token)) { $errors.Add("personal-memory missing durable-learning guard: $token") }
 }
 
+$imageMotionText = Get-Content -LiteralPath (Join-Path $Root 'image-motion-graphics\SKILL.md') -Raw
+foreach ($token in @('lyrics plus an MP3 or WAV', 'background motion-locked', 'whole-frame pan', 'integer-pixel crop animation', 'identical pixel coordinates')) {
+    if (-not $imageMotionText.Contains($token)) { $errors.Add("image-motion-graphics missing stable-background guard: $token") }
+}
+
 foreach ($token in @('Agent-architecture evidence guard', 'creator-authored terms unverified', 'measured baseline', 'evaluation set', 'retrieval quality', 'latency and cost budgets', 'self-modifying agent', 'isolated tests and human review')) {
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing architecture-evidence guard: $token") }
 }
@@ -176,7 +182,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 19 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 20 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 

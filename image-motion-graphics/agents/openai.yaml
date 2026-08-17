@@ -1,0 +1,4 @@
+interface:
+  display_name: "Image Motion Graphics"
+  short_description: "Create stable-background music videos from images or songs"
+  default_prompt: "Use my attached lyrics and MP3/WAV or source image to create a full layered music video. Keep the background motion-locked, animate only separate foreground, rain, and light layers, and verify the rendered result."
