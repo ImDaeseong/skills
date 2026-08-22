@@ -6,3 +6,9 @@ marketingskills/
 
 # Runtime dependency cloned on demand by book-distiller; not vendored.
 book-to-skill/
+
+# Runtime dependency cloned on demand by video-watcher; not vendored.
+claude-video/
+
+# Runtime dependency cloned on demand by shorts-clipper; not vendored.
+claude-shorts/

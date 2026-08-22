@@ -125,6 +125,18 @@
       "source": "./book-distiller",
       "skills": ["./"],
       "description": "Turns a source document (PDF/EPUB/DOCX/HTML/MD/text/RTF/MOBI/AZW) into a structured on-demand skill by wrapping book-to-skill (MIT) as a runtime dependency, honoring its cost/copyright/security-scan gates."
+    },
+    {
+      "name": "video-watcher",
+      "source": "./video-watcher",
+      "skills": ["./"],
+      "description": "Watches an existing video (frames + transcript) to answer questions about it — hooks, structure, retention beats — by wrapping claude-video's watch sub-skill (MIT) as a runtime dependency."
+    },
+    {
+      "name": "shorts-clipper",
+      "source": "./shorts-clipper",
+      "skills": ["./"],
+      "description": "Turns an existing longform video into short vertical clips with Claude-scored segments, user approval, and Remotion-rendered captions, by wrapping claude-shorts (MIT wrapper) as a runtime dependency."
     }
   ]
 }

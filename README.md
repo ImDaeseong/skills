@@ -1,6 +1,6 @@
 # skills
 
-Claude Code/Cowork용 Agent Skills 모음입니다. 19개 전문 스킬과 요청을 적절한 스킬로 연결하는 `genie`로 구성됩니다(총 20개).
+Claude Code/Cowork용 Agent Skills 모음입니다. 21개 전문 스킬과 요청을 적절한 스킬로 연결하는 `genie`로 구성됩니다(총 22개).
 
 > 다른 Agent Skills 호스트에서도 사용할 수 있지만, `allowed-tools`의 `AskUserQuestion`, `Task`, `Bash` 등은 Claude 전용 이름이므로 호스트에 맞게 변환해야 할 수 있습니다.
 
@@ -29,7 +29,7 @@ powershell.exe -NoProfile -File scripts/validate_links.ps1
 powershell.exe -NoProfile -File scripts/test_validators_ignore_scan.ps1
 ```
 
-- `validate_workspace.ps1`: all 20 skills의 구조, 이름, 도구 권한, 라우팅, 날짜와 안전 가드를 검사합니다.
+- `validate_workspace.ps1`: all 22 skills의 구조, 이름, 도구 권한, 라우팅, 날짜와 안전 가드를 검사합니다.
 - `validate_links.ps1`: 로컬 Markdown 링크를 검사합니다.
 - `test_validators_ignore_scan.ps1`: 검증기가 gitignored 제3자 디렉터리에 진입하지 않는지 회귀 검사합니다.
 - 같은 검사는 [GitHub Actions](.github/workflows/validate.yml)에서도 실행됩니다.
@@ -51,7 +51,7 @@ PASS는 규칙과 필수 문구가 올바르게 배치됐다는 뜻입니다. �
 |---|---|
 | 라우팅 | [`genie`](genie/SKILL.md) |
 | 사업·분석 | [`biz-council`](biz-council/SKILL.md), [`biz-ops`](biz-ops/SKILL.md), [`ai-adoption-scout`](ai-adoption-scout/SKILL.md), [`filing-analyst`](filing-analyst/SKILL.md), [`erp-fundamentals`](erp-fundamentals/SKILL.md) |
-| 콘텐츠·문서 | [`writing`](writing/SKILL.md), [`curator`](curator/SKILL.md), [`social-carousel`](social-carousel/SKILL.md), [`video-producer`](video-producer/SKILL.md), [`image-motion-graphics`](image-motion-graphics/SKILL.md), [`design-report`](design-report/SKILL.md), [`book-distiller`](book-distiller/SKILL.md) |
+| 콘텐츠·문서 | [`writing`](writing/SKILL.md), [`curator`](curator/SKILL.md), [`social-carousel`](social-carousel/SKILL.md), [`video-producer`](video-producer/SKILL.md), [`image-motion-graphics`](image-motion-graphics/SKILL.md), [`design-report`](design-report/SKILL.md), [`book-distiller`](book-distiller/SKILL.md), [`video-watcher`](video-watcher/SKILL.md), [`shorts-clipper`](shorts-clipper/SKILL.md) |
 | 개발·에이전트 | [`agent-builder`](agent-builder/SKILL.md), [`vibe-coder`](vibe-coder/SKILL.md), [`game-dev`](game-dev/SKILL.md), [`prompt-craft`](prompt-craft/SKILL.md), [`personal-memory`](personal-memory/SKILL.md) |
 | 업무 커뮤니케이션 | [`distribution`](distribution/SKILL.md), [`managing-up`](managing-up/SKILL.md) |
 
@@ -67,4 +67,4 @@ PASS는 규칙과 필수 문구가 올바르게 배치됐다는 뜻입니다. �
 
 ## English
 
-This repository contains 18 Claude-oriented specialist skills plus `genie`, the routing entry point (19 in total). See [`USAGE.md`](USAGE.md) for per-skill instructions, [`ATTRIBUTION.md`](ATTRIBUTION.md) for third-party evidence and licenses, and the verification commands above before committing.
+This repository contains 21 Claude-oriented specialist skills plus `genie`, the routing entry point (22 in total). See [`USAGE.md`](USAGE.md) for per-skill instructions, [`ATTRIBUTION.md`](ATTRIBUTION.md) for third-party evidence and licenses, and the verification commands above before committing.

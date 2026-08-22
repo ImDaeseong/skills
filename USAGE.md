@@ -154,6 +154,20 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Get back:** A structured skill written from the document — core mental models, per-chapter files loaded only when a later query touches them, a glossary, design patterns, and decision tables — plus where it was written and its estimated token footprint. The upstream tool's own cost pre-flight (token/pricing estimate before generating), copyright gate (third-party books publish to a private repo only), and security scan run first; the generated skill is handed back to you, not auto-registered into this workspace.
 **Runtime dependency: `book-to-skill`** ([github.com/virgiliojr94/book-to-skill](https://github.com/virgiliojr94/book-to-skill), cloned to `~/Desktop/skills/book-to-skill` on first use, MIT license, source-audited 2026-08-14 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Python 3; some formats need optional extractors (`pdftotext`, Calibre for MOBI/AZW) which it offers to install (`--install-missing ask`, not forced). The "24×–51× fewer tokens" figure is the vendor's own self-reported claim (`[LOW-EVIDENCE]`), not independently benchmarked here. Distinct from `prompt-craft` (standalone prompts) and `agent-builder` (worker design).
 
+## video-watcher
+
+**Trigger:** "watch this video", "analyze this video/link", "what happens in this video", "summarize this youtube/tiktok video", "break down this video's hook", "이 영상 좀 봐줘", "이 틱톡 영상 분석해줘".
+**Give it:** A video URL (YouTube, TikTok, Vimeo, Twitch clip, Loom, ~1,000 other yt-dlp-supported sites) or a local file path, and optionally a specific question.
+**Get back:** An answer grounded in both scene-aware extracted frames and a timestamped transcript — a summary, a hook/retention breakdown, or a direct answer citing timestamps. Read-only: it does not edit or render anything.
+**Runtime dependency: `claude-video`'s `watch` sub-skill** ([github.com/bradautomates/claude-video](https://github.com/bradautomates/claude-video), cloned to `~/Desktop/skills/claude-video` on first use, MIT license, source-audited 2026-08-21 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs `ffmpeg`/`ffprobe`/`yt-dlp` locally (auto-installed on macOS via its own setup script); a Groq or OpenAI Whisper API key is optional, only used as a transcript fallback when native captions are missing. Distinct from `video-producer` (renders new content) and `shorts-clipper` (cuts an existing video into short clips).
+
+## shorts-clipper
+
+**Trigger:** "make shorts from this video", "clip this into tiktoks", "extract shorts/reels from this", "cut this long video into clips", "이 영상으로 쇼츠 만들어줘", "롱폼을 숏폼으로".
+**Give it:** A longform local video file.
+**Get back:** An interactive 10-step pipeline — transcribe, Claude scores 8-12 candidate segments against a hook/coherence/emotion/value/payoff rubric, you approve/adjust which segments and caption style, boundaries snap to clean word/sentence cuts, Remotion renders animated captions, FFmpeg exports platform-optimized files (YouTube Shorts/TikTok/Instagram Reels) with post-export validation. Never auto-renders without your approval.
+**Runtime dependency: `claude-shorts`** ([github.com/AgriciDaniel/claude-shorts](https://github.com/AgriciDaniel/claude-shorts), cloned to `~/Desktop/skills/claude-shorts` on first use, MIT license for the wrapper, source-audited 2026-08-21 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs `ffmpeg`, Python 3 (venv auto-created for `faster-whisper`), and Node.js/npm for Remotion locally; GPU auto-detected and used if present. **License gate:** the Remotion npm package it renders through is source-available (free for individuals/non-profits/orgs ≤3 employees, paid above that) — the skill confirms your eligibility before rendering. Distinct from `video-producer` (renders brand-new content) and `video-watcher` (watches without cutting).
+
 ---
 
 ## Not yet built

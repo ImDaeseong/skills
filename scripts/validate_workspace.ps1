@@ -74,6 +74,8 @@ $requiredTools = @{
     'vibe-coder'       = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'video-producer'   = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'image-motion-graphics' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'video-watcher'    = @('Read', 'Bash', 'AskUserQuestion')
+    'shorts-clipper'   = @('Read', 'Bash', 'AskUserQuestion')
     'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
 }
 foreach ($file in $skillFiles) {
@@ -182,7 +184,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 20 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 22 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
