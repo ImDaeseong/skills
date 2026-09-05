@@ -119,9 +119,9 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## erp-fundamentals
 
-**Trigger:** "build an ERP", "ERP spec", "ERP requirements", "what modules does an ERP need", "design an ERP system".
+**Trigger:** "build an ERP", "ERP spec", "ERP requirements", "what modules does an ERP need", "design an ERP system", "SCM spec", "CRM spec".
 **Give it:** The industry/vertical the ERP is for, if known (manufacturing, general accounting, trade/import-export, retail/apparel, or a specific platform like SAP/NetSuite) — it asks if not stated.
-**Get back:** The universal module baseline (General Ledger, AP/AR, Procurement, Inventory, Order Management, HR/Payroll, master data) plus the verified standard that applies to the stated vertical (ISA-95, GAAP/IFRS, Incoterms/HS, GS1), to use as the acceptance-criteria seed for a proper spec pass. It does not produce the spec itself, connect to any real ERP software, or replace `biz-ops`'s ongoing back-office work once an ERP already exists.
+**Get back:** The universal module baseline (General Ledger, AP/AR, Procurement, Inventory, Order Management, HR/Payroll, CRM, master data — "SCM" is Procurement+Inventory+Order Management working together, not a separate module; whether CRM is in scope depends on the platform, confirmed rather than assumed) plus the verified standard that applies to the stated vertical (ISA-95, GAAP/IFRS, Incoterms/HS, GS1), to use as the acceptance-criteria seed for a proper spec pass. It does not produce the spec itself, connect to any real ERP/CRM software, or replace `biz-ops`'s ongoing back-office work once an ERP already exists.
 **Dependency:** None — original content sourced from cited vendor/standards documentation (see its own Attribution), not an external package.
 
 ## ai-adoption-scout

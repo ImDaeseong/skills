@@ -1,6 +1,6 @@
 ---
 name: erp-fundamentals
-description: "Before scoping or speccing an ERP-shaped project, establish the industry-agnostic baseline (universal module taxonomy, core master data, standard cross-industry processes) plus which verified industry standard applies once the vertical is known. MANDATORY TRIGGERS: 'build an ERP', 'ERP spec', 'ERP requirements', 'design an ERP system', 'what modules does an ERP need', 'ERP for my business'. Distinct from `biz-ops` (ongoing back-office execution for a business that already has its processes defined) and from literal ERP/SCM software system integration (connecting to and operating SAP/NetSuite/Oracle — see `../_shared/DEFERRED.md`, still uncovered by any evidence-cleared OSS skill). This skill produces the knowledge baseline a spec is built from, not the spec itself and not a system connection."
+description: "Before scoping or speccing an ERP/SCM/CRM-shaped project, establish the industry-agnostic baseline (universal module taxonomy, core master data, standard cross-industry processes) plus which verified industry standard applies once the vertical is known. MANDATORY TRIGGERS: 'build an ERP', 'ERP spec', 'ERP requirements', 'design an ERP system', 'what modules does an ERP need', 'ERP for my business', 'SCM spec', 'CRM spec', 'ERP/SCM/CRM 스펙'. Distinct from `biz-ops` (ongoing back-office execution for a business that already has its processes defined) and from literal ERP/SCM/CRM software system integration (connecting to and operating SAP/NetSuite/Oracle/Salesforce — see `../_shared/DEFERRED.md`, still uncovered by any evidence-cleared OSS skill). This skill produces the knowledge baseline a spec is built from, not the spec itself and not a system connection."
 allowed-tools:
   - Read
   - AskUserQuestion
@@ -19,6 +19,7 @@ A request to "build an ERP" arrives with no spec, no confirmed industry, and no 
   - Trade/customs: **Incoterms 2020** (ICC) and the **Harmonized System (HS Code)** (WCO, 200+ countries).
   - Retail/apparel/distribution: **GS1** barcode/EDI/traceability (1M+ companies, 6B+ transactions/day per gs1.org, incl. GS1 US's Apparel & General Merchandise guidelines).
 - **Vendor-specific reference (if the request names a specific platform)** — Oracle's own **SuiteCloud Agent Skills v1.0** for NetSuite (`oracle/netsuite-suitecloud-sdk`, UPL-1.0, Oracle's own org, confirmed via `docs.oracle.com` 2026-07-29) and two SAP-specific community collections, `secondsky/sap-skills` (GPL-3.0) and `marianfoo/sap-ai-mcp-servers` (MIT) — all still far below this workspace's usual bar, named here only as a starting point if a request specifically needs SAP/NetSuite conventions rather than generic ERP structure.
+- **CRM's placement is vendor-dependent, checked 2026-09-06 (WebSearch against current NetSuite vendor material):** NetSuite bundles CRM (lead management, opportunity tracking, sales forecasting, quote-to-cash, campaign management, case management) into its base ERP subscription as a core module, unified with financials/inventory in one customer record — but Oracle ERP Cloud's own six-pillar grouping (cited above) does not list CRM as one of its six pillars; Oracle sells CRM/customer-experience work as a separate suite (Oracle CX). Whether CRM is "in scope" for a given ERP spec is therefore a platform choice to confirm explicitly (Step 2), not a fact this skill can state universally either way.
 
 ## Core Laws
 
@@ -34,7 +35,10 @@ Every real ERP, independent of vertical, is built from the same core modules and
 - **Inventory / Item Master** — stock levels, locations, valuation.
 - **Order Management (Order-to-Cash)** — quote/order → fulfillment → invoice → collection.
 - **HR/Payroll** — employee records, compensation, time tracking (present in most ERPs even when a dedicated HRIS also exists).
+- **CRM (Customer Relationship Management)** — lead/opportunity tracking, sales forecasting, campaign and case management. Confirm with the user (Step 2) whether this is in scope: some platforms (NetSuite) bundle it as a core ERP module, others (Oracle) treat it as a separate, integrated system — see the Attribution note above. Do not assume either way.
 - **Master data, cross-cutting** — Chart of Accounts, Vendor master, Customer master, Item master. These are shared reference data every module above reads from; get this wrong and every downstream module inherits the error.
+
+**"SCM" (Supply Chain Management)** is not a separate module — it's the umbrella term for Procurement, Inventory, and Order Management above operating together across suppliers, warehouses, and customers. A request for an "SCM spec" maps to those three modules, not a new item to add.
 
 State this list back to the user as the acceptance-criteria seed before scoping further — a request that only wants "invoicing" or "inventory" may not need the full set, and that should be confirmed rather than assumed.
 
