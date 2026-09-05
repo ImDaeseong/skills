@@ -12,3 +12,9 @@ claude-video/
 
 # Runtime dependency cloned on demand by shorts-clipper; not vendored.
 claude-shorts/
+
+# Runtime dependency cloned on demand by footage-editor; not vendored.
+video-use/
+
+# Runtime dependency cloned on demand by diagram-forge; not vendored.
+archify-src/

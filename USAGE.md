@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 21 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 23 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -167,6 +167,20 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A longform local video file.
 **Get back:** An interactive 10-step pipeline — transcribe, Claude scores 8-12 candidate segments against a hook/coherence/emotion/value/payoff rubric, you approve/adjust which segments and caption style, boundaries snap to clean word/sentence cuts, Remotion renders animated captions, FFmpeg exports platform-optimized files (YouTube Shorts/TikTok/Instagram Reels) with post-export validation. Never auto-renders without your approval.
 **Runtime dependency: `claude-shorts`** ([github.com/AgriciDaniel/claude-shorts](https://github.com/AgriciDaniel/claude-shorts), cloned to `~/Desktop/skills/claude-shorts` on first use, MIT license for the wrapper, source-audited 2026-08-21 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs `ffmpeg`, Python 3 (venv auto-created for `faster-whisper`), and Node.js/npm for Remotion locally; GPU auto-detected and used if present. **License gate:** the Remotion npm package it renders through is source-available (free for individuals/non-profits/orgs ≤3 employees, paid above that) — the skill confirms your eligibility before rendering. Distinct from `video-producer` (renders brand-new content) and `video-watcher` (watches without cutting).
+
+## footage-editor
+
+**Trigger:** "edit this footage", "cut the filler words from this video", "color grade this clip", "add subtitles to this raw footage", "turn these takes into a video", "이 영상 편집해줘", "촬영본 편집".
+**Give it:** A folder of already-shot raw footage (talking head, montage, tutorial, interview, etc.).
+**Get back:** A conversation-driven edit — proposed cut/grade/subtitle strategy in plain English first, then (on your approval) a rendered clip with filler words and dead air removed at word-boundary precision, per-segment color grading, burned subtitles, and optional overlay animations — self-checked at every cut boundary before being shown to you.
+**Runtime dependency: `video-use`** ([github.com/browser-use/video-use](https://github.com/browser-use/video-use), cloned to `~/Desktop/skills/video-use` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs `ffmpeg`/`ffprobe` and Python 3 locally; Node.js 22+ only if an animation slot needs HyperFrames/Remotion. **Required API key:** transcription runs through ElevenLabs' Scribe API — an `ELEVENLABS_API_KEY` is a hard requirement, and footage audio (not video) is sent to that API; the skill confirms you're comfortable with this before proceeding. **License gate:** if an animation slot uses Remotion specifically, the same source-available employee-count gate as `shorts-clipper` applies. Distinct from `video-producer`/`image-motion-graphics` (generate new content) — this edits footage that was already shot.
+
+## diagram-forge
+
+**Trigger:** "diagram this architecture", "make a workflow diagram I can share", "export this as an interactive diagram", "visualize this system as HTML", "convert this Mermaid diagram to HTML".
+**Give it:** A plain-language description of the system/process/sequence/pipeline/state machine to diagram, or a pasted Mermaid `flowchart`/`sequenceDiagram`/`stateDiagram`.
+**Get back:** A standalone, validated interactive HTML file (architecture/workflow/sequence/data-flow/lifecycle) with its own viewer — search, focus, route tracing, dark/light toggle — plus export to PNG/JPEG/WebP/SVG/WebM. Distinct from a diagram drawn inline inside the current Artifact/chat, which stays there rather than becoming a portable file.
+**Runtime dependency: `archify`** ([github.com/tt-a1i/archify](https://github.com/tt-a1i/archify), installed via its own `npx skills add tt-a1i/archify -g` or cloned to `~/Desktop/skills/archify-src` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs Node.js locally; no other install required inside the skill package itself.
 
 ---
 

@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 21 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 23 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -137,6 +137,18 @@
       "source": "./shorts-clipper",
       "skills": ["./"],
       "description": "Turns an existing longform video into short vertical clips with Claude-scored segments, user approval, and Remotion-rendered captions, by wrapping claude-shorts (MIT wrapper) as a runtime dependency."
+    },
+    {
+      "name": "footage-editor",
+      "source": "./footage-editor",
+      "skills": ["./"],
+      "description": "Edits already-shot raw camera footage by conversation — filler-word cuts, color grading, subtitles, overlay animations — by wrapping video-use (MIT) as a runtime dependency."
+    },
+    {
+      "name": "diagram-forge",
+      "source": "./diagram-forge",
+      "skills": ["./"],
+      "description": "Generates a standalone, shareable interactive HTML diagram (architecture/workflow/sequence/data-flow/lifecycle) with multi-format export, by wrapping archify (MIT) as a runtime dependency."
     }
   ]
 }

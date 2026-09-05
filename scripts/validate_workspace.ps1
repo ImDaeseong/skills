@@ -76,6 +76,8 @@ $requiredTools = @{
     'image-motion-graphics' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'video-watcher'    = @('Read', 'Bash', 'AskUserQuestion')
     'shorts-clipper'   = @('Read', 'Bash', 'AskUserQuestion')
+    'footage-editor'   = @('Read', 'Bash', 'AskUserQuestion')
+    'diagram-forge'    = @('Read', 'Bash', 'AskUserQuestion')
     'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
 }
 foreach ($file in $skillFiles) {
