@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 23 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 25 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -149,6 +149,18 @@
       "source": "./diagram-forge",
       "skills": ["./"],
       "description": "Generates a standalone, shareable interactive HTML diagram (architecture/workflow/sequence/data-flow/lifecycle) with multi-format export, by wrapping archify (MIT) as a runtime dependency."
+    },
+    {
+      "name": "sales-desk",
+      "source": "./sales-desk",
+      "skills": ["./"],
+      "description": "Prospect-level sales execution — research, BANT/MEDDIC qualification, decision-maker mapping, outreach, objection handling — by wrapping ai-sales-team-claude (MIT) as a runtime dependency."
+    },
+    {
+      "name": "founder-finance",
+      "source": "./founder-finance",
+      "skills": ["./"],
+      "description": "Bootstrapped-founder cash discipline — runway/burn-rate, unit economics, hiring payback, driver-based forecasting — by wrapping charlie-cfo-skill (MIT) as a runtime dependency."
     }
   ]
 }

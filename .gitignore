@@ -18,3 +18,9 @@ video-use/
 
 # Runtime dependency cloned on demand by diagram-forge; not vendored.
 archify-src/
+
+# Runtime dependency cloned on demand by sales-desk; not vendored.
+ai-sales-team-claude/
+
+# Runtime dependency cloned on demand by founder-finance; not vendored.
+charlie-cfo-skill/

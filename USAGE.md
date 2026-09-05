@@ -4,7 +4,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 23 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 25 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -137,6 +137,20 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A ticker/company name and market (US or Korea); a current share price if no live-quote tool is available in-session; earnings-call transcripts if you want the change-comparison step to include tone, since this skill has no transcript source of its own.
 **Get back:** A one-page cited business/segment decoder, a multi-year comparison of what changed in the filing's own language, and a reverse-DCF implied-growth-rate read — every figure cites its filing page/section, and every output ends with an explicit not-investment-advice disclaimer.
 **Dependency:** SEC EDGAR (`data.sec.gov`) needs no API key but requires a `User-Agent` header identifying the requester, capped at 10 requests/second. DART (Korean filings) requires a free personal API key from `opendart.fss.or.kr` — the skill will ask for it if missing rather than fabricating filing content.
+
+## sales-desk
+
+**Trigger:** "research this prospect", "qualify this lead", "find decision makers at this company", "write a cold outreach sequence for X", "prep me for this sales call", "handle this sales objection".
+**Give it:** A company URL or name, and which piece you need (full prospect research, just qualification, just contacts, outreach only, etc.) — it doesn't default to the heaviest 5-agent pipeline if you only need one piece.
+**Get back:** BANT/MEDDIC qualification scoring, a decision-maker/buying-committee map sourced from the target company's own public site, a competitive-intel snapshot, an outreach sequence, meeting-prep notes, or a pipeline report — as a saved file (e.g. `PROSPECT-ANALYSIS.md`). Distinct from `biz-ops` (deal/pricing/RFP strategy) and `distribution` (channel/growth-marketing planning) — this is prospect-level sales execution.
+**Runtime dependency: `ai-sales-team-claude`** ([github.com/zubair-trabzada/ai-sales-team-claude](https://github.com/zubair-trabzada/ai-sales-team-claude), cloned to `~/Desktop/skills/ai-sales-team-claude` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs `git` and Python 3; `reportlab`/`beautifulsoup4` are optional for PDF export/better parsing. Only fetches the target company's own public web pages (about/team/leadership) — never LinkedIn or a people-search service. **Caveat:** the upstream contact-finder script disables TLS certificate verification on its own fetches — avoid running it over an untrusted network.
+
+## founder-finance
+
+**Trigger:** "how much runway do we have", "should we make this hire", "what's our burn multiple", "check our unit economics", "build a 13-week cash flow forecast", "런웨이 계산".
+**Give it:** Your actual numbers — current burn, cash on hand, headcount, ARR, or the specific hire/spend decision in question.
+**Get back:** A direct answer against real thresholds (runway targets, burn multiple, LTV:CAC, CAC payback, Rule of 40) using your own figures, not the reference's example benchmarks. Distinct from `biz-ops` (DCF/valuation modeling for an established business) and `biz-council` (validating a brand-new idea) — this is day-to-day cash discipline for a bootstrapped or self-funded operator.
+**Runtime dependency: `charlie-cfo-skill`** ([github.com/EveryInc/charlie-cfo-skill](https://github.com/EveryInc/charlie-cfo-skill), cloned to `~/Desktop/skills/charlie-cfo-skill` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Pure reference content — no scripts, no network calls, nothing to install beyond the clone itself.
 
 ---
 
