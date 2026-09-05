@@ -29,7 +29,7 @@ powershell.exe -NoProfile -File scripts/validate_links.ps1
 powershell.exe -NoProfile -File scripts/test_validators_ignore_scan.ps1
 ```
 
-- `validate_workspace.ps1`: all 22 skills의 구조, 이름, 도구 권한, 라우팅, 날짜와 안전 가드를 검사합니다.
+- `validate_workspace.ps1`: all 24 skills의 구조, 이름, 도구 권한, 라우팅, 날짜와 안전 가드를 검사합니다.
 - `validate_links.ps1`: 로컬 Markdown 링크를 검사합니다.
 - `test_validators_ignore_scan.ps1`: 검증기가 gitignored 제3자 디렉터리에 진입하지 않는지 회귀 검사합니다.
 - 같은 검사는 [GitHub Actions](.github/workflows/validate.yml)에서도 실행됩니다.
@@ -61,7 +61,7 @@ PASS는 규칙과 필수 문구가 올바르게 배치됐다는 뜻입니다. �
 
 이 저장소가 직접 작성한 콘텐츠는 [MIT License](LICENSE)로 배포됩니다. 외부 프로젝트는 이 저장소의 라이선스로 재배포되지 않습니다.
 
-- `last30days`, `marketingskills`, `book-to-skill`은 필요할 때 내려받는 gitignored 런타임 의존성입니다.
+- `last30days`, `marketingskills`, `book-to-skill`, `claude-video`, `claude-shorts`, `video-use`, `archify-src`는 필요할 때 내려받는 gitignored 런타임 의존성입니다.
 - 이들의 자체 테스트는 이 저장소의 PASS 기준에 포함되지 않습니다. 특히 `last30days` 테스트는 POSIX 환경을 전제로 하므로 Windows에서 직접 실행하면 무관한 실패가 발생할 수 있습니다.
 - 외부 자료를 설치하거나 재사용하기 전에 [`NOTICE.md`](NOTICE.md)와 [`ATTRIBUTION.md`](ATTRIBUTION.md)를 확인하세요.
 

@@ -186,7 +186,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 22 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 24 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
