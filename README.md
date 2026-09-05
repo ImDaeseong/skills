@@ -13,6 +13,10 @@ Claude Code/Cowork용 Agent Skills 모음입니다. 25개 전문 스킬과 요�
 
 스킬별 입력, 출력, 호출 예시와 제약은 [`USAGE.md`](USAGE.md)를 참고하세요.
 
+### Claude.ai / ChatGPT 웹 Project에서 쓰기
+
+Claude Code 없이 브라우저의 Claude.ai 또는 ChatGPT Project에서도 이 스킬들을 대화형으로 재사용할 수 있습니다(파일 실행 없이 텍스트 기반으로). [`시작하기.md`](시작하기.md)의 설치·호출 순서부터 따라가세요 — [`지침.md`](지침.md)(Project 지침용), [`메모리.md`](메모리.md)(계정 메모리용 압축본), [`파일설명.md`](파일설명.md)(전체 파일 목록)는 그 안에서 안내하는 순서대로 첨부하면 됩니다.
+
 ## 검증
 
 최초 clone 후 Git hook을 한 번 설치합니다.
