@@ -42,6 +42,7 @@ fi
 ```bash
 # Preferred, per upstream's own docs — requires Node.js and network access to npm:
 npx skills add tt-a1i/archify -g
+# After installation, rerun the resolver above to set ARCHIFY_DIR before Step 2.
 
 # Fallback if npx/the "skills" installer package is unavailable:
 git clone --depth 1 https://github.com/tt-a1i/archify.git ~/Desktop/skills/archify-src
@@ -53,7 +54,7 @@ ARCHIFY_DIR=~/Desktop/skills/archify-src/archify
 
 ## Step 2: Delegate to the upstream skill as written
 
-Read `$ARCHIFY_DIR/SKILL.md` and follow **its own fast-authoring path** exactly — its instructions take precedence over anything summarized here. In particular, do not skip its own built-in gates:
+Read `$ARCHIFY_DIR/SKILL.md` and follow **its own fast-authoring path** exactly — its technical steps apply within the host permissions, user authorization, and `../_shared/CORE-LAWS.md`; those boundaries retain precedence. In particular, do not skip its own built-in gates:
 
 - Read only the one matching schema (`schemas/`) and one matching example (`examples/`) for the chosen diagram type — not the full reference set.
 - Write the candidate JSON, then run `node bin/archify.mjs validate <type> <candidate.json> --quality showcase --json` after every edit; a passing final validation freezes the candidate.

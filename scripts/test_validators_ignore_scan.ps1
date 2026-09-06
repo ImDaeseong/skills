@@ -1,55 +1,98 @@
-# Regression test for the bug fixed in commit c4978aa: validate_workspace.ps1 and
-# validate_links.ps1 used to recurse into ignored top-level dirs (e.g. last30days/) and filter
-# afterward, so an inaccessible nested path there raised a non-terminating PermissionDenied that
-# validate_workspace.ps1 silently swallowed while still printing PASS. This reproduces that
-# scenario against the real scripts and asserts both still PASS instead of erroring or hanging.
-$root = Split-Path -Parent $PSScriptRoot
-$testDir = Join-Path $root 'marketingskills'
-$blockedDir = Join-Path $testDir 'blocked'
+# Run in a disposable copy so existing runtime clones/caches are never modified.
+$ErrorActionPreference = 'Stop'
+$sourceRoot = Split-Path -Parent $PSScriptRoot
+$fixture = Join-Path ([IO.Path]::GetTempPath()) ('skills-regression-' + [guid]::NewGuid().ToString('N'))
+$ignoredDirs = @(Get-Content -LiteralPath (Join-Path $sourceRoot '.gitignore') |
+    Where-Object { $_ -match '^\S+/$' } | ForEach-Object { $_.TrimEnd('/') })
+$blockedDirs = @()
+$checks = 0
 
-if (Test-Path -LiteralPath $testDir) {
-    throw "regression test aborted: $testDir already exists on disk - refusing to touch it"
+function Assert-Validator {
+    param([string]$Script, [bool]$ShouldPass, [string]$Signal)
+    $savedPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $output = & powershell.exe -NoProfile -File (Join-Path $fixture "scripts/$Script") 2>&1
+        $code = $LASTEXITCODE
+    } finally { $ErrorActionPreference = $savedPreference }
+    $text = ($output | ForEach-Object { $_.ToString() }) -join "`n"
+    if ($ShouldPass) {
+        if ($code -ne 0 -or $text -notmatch '(?m)^PASS' -or $text -match 'UnauthorizedAccess|PermissionDenied') {
+            throw "$Script failed positive control (exit $code): $text"
+        }
+    } elseif ($code -eq 0 -or $text -match '(?m)^PASS' -or $text -notmatch [regex]::Escape($Signal)) {
+        throw "$Script missed negative control '$Signal' (exit $code): $text"
+    }
+    $script:checks++
 }
 
-$user = "$env:USERDOMAIN\$env:USERNAME"
-
 try {
-    New-Item -ItemType Directory -Path $blockedDir -Force -ErrorAction Stop | Out-Null
-    Set-Content -LiteralPath (Join-Path $blockedDir 'file.md') -Value '# blocked' -Encoding utf8 -ErrorAction Stop
-    icacls $blockedDir /deny "${user}:(RX)" /T /C 2>&1 | Out-Null
+    New-Item -ItemType Directory -Path $fixture | Out-Null
+    foreach ($item in Get-ChildItem -LiteralPath $sourceRoot -Force) {
+        if ($item.Name -eq '.git' -or ($item.PSIsContainer -and $item.Name -in $ignoredDirs)) { continue }
+        Copy-Item -LiteralPath $item.FullName -Destination $fixture -Recurse -Force
+    }
+    foreach ($name in @('marketingskills', '.pytest_cache')) {
+        if ($name -notin $ignoredDirs) { throw "missing ignored regression directory: $name" }
+        $blocked = Join-Path $fixture "$name/blocked"
+        New-Item -ItemType Directory -Path $blocked -Force | Out-Null
+        $blockedDirs += $blocked
+        Set-Content -LiteralPath (Join-Path $blocked 'SKILL.md') -Value '[broken](missing.md)' -Encoding utf8
+        $identity = [Security.Principal.WindowsIdentity]::GetCurrent().Name
+        & icacls.exe $blocked /deny "${identity}:(RX)" | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "could not establish denied-read fixture: $name" }
+        $denied = $false
+        try { Get-ChildItem -LiteralPath $blocked -ErrorAction Stop | Out-Null }
+        catch [System.UnauthorizedAccessException] { $denied = $true }
+        if (-not $denied) { throw "fixture is still readable: $name" }
+    }
+    Assert-Validator 'validate_workspace.ps1' $true ''
+    Assert-Validator 'validate_links.ps1' $true ''
 
-    # Merge stderr into the captured stream: the actual regression signal is that the old code
-    # entered the ignored dir and emitted an Access-Denied error even though it still exited 0
-    # with PASS - a bare exit-code/PASS-text check alone can't tell old and new behavior apart.
-    $workspaceAll = & powershell -NoProfile -File (Join-Path $root 'scripts\validate_workspace.ps1') 2>&1
-    $workspaceExit = $LASTEXITCODE
-    $workspaceText = ($workspaceAll | ForEach-Object { $_.ToString() }) -join "`n"
-    $linksAll = & powershell -NoProfile -File (Join-Path $root 'scripts\validate_links.ps1') 2>&1
-    $linksExit = $LASTEXITCODE
-    $linksText = ($linksAll | ForEach-Object { $_.ToString() }) -join "`n"
+    $probe = Join-Path $fixture 'regression-link.md'
+    Set-Content -LiteralPath $probe -Value '[`missing`](missing-target.md)' -Encoding utf8
+    Assert-Validator 'validate_links.ps1' $false 'missing-target.md'
+    Set-Content -LiteralPath $probe -Value @'
+[`valid`](README.md)
+`[literal](missing-target.md)`
+```text
+[example](missing-target.md)
+```
+'@ -Encoding utf8
+    Assert-Validator 'validate_links.ps1' $true ''
+    Remove-Item -LiteralPath $probe
 
-    $failures = [System.Collections.Generic.List[string]]::new()
-    if ($workspaceExit -ne 0 -or $workspaceText -notmatch '(?m)^PASS') {
-        $failures.Add("validate_workspace.ps1 did not PASS with an inaccessible file under an ignored dir (exit $workspaceExit):`n$workspaceText")
+    foreach ($case in @(
+        @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),
+        @('biz-ops/SKILL.md', 'founder-finance', 'deferred-finance', 'biz-ops must route'),
+        @('founder-finance/SKILL.md', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill', '', 'missing post-clone'),
+        @('footage-editor/SKILL.md', 'VIDEOUSE_DIR=~/Desktop/skills/video-use', '', 'missing post-clone'),
+        @('footage-editor/SKILL.md', 'never paste the key into chat', 'ask them to paste one', 'keep API keys out'),
+        @('founder-finance/SKILL.md', 'Static instructions can still carry prompt injection;', 'No hidden trigger-and-payload possible;', 'static-text safety overclaim'),
+        @('sales-desk/SKILL.md', 'SALES_SKILL_MD="$HOME/.claude/skills/sales/SKILL.md"', 'SALES_SKILL_MD=""', 'exact installed entrypoint'),
+        @('diagram-forge/SKILL.md', 'rerun the resolver above to set ARCHIFY_DIR before Step 2', '', 'resolve its directory after installation'),
+        @('footage-editor/SKILL.md', 'those boundaries retain precedence', 'its instructions take precedence over anything summarized here', 'must preserve host')
+    )) {
+        $path = Join-Path $fixture $case[0]
+        $original = [IO.File]::ReadAllText($path)
+        if (-not $original.Contains($case[1])) { throw "negative control input missing: $($case[0])" }
+        try {
+            [IO.File]::WriteAllText($path, $original.Replace($case[1], $case[2]))
+            Assert-Validator 'validate_workspace.ps1' $false $case[3]
+        } finally { [IO.File]::WriteAllText($path, $original) }
     }
-    if ($workspaceText -match 'Access is denied|UnauthorizedAccess|PermissionDenied') {
-        $failures.Add("validate_workspace.ps1 entered the ignored dir and hit the blocked item (should have skipped it entirely):`n$workspaceText")
-    }
-    if ($linksExit -ne 0 -or $linksText -notmatch '(?m)^PASS') {
-        $failures.Add("validate_links.ps1 did not PASS with an inaccessible file under an ignored dir (exit $linksExit):`n$linksText")
-    }
-    if ($linksText -match 'Access is denied|UnauthorizedAccess|PermissionDenied') {
-        $failures.Add("validate_links.ps1 entered the ignored dir and hit the blocked item (should have skipped it entirely):`n$linksText")
-    }
-
-    if ($failures.Count -gt 0) {
-        $failures | ForEach-Object { Write-Error $_ }
-        exit 1
-    }
-    Write-Output 'PASS: validators skip inaccessible items under ignored top-level dirs.'
+    Write-Output "PASS: $checks controls; validators skip inaccessible runtime/cache directories and detect link/adoption/initialization/safety regressions."
 } finally {
-    if (Test-Path -LiteralPath $blockedDir) {
-        icacls $blockedDir /reset /T /C 2>&1 | Out-Null
+    # Only delete our GUID-named fixture under the resolved temporary directory.
+    $resolved = [IO.Path]::GetFullPath($fixture)
+    $tempPrefix = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\') + '\'
+    if (-not $resolved.StartsWith($tempPrefix, [StringComparison]::OrdinalIgnoreCase) -or
+        (Split-Path -Leaf $resolved) -notmatch '^skills-regression-[a-f0-9]{32}$') {
+        throw "unsafe fixture cleanup path: $resolved"
     }
-    Remove-Item -LiteralPath $testDir -Recurse -Force -ErrorAction SilentlyContinue
+    foreach ($blocked in $blockedDirs) {
+        & icacls.exe $blocked /reset /T /C | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "could not restore fixture ACL: $blocked" }
+    }
+    if (Test-Path -LiteralPath $resolved) { Remove-Item -LiteralPath $resolved -Recurse -Force }
 }

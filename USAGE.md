@@ -200,4 +200,4 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## Not yet built
 
-Planning, manufacturing, sales, and financial operations (cash-flow/runway discipline) have no skill yet. `genie` says so honestly rather than improvising — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for what was actually evaluated and why each was deferred (thin GitHub evidence, not just unconsidered).
+Planning, manufacturing, and literal ERP/SCM/CRM software-system integration have no skill yet. Prospect-level sales execution is covered by `sales-desk`; founder cash-flow/runway discipline is covered by `founder-finance`. `genie` says so honestly rather than improvising — see [`_shared/DEFERRED.md`](_shared/DEFERRED.md) for what was actually evaluated and why each was deferred (thin GitHub evidence, not just unconsidered).

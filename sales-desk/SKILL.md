@@ -29,7 +29,8 @@ Follow `../_shared/CORE-LAWS.md` in full.
 ## Step 1: Resolve the engine — do not assume it exists
 
 ```bash
-SALES_SKILL_MD=$(find "$HOME/.claude/skills" ~/Desktop/skills -maxdepth 4 -iname "SKILL.md" -path "*sales*" 2>/dev/null | grep -v sales-desk | head -1)
+SALES_SKILL_MD="$HOME/.claude/skills/sales/SKILL.md"
+if [ ! -f "$SALES_SKILL_MD" ]; then SALES_SKILL_MD=""; fi
 if [ -z "$SALES_SKILL_MD" ]; then
   echo "ai-sales-team-claude not found locally."
   SALES_DIR=""
@@ -41,15 +42,18 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/zubair-trabzada/ai-sales-team-claude` into `~/Desktop/skills/ai-sales-team-claude` now (MIT, safety-audited above — note the public-website-only data collection and the TLS-verification caveat), or stop. If approved:
 
 ```bash
-git clone --depth 1 https://github.com/zubair-trabzada/ai-sales-team-claude.git ~/Desktop/skills/ai-sales-team-claude
+if [ ! -d ~/Desktop/skills/ai-sales-team-claude ]; then
+  git clone --depth 1 https://github.com/zubair-trabzada/ai-sales-team-claude.git ~/Desktop/skills/ai-sales-team-claude
+fi
 bash ~/Desktop/skills/ai-sales-team-claude/install.sh
+SALES_DIR="$HOME/.claude/skills/sales"
 ```
 
 `ai-sales-team-claude/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.
 
 ## Step 2: Delegate to the upstream skill as written
 
-Read the installed `~/.claude/skills/sales/SKILL.md` and follow **its own commands** exactly — its instructions take precedence over anything summarized here. Match the request to the closest command rather than always running the full pipeline:
+Confirm `$SALES_DIR/SKILL.md` exists, then read it and follow **its own commands** exactly — its technical steps apply within the host permissions, user authorization, and `../_shared/CORE-LAWS.md`; those boundaries retain precedence. Match the request to the closest command rather than always running the full pipeline:
 
 - Full account research + qualification + outreach plan → `/sales prospect <url>`
 - Just qualification scoring → `/sales qualify <url>`

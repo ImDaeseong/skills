@@ -206,6 +206,49 @@ if (-not (Test-Path -LiteralPath $workflowPath)) {
     }
 }
 
+# Regression guards for the 2026-09-06 additions and their shared documentation.
+$usageText = Get-Content -LiteralPath (Join-Path $Root 'USAGE.md') -Raw -Encoding utf8
+foreach ($skill in $skillFiles.Directory.Name) {
+    if ($usageText -notmatch ('(?m)^## ' + [regex]::Escape($skill) + '\r?$')) {
+        $errors.Add("skill missing from USAGE.md: $skill")
+    }
+}
+if ($usageText.Contains('Planning, manufacturing, sales, and financial operations')) {
+    $errors.Add('USAGE.md still defers adopted sales/finance skills')
+}
+$bizOpsText = Get-Content -LiteralPath (Join-Path $Root 'biz-ops/SKILL.md') -Raw -Encoding utf8
+if (-not $bizOpsText.Contains('`founder-finance`') -or $bizOpsText.Contains('no dominant OSS')) {
+    $errors.Add('biz-ops must route founder cash discipline to founder-finance')
+}
+foreach ($entry in @(@('founder-finance', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill'), @('footage-editor', 'VIDEOUSE_DIR=~/Desktop/skills/video-use'))) {
+    $entryText = Get-Content -LiteralPath (Join-Path $Root ($entry[0] + '/SKILL.md')) -Raw -Encoding utf8
+    if (-not $entryText.Contains($entry[1])) { $errors.Add("missing post-clone directory assignment: $($entry[0])") }
+}
+$footageText = Get-Content -LiteralPath (Join-Path $Root 'footage-editor/SKILL.md') -Raw -Encoding utf8
+if ($footageText.Contains('ask them to paste one') -or -not $footageText.Contains('never paste the key into chat')) {
+    $errors.Add('footage-editor must keep API keys out of chat')
+}
+foreach ($relative in @('founder-finance/SKILL.md', 'ATTRIBUTION.md')) {
+    $referenceText = Get-Content -LiteralPath (Join-Path $Root $relative) -Raw -Encoding utf8
+    if ($referenceText -match 'No (hidden trigger-and-payload possible|executable surface for a hidden trigger)') {
+        $errors.Add("static-text safety overclaim: $relative")
+    }
+}
+foreach ($relative in @('sales-desk/SKILL.md', 'footage-editor/SKILL.md', 'diagram-forge/SKILL.md')) {
+    $referenceText = Get-Content -LiteralPath (Join-Path $Root $relative) -Raw -Encoding utf8
+    if ($referenceText.Contains('its instructions take precedence over anything summarized here')) {
+        $errors.Add("upstream instructions must preserve host and CORE-LAWS boundaries: $relative")
+    }
+}
+$salesText = Get-Content -LiteralPath (Join-Path $Root 'sales-desk/SKILL.md') -Raw -Encoding utf8
+if (-not $salesText.Contains('SALES_SKILL_MD="$HOME/.claude/skills/sales/SKILL.md"') -or $salesText.Contains('-path "*sales*"')) {
+    $errors.Add('sales-desk must resolve the exact installed entrypoint')
+}
+$diagramText = Get-Content -LiteralPath (Join-Path $Root 'diagram-forge/SKILL.md') -Raw -Encoding utf8
+if (-not $diagramText.Contains('rerun the resolver above to set ARCHIFY_DIR before Step 2')) {
+    $errors.Add('diagram-forge must resolve its directory after installation')
+}
+
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object {
         $message = $_.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')

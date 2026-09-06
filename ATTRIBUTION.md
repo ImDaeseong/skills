@@ -242,7 +242,7 @@ New skill (2026-09-06) — same 5-domain re-search request as `sales-desk` above
 
 **Candidate checked and rejected:** `googlarz/finance-assistant` (41 stars) — its actual `LICENSE` file, read directly, is CC BY 4.0, not the MIT/Apache/BSD-class permissive license GitHub's own API metadata implied (`NOASSERTION`, a real mismatch worth flagging on its own). CC-BY carries no patent grant and is a poor fit for software regardless — fails LAW 1's permissive-license bar outright. Other names surfacing in search ("Financial Coach," "CFO Advisor" marketplace listings, the `alirezarezvani/claude-skills` mega-bundle, a `founderjourney` SaaS-metrics skill) were bundled or unlisted, not independently star-evidenced standalone packages — not adopted on this pass.
 
-**Source-code safety audit (LAW 1 point 5), 2026-09-06:** the actual `SKILL.md` (161 lines) was fetched and read directly via `raw.githubusercontent.com`. It is static reference content only — no `allowed-tools` frontmatter, no scripts, no external calls of any kind. No executable surface for a hidden trigger-and-payload to exist in.
+**Source-code safety audit (LAW 1 point 5), 2026-09-06:** the actual `SKILL.md` (161 lines) was fetched and read directly via `raw.githubusercontent.com`. It is static reference content only — no `allowed-tools` frontmatter, no scripts, no external calls of any kind. Static instructions can still carry prompt injection; the absence of scripts does not establish instruction safety.
 
 ## Evaluated, no action — ai-engineering-from-scratch / scientific-agent-skills / OpenMAIC / gpt-image2-gallery
 

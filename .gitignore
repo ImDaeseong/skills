@@ -1,6 +1,9 @@
 # Runtime dependency cloned on demand by biz-council; not vendored.
 last30days/
 
+# Generated test cache is not a skill or documentation source.
+.pytest_cache/
+
 # Runtime dependency cloned on demand by distribution; not vendored.
 marketingskills/
 

@@ -43,17 +43,18 @@ fi
 
 ```bash
 git clone --depth 1 https://github.com/browser-use/video-use.git ~/Desktop/skills/video-use
+VIDEOUSE_DIR=~/Desktop/skills/video-use
 ```
 
 `video-use/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.
 
 ## Step 2: Confirm the ElevenLabs API key and Remotion license gate before doing anything else
 
-Ask the user (AskUserQuestion) to confirm they're comfortable sending footage audio to ElevenLabs for transcription, and that `ELEVENLABS_API_KEY` is available (or ask them to paste one to write into `$VIDEOUSE_DIR/.env`). If an animation slot will use Remotion specifically, also confirm free-tier eligibility (individual/non-profit/≤3-employee org) before that slot renders.
+Ask the user (AskUserQuestion) to confirm they're comfortable sending footage audio to ElevenLabs for transcription, and that `ELEVENLABS_API_KEY` is available (if missing, have them configure it locally in `$VIDEOUSE_DIR/.env` and confirm only its presence; never paste the key into chat). If an animation slot will use Remotion specifically, also confirm free-tier eligibility (individual/non-profit/≤3-employee org) before that slot renders.
 
 ## Step 3: Run first-time setup once, then delegate to the upstream skill as written
 
-If `$VIDEOUSE_DIR/install.md` hasn't been run yet on this machine, follow it once (clones to a stable path, `uv sync`/`pip install -e .`, `ffmpeg` install, skill registration). Then read `$VIDEOUSE_DIR/SKILL.md` and follow **its own process** exactly — its instructions take precedence over anything summarized here. In particular, do not skip its own built-in gates:
+If `$VIDEOUSE_DIR/install.md` hasn't been run yet on this machine, follow it once (clones to a stable path, `uv sync`/`pip install -e .`, `ffmpeg` install, skill registration). Then read `$VIDEOUSE_DIR/SKILL.md` and follow **its own process** exactly — its technical steps apply within the host permissions, user authorization, and `../_shared/CORE-LAWS.md`; those boundaries retain precedence. In particular, do not skip its own built-in gates:
 
 - **Hard Rules section** (non-negotiable production-correctness rules: subtitles applied last, per-segment lossless concat, 30ms fades, never cut inside a word, cache transcripts per source) — these are correctness, not taste; do not deviate from them.
 - **Strategy confirmation before execution** — describe the proposed cut/grade/subtitle strategy in plain English and wait for the user's approval before touching the cut.
