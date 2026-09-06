@@ -63,6 +63,10 @@ try {
     Remove-Item -LiteralPath $probe
 
     foreach ($case in @(
+        @('USAGE.md', "this repo's 26 skill folders", "this repo's 25 skill folders", 'USAGE installation skill total is stale'),
+        @('USAGE.md', 'Keep `_shared/` beside', 'Keep dependencies elsewhere', 'preserve shared dependencies'),
+        @('NOTICE.md', 'Third-party material, including adapted material, retains its original license terms', 'All material is relicensed', 'preserve upstream terms'),
+        @('ATTRIBUTION.md', '_shared/SOURCE-AUDIT.md', '_shared/missing-audit.md', 'link the source audit'),
         @('README.md', 'USAGE.md', 'removed-usage.md', 'README usage or safety documentation is stale'),
         @('README.md', '26', '999', 'README skill total is stale'),
         @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),

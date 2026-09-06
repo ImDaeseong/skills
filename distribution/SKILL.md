@@ -15,9 +15,9 @@ allowed-tools:
 
 ## Attribution
 
-This skill does not reimplement marketing execution — it resolves and routes into a real, actively-maintained skill library rather than rewriting 47 specialist skills' worth of content from scratch.
+This skill does not reimplement marketing execution — it resolves and routes into a real, actively-maintained skill library rather than rewriting specialist skills' worth of content from scratch.
 
-- **marketingskills** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) (checked 2026-07-18 via GitHub API, pushed within the last day), MIT license (verified via GitHub API license endpoint). By Corey Haines. Contains 47 individual `SKILL.md` specialist skills (recounted 2026-07-18 via direct folder listing — grew from 46 since the star count was last checked; already in Agent Skills spec format) covering SEO, CRO, copy, paid, growth/retention, sales/GTM, and strategy. This skill treats it as a **runtime dependency**, resolved/cloned on demand exactly like `biz-council` does for `last30days` — never vendored into this repo, never copied verbatim.
+- **marketingskills** — [github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills), by Corey Haines. MIT license, checked against the root `LICENSE` on 2026-09-06. Provides specialist skills for SEO, CRO, copy, paid marketing, growth/retention, sales/GTM, and strategy. Resolve/clone the runtime dependency on demand and read the current specialist list; its size changes over time.
 - **Step 2a content-format framing**: for an AI-agent product specifically, a "workflow teardown" (show the painful manual way a task is done today, then the same task done by the agent, ending on the specific pain it removes) is a content format that wins distribution for this product category — added as a candidate content angle, not a replacement for Step 2's channel-discovery work.
 
 ## Core Laws

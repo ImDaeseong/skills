@@ -1,5 +1,5 @@
 # Third-party notice
 
-The MIT license in `LICENSE` covers the original content tracked in this repository.
+The MIT license in `LICENSE` applies only to original additions that the maintainer has the right to license. Third-party material, including adapted material, retains its original license terms and required copyright notices; this repository does not relicense it.
 
-Third-party projects named in the skills and README are references or optional runtime dependencies; their code and documentation are not vendored here and are not relicensed by this repository. Review each project's own license before installing, copying, modifying, or redistributing it. Entries whose license is unknown are explicitly marked in `ATTRIBUTION.md` and must not be copied from their source into this repository.
+Known sources and uses are recorded in `ATTRIBUTION.md`. Complete file-level provenance has not been established. Check the applicable source license and preserve its required notices before copying, modifying, installing, or redistributing material. An unknown license is not permission to reuse it.

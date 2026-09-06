@@ -253,6 +253,22 @@ if (-not $diagramText.Contains('rerun the resolver above to set ARCHIFY_DIR befo
     $errors.Add('diagram-forge must resolve its directory after installation')
 }
 
+# Documentation regressions found by the five-document source audit.
+if (-not $usageText.Contains("this repo's $($skillFiles.Count) skill folders")) {
+    $errors.Add('USAGE installation skill total is stale')
+}
+if (-not $usageText.Contains('Keep `_shared/` beside')) {
+    $errors.Add('USAGE installation must preserve shared dependencies')
+}
+$noticeText = Get-Content -LiteralPath (Join-Path $Root 'NOTICE.md') -Raw -Encoding utf8
+if (-not $noticeText.Contains('Third-party material, including adapted material, retains its original license terms')) {
+    $errors.Add('NOTICE must preserve upstream terms for adapted material')
+}
+$attributionText = Get-Content -LiteralPath (Join-Path $Root 'ATTRIBUTION.md') -Raw -Encoding utf8
+if (-not $attributionText.Contains('_shared/SOURCE-AUDIT.md')) {
+    $errors.Add('ATTRIBUTION must link the source audit and its limits')
+}
+
 if ($errors.Count -gt 0) {
     $errors | ForEach-Object {
         $message = $_.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
