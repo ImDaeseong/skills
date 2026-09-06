@@ -187,10 +187,14 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
     if (-not $agentBuilderText.Contains($token)) { $errors.Add("agent-builder missing financial-action guard: $token") }
 }
 
-$readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw
-foreach ($token in @('NOTICE.md', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'all 26 skills', 'claim attribution', 'idempotency', 'financial actions', 'GitHub Actions')) {
+$readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw -Encoding utf8
+foreach ($token in @('USAGE.md', 'ATTRIBUTION.md', 'NOTICE.md', 'LICENSE', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'scripts/test_validators_ignore_scan.ps1', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
+
+# Validate the actual total rather than requiring a fixed English sentence.
+$totalLabel = ([string][char]0xCD1D) + ' ' + $skillFiles.Count + ([string][char]0xAC1C)
+if (-not $readmeText.Contains($totalLabel)) { $errors.Add('README skill total is stale') }
 
 $licenseText = Get-Content -LiteralPath (Join-Path $Root 'LICENSE') -Raw
 if (-not $licenseText.StartsWith('MIT License')) { $errors.Add('LICENSE is not the standard MIT license') }

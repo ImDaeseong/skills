@@ -63,6 +63,8 @@ try {
     Remove-Item -LiteralPath $probe
 
     foreach ($case in @(
+        @('README.md', 'USAGE.md', 'removed-usage.md', 'README usage or safety documentation is stale'),
+        @('README.md', '26', '999', 'README skill total is stale'),
         @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),
         @('biz-ops/SKILL.md', 'founder-finance', 'deferred-finance', 'biz-ops must route'),
         @('founder-finance/SKILL.md', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill', '', 'missing post-clone'),
