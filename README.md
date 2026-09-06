@@ -1,6 +1,8 @@
 # skills
 
-**사업·개발·콘텐츠 작업을 위한 Claude Code/Cowork용 스킬 모음.** 전문 스킬 25개와 요청을 분류하는 `genie`, 총 26개로 구성됩니다.
+**GitHub에 공개된 스킬과 관련 자료를 선별해 활용하는 개인 스킬 저장소입니다.** 원본을 그대로 사용하거나, 사용 목적에 맞게 개선·보완·재구성합니다. 원본 출처와 활용 방식은 [ATTRIBUTION.md](ATTRIBUTION.md)에 기록합니다.
+
+Claude Code/Cowork용 전문 스킬 25개와 요청을 분류하는 `genie`, 총 26개로 구성됩니다.
 
 ## 시작하기
 
@@ -39,7 +41,7 @@ powershell.exe -NoProfile -File scripts/test_validators_ignore_scan.ps1
 
 ## 의존성과 라이선스
 
-직접 작성한 콘텐츠는 [MIT License](LICENSE)를 따릅니다. 외부 프로젝트에는 각각의 라이선스가 적용됩니다. 설치·재사용 전 [고지](NOTICE.md)와 [출처·채택 근거](ATTRIBUTION.md)를 확인하세요.
+원본 스킬·자료의 저작권과 라이선스는 각 원저작자의 고지를 따릅니다. 이 저장소의 [MIT License](LICENSE)는 자체 추가 작성 부분에 적용되며, 외부 원본의 라이선스를 대체하지 않습니다. 설치·재사용 전 [고지](NOTICE.md)와 [출처·채택 근거](ATTRIBUTION.md)를 확인하세요.
 
 `last30days`, `marketingskills`, `book-to-skill`, `claude-video`, `claude-shorts`, `video-use`, `archify-src`, `ai-sales-team-claude`, `charlie-cfo-skill`는 필요할 때 내려받는 런타임 의존성입니다. Git 추적과 이 저장소의 테스트 범위에서 제외되며, 자체 테스트는 해당 프로젝트의 지원 환경에서 실행합니다.
 
