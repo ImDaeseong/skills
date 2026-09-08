@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 26 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 28 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -153,6 +153,20 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** Your actual numbers — current burn, cash on hand, headcount, ARR, or the specific hire/spend decision in question.
 **Get back:** A direct answer against real thresholds (runway targets, burn multiple, LTV:CAC, CAC payback, Rule of 40) using your own figures, not the reference's example benchmarks. Distinct from `biz-ops` (DCF/valuation modeling for an established business) and `biz-council` (validating a brand-new idea) — this is day-to-day cash discipline for a bootstrapped or self-funded operator.
 **Runtime dependency: `charlie-cfo-skill`** ([github.com/EveryInc/charlie-cfo-skill](https://github.com/EveryInc/charlie-cfo-skill), cloned to `~/Desktop/skills/charlie-cfo-skill` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Pure reference content — no scripts, no network calls, nothing to install beyond the clone itself.
+
+## pm-delivery-ops
+
+**Trigger:** "write this as a Jira ticket", "prioritize the backlog", "backlog grooming", "sprint planning", "metrics review", "PRD for this feature", "design system 준수 확인", "Figma 디자인 리뷰 체크리스트".
+**Give it:** The problem/feature to ticket, the candidate items to prioritize (plus the metric they're supposed to move), or the metric numbers to review.
+**Get back:** A Jira-ready ticket (title, user story, acceptance criteria, priority), a backlog ranked by effect-to-cost against a stated metric, a metrics-review write-up that separates observation from hypothesis from action, or a design-system consistency checklist for a Figma-based feature. Methodology and templates only — no live Jira/Figma account or MCP connection; for that, use Jira's or Figma's own official MCP integration directly. Distinct from `biz-ops` (financial/commercial/vendor operations, not product delivery) and `managing-up` (a single message to a manager, not a recurring workflow).
+**Runtime dependency: `alirezarezvani/claude-skills`** (same dependency `biz-ops` uses — see above) for its `project-management` category (`jira-expert`, `scrum-master`, `senior-pm`, `confluence-expert`); ticket-mechanics/JQL requests route there rather than reimplementing Jira conventions from scratch. The Figma design-system checklist is original content informed by Figma's own published design-system guidance, not a wrapped skill package.
+
+## job-posting-tracker
+
+**Trigger:** "채용공고 스킬 분석", "이 공고 확인해줘", "요즘 AI 직무에 필요한 스킬", "job posting skill analysis", "직무별 기술스택 정리", "내 스택 대비 부족한 스킬", "학습 로드맵 만들어줘".
+**Give it:** One or more pasted real job postings (any language) — a single posting or a batch. For the optional gap-analysis pass, also your own current skillset (stated by you, never assumed).
+**Get back:** A structured per-posting extraction (required vs. preferred skills/tools, role cluster, domain signal) appended to a running tally file (default `job-posting-tracker.md`), with a frequency table at the top showing how many processed postings named each skill as required vs. preferred and which role clusters it appears in. Every skill/requirement traces to an actual posting's text — nothing is inferred or filled in from what a role "usually" needs. Only when explicitly asked, an additional gap-analysis pass compares the tally against your stated skills and appends a priority-ranked roadmap, with any named learning resource verified via WebSearch rather than recalled from memory. Not a résumé matcher or interview simulator.
+**Dependency:** None installed — original extraction/tallying logic. `he-yufeng/FindJobs-Agent` (MIT, 252 stars) was considered and not adopted — it's a full standalone résumé-scoring/mock-interview application, out of scope for this skill's narrower "extract and tally, nothing else" design.
 
 ---
 

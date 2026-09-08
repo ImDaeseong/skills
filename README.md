@@ -1,6 +1,6 @@
 # skills
 
-GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선·보완하는 개인 저장소입니다. Claude Code/Cowork용 전문 스킬 25개와 라우터 `genie`, 총 26개를 관리합니다.
+GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선·보완하는 개인 저장소입니다. Claude Code/Cowork용 전문 스킬 27개와 라우터 `genie`, 총 28개를 관리합니다.
 
 ## 사용
 
@@ -17,6 +17,7 @@ GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선�
 | 영상 | `video-producer`, `image-motion-graphics`, `video-watcher`, `shorts-clipper`, `footage-editor` |
 | 개발·에이전트 | `agent-builder`, `vibe-coder`, `game-dev`, `prompt-craft`, `personal-memory` |
 | 마케팅·업무 소통 | `distribution`, `managing-up` |
+| 업무 운영·커리어 | `pm-delivery-ops`, `job-posting-tracker` |
 
 ## 변경 후 검증
 

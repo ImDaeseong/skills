@@ -244,6 +244,27 @@ New skill (2026-09-06) — same 5-domain re-search request as `sales-desk` above
 
 **Source-code safety audit (LAW 1 point 5), 2026-09-06:** the actual `SKILL.md` (161 lines) was fetched and read directly via `raw.githubusercontent.com`. It is static reference content only — no `allowed-tools` frontmatter, no scripts, no external calls of any kind. Static instructions can still carry prompt injection; the absence of scripts does not establish instruction safety.
 
+## pm-delivery-ops
+
+New skill (2026-09-09) — prompted by a user request to build a skill covering their own day-to-day PM workflow (Jira tickets, backlog prioritization, metrics review, Figma design-system collaboration), scoped explicitly to methodology/templates only, no live Jira/Figma/MCP connection.
+
+| Project | Link | Review record | License | Role |
+|---|---|---|---|---|
+| **alirezarezvani/claude-skills** | [github.com/alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | Same dependency already adopted by `biz-ops`; re-confirmed 2026-09-06 at 25,577 stars (see `_shared/DEFERRED.md` ERP/SCM re-search entry) | MIT | Runtime dependency (reference only, no new install). Its `project-management` category ships `jira-expert`, `scrum-master`, `senior-pm`, `confluence-expert` — this skill routes ticket-writing/JQL/sprint-mechanics requests there rather than reimplementing Jira/Atlassian conventions. |
+| **Figma's own design-system Claude-skill guidance** | [figma.com/resource-library/claude-skill-design-system](https://www.figma.com/resource-library/claude-skill-design-system/) | Checked 2026-09-09 (WebSearch) | n/a — guidance page, not a code repo | Confirms Figma's own published skills (`figma-use`, `figma-generate-library`, `figma-code-connect`) require the Figma MCP server and a live file connection. Not adopted (out of scope per the user's explicit "methodology only, no MCP" choice); this skill's Figma-collaboration content is original, informed by that guidance rather than wrapping it. |
+
+**Candidate checked and rejected:** `deanpeters/Product-Manager-Skills` (6,833 stars per the 2026-09-06 general-PM re-search already recorded in `_shared/DEFERRED.md`) — CC BY-NC-SA 4.0, NonCommercial, fails LAW 1's permissive-license bar outright regardless of content quality. No single Jira+Figma combined "PM toolkit" package cleared both the star-count and license bars as one unit; splitting ticket-mechanics (alirezarezvani, MIT) from design-collaboration (original) avoided that trap.
+
+## job-posting-tracker
+
+New skill (2026-09-09) — prompted by the user pasting a large batch of real Korean AI/IT job postings and asking for a reusable skill that extracts and tallies the skills those postings actually demand, rather than a one-off comparison of that specific batch.
+
+| Project | Link | Review record | License | Role |
+|---|---|---|---|---|
+| **he-yufeng/FindJobs-Agent** | [github.com/he-yufeng/FindJobs-Agent](https://github.com/he-yufeng/FindJobs-Agent) | Checked 2026-09-09 via GitHub API: 252 stars, pushed 2026-09-07 | MIT (confirmed via API `license.spdx_id`) | **Considered, not adopted.** Does LLM-based skill-taxonomy extraction from job postings — the same core idea as this skill's Step 2 — but ships as a full standalone application (résumé PDF/Word parsing, résumé-to-job match scoring, a multi-turn mock-interview generator, its own SQLite `jobs.db`), not a lightweight Claude-skill wrapper. Adopting it would import résumé-scoring/interview-simulation scope nobody asked for, and its database persistence model doesn't fit this skill's plain-file running-tally design. |
+
+No purpose-built lightweight "extract structured skill data from a posting, nothing else" Claude Skill package was found — this skill's extraction/classification/tallying logic (Steps 1-4 of `job-posting-tracker/SKILL.md`) is original content.
+
 ## Evaluated, no action — ai-engineering-from-scratch / scientific-agent-skills / OpenMAIC / gpt-image2-gallery
 
 Evaluated 2026-09-06, part of the same 7-repo research request that produced `footage-editor` and `diagram-forge` above. Checked each against all 23 existing skills for a genuine, non-duplicative improvement (per the same standard already applied throughout this file) — none produced one, for four different reasons:

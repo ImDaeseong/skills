@@ -161,6 +161,18 @@
       "source": "./founder-finance",
       "skills": ["./"],
       "description": "Bootstrapped-founder cash discipline — runway/burn-rate, unit economics, hiring payback, driver-based forecasting — by wrapping charlie-cfo-skill (MIT) as a runtime dependency."
+    },
+    {
+      "name": "pm-delivery-ops",
+      "source": "./pm-delivery-ops",
+      "skills": ["./"],
+      "description": "Day-to-day product management operations — Jira-ready tickets, metric-driven backlog prioritization, metrics review, Figma design-system checklist. Methodology only, no live Jira/Figma/MCP connection."
+    },
+    {
+      "name": "job-posting-tracker",
+      "source": "./job-posting-tracker",
+      "skills": ["./"],
+      "description": "Extracts required/preferred skills from pasted real job postings, classifies by role cluster, and appends to a cumulative frequency-tally file across sessions. Source-traceable extraction only, not a résumé matcher."
     }
   ]
 }

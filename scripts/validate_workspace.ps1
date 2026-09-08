@@ -81,6 +81,8 @@ $requiredTools = @{
     'sales-desk'       = @('Read', 'Bash', 'AskUserQuestion')
     'founder-finance'  = @('Read', 'Bash', 'AskUserQuestion')
     'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
+    'pm-delivery-ops'      = @('Read', 'Write', 'AskUserQuestion')
+    'job-posting-tracker'  = @('Read', 'Write', 'AskUserQuestion', 'WebSearch')
 }
 foreach ($file in $skillFiles) {
     $lines = Get-Content -LiteralPath $file.FullName
