@@ -49,6 +49,10 @@ try {
     Assert-Validator 'validate_workspace.ps1' $true ''
     Assert-Validator 'validate_links.ps1' $true ''
 
+    $skillCount = @(Get-ChildItem -LiteralPath $fixture -Directory | Where-Object {
+        $_.Name -notin $ignoredDirs -and (Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md'))
+    }).Count
+
     $probe = Join-Path $fixture 'regression-link.md'
     Set-Content -LiteralPath $probe -Value '[`missing`](missing-target.md)' -Encoding utf8
     Assert-Validator 'validate_links.ps1' $false 'missing-target.md'
@@ -63,12 +67,12 @@ try {
     Remove-Item -LiteralPath $probe
 
     foreach ($case in @(
-        @('USAGE.md', "this repo's 26 skill folders", "this repo's 25 skill folders", 'USAGE installation skill total is stale'),
+        @('USAGE.md', "this repo's $skillCount skill folders", "this repo's 999 skill folders", 'USAGE installation skill total is stale'),
         @('USAGE.md', 'Keep `_shared/` beside', 'Keep dependencies elsewhere', 'preserve shared dependencies'),
         @('NOTICE.md', 'Third-party material, including adapted material, retains its original license terms', 'All material is relicensed', 'preserve upstream terms'),
         @('ATTRIBUTION.md', '_shared/SOURCE-AUDIT.md', '_shared/missing-audit.md', 'link the source audit'),
         @('README.md', 'USAGE.md', 'removed-usage.md', 'README usage or safety documentation is stale'),
-        @('README.md', '26', '999', 'README skill total is stale'),
+        @('README.md', [string]$skillCount, '999', 'README skill total is stale'),
         @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),
         @('biz-ops/SKILL.md', 'founder-finance', 'deferred-finance', 'biz-ops must route'),
         @('founder-finance/SKILL.md', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill', '', 'missing post-clone'),
