@@ -12,6 +12,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Check for real-looking secrets
+        shell: powershell
+        run: ./scripts/check_no_example_secrets.ps1
+      - name: Regression test - secrets guard pattern set
+        shell: powershell
+        run: ./scripts/test_check_no_example_secrets.ps1
       - name: Validate workspace
         shell: powershell
         run: |

@@ -27,6 +27,16 @@ if (Test-Path -LiteralPath $hookPath) {
 $hookContent = @"
 #!/bin/sh
 $marker
+# Security guard: block commits that introduce a real-looking secret
+# (see scripts/check_no_example_secrets.ps1). This repo is a public GitHub
+# mirror, so exposure risk here is higher than a private repo's.
+powershell.exe -NoProfile -File scripts/check_no_example_secrets.ps1
+if [ `$? -ne 0 ]; then
+    echo ""
+    echo "pre-commit: secret scan failed (see above). Remove the flagged value before committing."
+    exit 1
+fi
+
 # Regression guard: block commits that reintroduce future-dated evidence labels,
 # broken CORE-LAWS references, unrouted skills, or permission mismatches
 # (see scripts/validate_workspace.ps1 -- caught 47 future-dated "checked" labels once already).
@@ -67,4 +77,5 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Installed pre-commit hook at $hookPath"
+Write-Host "Verify: powershell.exe -NoProfile -File scripts/check_no_example_secrets.ps1"
 Write-Host "Verify: powershell.exe -NoProfile -File scripts/validate_workspace.ps1"
