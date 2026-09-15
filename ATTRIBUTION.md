@@ -265,6 +265,17 @@ New skill (2026-09-09) — prompted by the user pasting a large batch of real Ko
 
 No purpose-built lightweight "extract structured skill data from a posting, nothing else" Claude Skill package was found — this skill's extraction/classification/tallying logic (Steps 1-4 of `job-posting-tracker/SKILL.md`) is original content.
 
+## explain-for-audience
+
+New skill (2026-09-15) — prompted by a user-shared YouTube video (실용주의 개발, "클로드 쓴다면 이 스킬 한번 써보세요", 2026-09-11) comparing two real ELI5-style Claude Code skills; both verified to still exist and re-checked directly rather than trusted from the video's own claims.
+
+| Project | Link | Review record | License | Role |
+|---|---|---|---|---|
+| **DreambigOu/ELI5** | [github.com/DreambigOu/ELI5](https://github.com/DreambigOu/ELI5) | Checked 2026-09-15 via GitHub API: 1229 stars, pushed 2026-03-18 | MIT (confirmed via API `license.spdx_id`) | **Primary reference.** Audience-adaptive prose explanation — detects the target audience and calibrates vocabulary/analogy/tone/depth via a 3-step framework (identify audience → understand source → craft explanation), rather than one fixed "simplify" register. This skill's prose-mode Step 3 follows that framework directly. |
+| **anthropics/claude-plugins-community** (`eli5` plugin) | [github.com/anthropics/claude-plugins-community/tree/main/eli5](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) | Checked 2026-09-15 via GitHub API: 4058 stars, pushed 2026-08-25 | Apache-2.0 (confirmed via API `license.spdx_id`) | **Secondary reference**, for one case DreambigOu's text-first approach doesn't cover: a true "explain like I'm 5" request for a young child or complete beginner, better served by a picture-first Artifact assuming zero background knowledge than by more prose. This skill's visual-mode Step 3 follows that approach, routed through `artifact-design` for construction. |
+
+Both repos are small, single-purpose `SKILL.md` files with no scripts or external calls — read directly per LAW 1 point 5 before citing.
+
 ## Evaluated, no action — ai-engineering-from-scratch / scientific-agent-skills / OpenMAIC / gpt-image2-gallery
 
 Evaluated 2026-09-06, part of the same 7-repo research request that produced `footage-editor` and `diagram-forge` above. Checked each against all 23 existing skills for a genuine, non-duplicative improvement (per the same standard already applied throughout this file) — none produced one, for four different reasons:

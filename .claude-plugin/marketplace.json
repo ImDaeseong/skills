@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 25 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 28 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -173,6 +173,12 @@
       "source": "./job-posting-tracker",
       "skills": ["./"],
       "description": "Extracts required/preferred skills from pasted real job postings, classifies by role cluster, and appends to a cumulative frequency-tally file across sessions. Source-traceable extraction only, not a résumé matcher."
+    },
+    {
+      "name": "explain-for-audience",
+      "source": "./explain-for-audience",
+      "skills": ["./"],
+      "description": "Explains a topic/code/error/document calibrated to a named audience (child, manager, engineer, any role) by adjusting vocabulary, analogy, tone, and depth; routes to a picture-based Artifact for a young child or explicit visual request."
     }
   ]
 }

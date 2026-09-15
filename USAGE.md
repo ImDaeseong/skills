@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 28 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 29 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -211,6 +211,14 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** A plain-language description of the system/process/sequence/pipeline/state machine to diagram, or a pasted Mermaid `flowchart`/`sequenceDiagram`/`stateDiagram`.
 **Get back:** A standalone, validated interactive HTML file (architecture/workflow/sequence/data-flow/lifecycle) with its own viewer — search, focus, route tracing, dark/light toggle — plus export to PNG/JPEG/WebP/SVG/WebM. Distinct from a diagram drawn inline inside the current Artifact/chat, which stays there rather than becoming a portable file.
 **Runtime dependency: `archify`** ([github.com/tt-a1i/archify](https://github.com/tt-a1i/archify), installed via its own `npx skills add tt-a1i/archify -g` or cloned to `~/Desktop/skills/archify-src` on first use, MIT license, source-audited 2026-09-06 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs Node.js locally; no other install required inside the skill package itself.
+
+---
+
+## explain-for-audience
+
+**Trigger:** "explain like I am", "ELI5", "explain this to my manager/kid/mom", "break this down for", "dumb it down", "simplify this for", "/eli5".
+**Give it:** What to explain (a concept, code, an error, a document) and who it's for — a named audience if you have one; it asks if you don't.
+**Get back:** An explanation calibrated to that specific audience's vocabulary, analogy, tone, and depth (via `DreambigOu/ELI5`, MIT) — not a generic shortened version. For a young child, a complete beginner, or an explicit "picture" request, it instead builds a picture-first Artifact assuming zero background knowledge (per `anthropics/claude-plugins-community`'s `eli5`, Apache-2.0). Distinct from `writing` (no named audience) and `diagram-forge` (a standalone diagram file, not an audience-calibrated explanation).
 
 ---
 
