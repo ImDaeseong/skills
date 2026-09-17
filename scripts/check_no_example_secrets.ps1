@@ -34,7 +34,12 @@ foreach ($relPath in (Get-TrackedFiles -Root $root)) {
     if ($imageExtensions -contains $ext) { continue }
     $fullPath = Join-Path $root $relPath
     try {
-        $lines = Get-Content -LiteralPath $fullPath -Encoding utf8 -ErrorAction Stop
+        # @(...) forces an array even for a single-line file -- Get-Content
+        # otherwise returns a bare String, and indexing a String returns a
+        # single character, not the whole line, which silently made every
+        # single-line file's scan a no-op (same defect class found live in
+        # ai_prompt's identical copy of this guard, 2026-09-18).
+        $lines = @(Get-Content -LiteralPath $fullPath -Encoding utf8 -ErrorAction Stop)
     } catch {
         continue
     }

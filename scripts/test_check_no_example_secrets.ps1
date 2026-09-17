@@ -50,9 +50,31 @@ if ($LASTEXITCODE -ne 0) {
     $failures.Add("End-to-end case: guard exited $LASTEXITCODE against this repo's own clean tracked files.")
 }
 
+# Regression (found live 2026-09-18 in ai_prompt's identical copy of this
+# guard): Get-Content returns a bare String, not an array, for a single-line
+# file. Indexing a String returns one character, not the whole line -- the
+# guard silently never checked single-line files at all. Plant a real secret
+# in a single-line file and confirm the real guard, end-to-end, catches it.
+$tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("secret-guard-singleline-" + [guid]::NewGuid())
+try {
+    New-Item -ItemType Directory -Path (Join-Path $tempRoot "scripts") | Out-Null
+    & git -C $tempRoot init --quiet
+    Set-Content -LiteralPath (Join-Path $tempRoot "creds.py") `
+        -Value ('TOKEN = "sk-proj-' + ("A" * 40) + '"') -Encoding ascii  # qa:allow CWE-798 - planted test fixture proving the secrets guard catches it, not a real secret
+    Copy-Item -LiteralPath $guardAbs -Destination (Join-Path $tempRoot "scripts/check_no_example_secrets.ps1")
+    & git -C $tempRoot add -A | Out-Null
+
+    & powershell.exe -NoProfile -File (Join-Path $tempRoot "scripts/check_no_example_secrets.ps1") | Out-Null
+    if ($LASTEXITCODE -eq 0) {
+        $failures.Add("Regression case: guard exited 0 against a single-line file containing a planted secret (single-line files were silently unscanned).")
+    }
+} finally {
+    Remove-Item -LiteralPath $tempRoot -Recurse -Force -ErrorAction SilentlyContinue
+}
+
 if ($failures.Count -gt 0) {
     $failures | ForEach-Object { Write-Error $_ }
     exit 1
 }
 
-Write-Output "PASS: check_no_example_secrets pattern set catches a planted secret and stays quiet on clean text (3 case(s))."
+Write-Output "PASS: check_no_example_secrets pattern set catches a planted secret and stays quiet on clean text (4 case(s))."
