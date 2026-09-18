@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>skills — 쉬운 설명</title>
+<style>
+  :root{
+    --bg:#fbf8f4; --card:#ffffff; --ink:#211c14; --sub:#7a7160;
+    --accent:#b8862f; --accent-soft:#f4e6cd; --line:#efe6d5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#191510; --card:#231e17; --ink:#f4eee1; --sub:#b6a98e;
+      --accent:#e0ab54; --accent-soft:#37301f; --line:#3a3123; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI",Pretendard,sans-serif;
+    padding:32px 20px 56px}
+  .wrap{max-width:640px;margin:0 auto}
+  .hero{text-align:center;padding:36px 16px}
+  .emoji{font-size:88px;line-height:1}
+  h1{font-size:26px;margin:14px 0 6px}
+  .tag{color:var(--sub);font-size:15px}
+  .analogy{background:var(--accent-soft);border-radius:20px;padding:24px 22px;
+    margin:24px 0;font-size:17px;line-height:1.65}
+  .analogy b{color:var(--accent)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+  @media (max-width:480px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px}
+  .card .ic{font-size:28px}
+  .card h3{font-size:14px;margin:8px 0 4px}
+  .card p{font-size:13px;color:var(--sub);margin:0;line-height:1.5}
+  .run{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;margin-top:24px}
+  .run h3{font-size:14px;margin:0 0 10px}
+  code{display:block;background:var(--accent-soft);color:var(--ink);
+    padding:12px 14px;border-radius:10px;font-size:13px;overflow-x:auto;
+    white-space:pre}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="emoji">🧑‍🍳📗</div>
+    <h1>skills</h1>
+    <div class="tag">GitHub의 좋은 AI 스킬을 검증해서 모은 요리책</div>
+  </div>
+
+  <div class="analogy">
+    인터넷에 레시피가 수백만 개 있지만 다 믿을 순 없죠. 이 저장소는
+    <b>"누가 만들었고, 얼마나 검증됐고, 라이선스는 괜찮은지"</b>까지 확인한
+    뒤에만 요리책에 싣는 편집팀입니다. `genie`라는 안내 데스크가 지금
+    작업에 맞는 스킬을 골라줍니다.
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="ic">📗</div><h3>29개 스킬</h3>
+      <p>28개 개별 스킬 + 안내 데스크 genie</p></div>
+    <div class="card"><div class="ic">⚖️</div><h3>CORE-LAWS.md</h3>
+      <p>모든 스킬이 지켜야 할 공통 원칙</p></div>
+    <div class="card"><div class="ic">🧭</div><h3>ROUTING.md</h3>
+      <p>어떤 상황에 어떤 스킬을 쓰는지 안내</p></div>
+    <div class="card"><div class="ic">🏷️</div><h3>ATTRIBUTION</h3>
+      <p>각 스킬의 원본 출처와 라이선스</p></div>
+  </div>
+
+  <div class="run">
+    <h3>🔍 확인해보려면</h3>
+    <code>powershell.exe -NoProfile -File scripts\validate_workspace.ps1</code>
+  </div>
+</div>
+</body>
+</html>
