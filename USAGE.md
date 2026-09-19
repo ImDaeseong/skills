@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 29 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 30 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -219,6 +219,14 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Trigger:** "explain like I am", "ELI5", "explain this to my manager/kid/mom", "break this down for", "dumb it down", "simplify this for", "/eli5".
 **Give it:** What to explain (a concept, code, an error, a document) and who it's for — a named audience if you have one; it asks if you don't.
 **Get back:** An explanation calibrated to that specific audience's vocabulary, analogy, tone, and depth (via `DreambigOu/ELI5`, MIT) — not a generic shortened version. For a young child, a complete beginner, or an explicit "picture" request, it instead builds a picture-first Artifact assuming zero background knowledge (per `anthropics/claude-plugins-community`'s `eli5`, Apache-2.0). Distinct from `writing` (no named audience) and `diagram-forge` (a standalone diagram file, not an audience-calibrated explanation).
+
+---
+
+## judgment-on-request
+
+**Trigger:** "이거 어떻게 생각해", "내 의견 어때", "판단해줘", "왜 그렇게 생각해", "근거는", "확신도는", "what do you think of this", "judge this idea", "why do you think that".
+**Give it:** An opinion, proposal, or decision you want judged.
+**Get back:** A short verdict plus its single strongest reason — not a full reasoning dump. The full chain (hypothesis, evidence, counter-argument, confidence) was actually formed first but stays hidden until you ask "why"/"근거는" (reveals the reasoning chain) or "확신도는"/"how sure" (reveals the counter-argument, confidence, and what would change the verdict). Per CHI 2026's study on answer-first/on-demand rationale disclosure. Distinct from `prompt-craft`'s always-visible Chain-of-Thought and from `committee`'s multiple parallel expert personas.
 
 ---
 

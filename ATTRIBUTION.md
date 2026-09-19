@@ -276,6 +276,15 @@ New skill (2026-09-15) — prompted by a user-shared YouTube video (실용주의
 
 Both repos are small, single-purpose `SKILL.md` files with no scripts or external calls — read directly per LAW 1 point 5 before citing.
 
+## judgment-on-request
+
+New skill (2026-09-19) — originated from a user question asking whether Chain-of-Thought could be applied as a new concept. WebSearch (2026-09-19) found no existing GitHub repo or Claude skill implementing this exact answer-first / disclose-on-request pattern, so this skill's Steps 1-3 are original content, not adapted from a runtime dependency. It packages two separately-documented ideas instead of claiming invention:
+
+| Source | Link | Role |
+|---|---|---|
+| "Seeing the Reasoning: How LLM Rationales Influence User Trust and Decision-Making in Factual Verification Tasks" (CHI 2026 Extended Abstracts) | [dl.acm.org/doi/10.1145/3772363.3798613](https://dl.acm.org/doi/10.1145/3772363.3798613) | Studies the answer-first/on-demand rationale disclosure format this skill's Step 2-3 split is based on. |
+| Progressive disclosure (UX/agent-design principle) | [uxtigers.com/post/progressive-disclosure](https://www.uxtigers.com/post/progressive-disclosure), [mindstudio.ai/blog/progressive-disclosure-ai-agent-skill-design](https://www.mindstudio.ai/blog/progressive-disclosure-ai-agent-skill-design) | General principle behind revealing detail only on request, applied here to reasoning chains specifically. |
+
 ## Evaluated, no action — ai-engineering-from-scratch / scientific-agent-skills / OpenMAIC / gpt-image2-gallery
 
 Evaluated 2026-09-06, part of the same 7-repo research request that produced `footage-editor` and `diagram-forge` above. Checked each against all 23 existing skills for a genuine, non-duplicative improvement (per the same standard already applied throughout this file) — none produced one, for four different reasons:

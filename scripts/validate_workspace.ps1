@@ -84,6 +84,7 @@ $requiredTools = @{
     'pm-delivery-ops'      = @('Read', 'Write', 'AskUserQuestion')
     'job-posting-tracker'  = @('Read', 'Write', 'AskUserQuestion', 'WebSearch')
     'explain-for-audience' = @('Read', 'AskUserQuestion')
+    'judgment-on-request'  = @('Read')
 }
 foreach ($file in $skillFiles) {
     $lines = Get-Content -LiteralPath $file.FullName

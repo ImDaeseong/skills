@@ -179,6 +179,12 @@
       "source": "./explain-for-audience",
       "skills": ["./"],
       "description": "Explains a topic/code/error/document calibrated to a named audience (child, manager, engineer, any role) by adjusting vocabulary, analogy, tone, and depth; routes to a picture-based Artifact for a young child or explicit visual request."
+    },
+    {
+      "name": "judgment-on-request",
+      "source": "./judgment-on-request",
+      "skills": ["./"],
+      "description": "Evaluates an opinion or proposal with a full silent judgment, answers with only the verdict and strongest reason, and unpacks the reasoning chain one layer deeper each time the user actually asks why."
     }
   ]
 }
