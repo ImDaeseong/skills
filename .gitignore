@@ -27,3 +27,6 @@ ai-sales-team-claude/
 
 # Runtime dependency cloned on demand by founder-finance; not vendored.
 charlie-cfo-skill/
+
+# Runtime dependency cloned on demand by book-author; not vendored.
+claude-epub-skill/

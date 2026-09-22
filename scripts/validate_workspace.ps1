@@ -59,6 +59,7 @@ $requiredTools = @{
     'ai-adoption-scout' = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
     'biz-council'      = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion', 'Task')
     'biz-ops'          = @('Read', 'Write', 'Bash', 'AskUserQuestion')
+    'book-author'      = @('Read', 'Write', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
     'book-distiller'   = @('Read', 'Bash', 'AskUserQuestion')
     'curator'          = @('Read', 'Write', 'Bash', 'WebFetch', 'AskUserQuestion')
     'design-report'    = @('Read', 'Write', 'Bash', 'AskUserQuestion')

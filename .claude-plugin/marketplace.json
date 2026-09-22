@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 28 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 30 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -119,6 +119,12 @@
       "source": "./managing-up",
       "skills": ["./"],
       "description": "Drafts a message to a manager/lead about a specific decision, with real trade-off options instead of a flat refusal, grounded in HBR's 'Managing Your Boss' and Frei's critique of solutions-only reporting."
+    },
+    {
+      "name": "book-author",
+      "source": "./book-author",
+      "skills": ["./"],
+      "description": "Ghostwrites a nonfiction technical book from the author's own accumulated material via a voice-fingerprint + chapter template, a per-chapter Researcher-Writer-Editor-Reviewer pipeline, and DOCX/PDF/EPUB compilation."
     },
     {
       "name": "book-distiller",

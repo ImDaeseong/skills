@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 30 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 31 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -176,6 +176,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The actual situation (what triggered this), the real technical/operational risk in specific terms, what decision you want your manager to make, and — if you know it — what your manager is actually accountable for this cycle. If you don't know the last one, say so; the skill drafts around the acknowledged gap instead of inventing a plausible-sounding KPI.
 **Get back:** A draft message with 2-3 trade-off options (each with a real cost/risk attached, not vague terms), opening on the shared goal in your manager's own terms and ending with a specific one-line ask — not a flat refusal, and not a template with unfilled placeholders. Every number in the draft traces back to what you stated.
 **Dependency:** None — self-contained, no external library or API. Distinct from `writing` (general tone/voice editing, not manager-specific negotiation).
+
+## book-author
+
+**Trigger:** "책으로 만들어줘", "전자책 원고 써줘", "이 내용으로 책 써줘", "write my book", "ghostwrite this book", "turn my notes into a book", "ebook 원고 작성".
+**Give it:** Raw material (past conversation exports, notes, drafts) and, if available, writing samples for voice matching.
+**Get back:** A `STYLE.md` chapter template (concept-first opening + diagrams + verified code + troubleshooting checklist + back-matter appendix, synthesized from real AI-engineering-book and 크몽 self-publishing style research), an outline ordered by where readers actually get stuck, chapters run through a Researcher→Writer→윤문→Reviewer pipeline (max 3 revision cycles), then compiled to DOCX/PDF (via `design-report`) and EPUB. Manuscript production only — self-publishing-platform (부크크/크몽) registration/distribution guidance was evaluated and explicitly removed from scope by user request; see `ATTRIBUTION.md`'s scope-narrowing history.
+**Runtime dependency: `claude-epub-skill`** ([github.com/smerchek/claude-epub-skill](https://github.com/smerchek/claude-epub-skill), cloned to `~/Desktop/skills/claude-epub-skill` on first use, MIT license, source-audited 2026-09-22 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs Python 3 with `ebooklib`/`markdown2`/`Pygments` (installed from its own `requirements.txt`). Distinct from `writing` (prose polish only, no book structure/compile) and `book-distiller` (existing book → Claude skill, opposite direction).
 
 ## book-distiller
 
