@@ -1,6 +1,6 @@
 ---
 name: book-author
-description: "Ghostwrite a nonfiction technical book manuscript (e.g. an AI-development / vibe-coding book) from the author's own accumulated material — captures a voice fingerprint, builds a chapter template blending international AI-engineering-book narrative style with practical troubleshooting-checklist chapter closings, runs a Researcher→Writer→Editor→Reviewer pipeline per chapter, then compiles to DOCX/PDF (via `design-report`) and EPUB (via a wrapped runtime dependency). Manuscript production only — no self-publishing-platform registration/distribution guidance. MANDATORY TRIGGERS: '책으로 만들어줘', '전자책 원고 써줘', '이 내용으로 책 써줘', 'write my book', 'ghostwrite this book', 'turn my notes into a book', 'ebook 원고 작성', '책 스타일'. Distinct from `writing` (prose polish only, no book structure/compile) and `book-distiller` (existing book → Claude skill, the opposite direction)."
+description: "Ghostwrite a nonfiction technical book manuscript (e.g. an AI-development / vibe-coding book) from the author's own accumulated material — captures a voice fingerprint, builds a chapter template blending international AI-engineering-book narrative style with practical troubleshooting-checklist chapter closings, runs a Researcher→Writer→Editor→Reviewer pipeline per chapter, compiles to DOCX/PDF/EPUB, and can derive a slide-deck + lecture-guide version of the same finished chapters. Manuscript production only — no self-publishing-platform registration/distribution guidance. MANDATORY TRIGGERS: '책으로 만들어줘', '전자책 원고 써줘', '이 내용으로 책 써줘', 'write my book', 'ghostwrite this book', 'turn my notes into a book', 'ebook 원고 작성', '책 스타일', '강의 버전 만들어줘', '이 책으로 강의자료 만들어줘'. Distinct from `writing` (prose polish only, no book structure/compile) and `book-distiller` (existing book → Claude skill, the opposite direction)."
 allowed-tools:
   - Read
   - Write
@@ -23,7 +23,7 @@ Writing a full nonfiction book is not "draft prose, then polish it" — it's out
 - **Chip Huyen, *AI Engineering* (O'Reilly, 2025)** and **Addy Osmani, *Beyond Vibe Coding* (O'Reilly)** — published books, not repos, so LAW 1's star ranking doesn't apply. Style references (checked via WebSearch/WebFetch 2026-09-22) for Step 1's chapter template: concept-first chapter openings with diagrams, progressive/narrative argument over reference-list structure, and Osmani's "spectrum framing" (position the reader before diving in).
 - **arXiv:2402.08855, "GhostWriter" (CHI 2024)** — `[LOW-EVIDENCE]`, an 18-participant HCI study. Cited only as evidence that learning a voice fingerprint from writing samples is a studied approach to AI-assisted authorship, not as proof of book-writing-quality outcomes.
 - **`writing` skill** (this workspace, internal) — Step 3 routes Korean/English prose-polish to it instead of duplicating its AI-tell pattern catalog here.
-- **`design-report` skill + `anthropics/skills`'s `docx`/`pdf` skills** (this workspace, internal + source-available) — Step 4 routes DOCX/PDF generation and cover-design direction there instead of reimplementing document generation here.
+- **`design-report` skill + `anthropics/skills`'s `docx`/`pdf`/`pptx` skills** (this workspace, internal + source-available) — Step 4 routes DOCX/PDF generation and cover-design direction there; Step 5 routes the lecture deck (PPTX) and lecture guide (DOCX) the same way, instead of reimplementing office-file generation here.
 
 ## Core Laws
 
@@ -83,6 +83,15 @@ For each chapter, run this pipeline (the shape is `luquiluke/claude-book-skill`'
 - **EPUB** — concatenate the finished, reviewed chapters into one Markdown file (H1 = chapter boundary, matching the Step 0 engine's own chapter-detection rule), then run the Step 0 engine per its own `SKILL.md`/`REFERENCE.md` at `$EPUB_DIR` — its instructions on markdown structure and metadata take precedence over anything paraphrased here.
 - If a print-ready PDF with different typography than `design-report`'s output is wanted, the HTML→PDF (Puppeteer) + Pandoc toolchain referenced in `arturseo-geo/ebook-publishing-skill`'s Attribution entry is a documented approach — not wrapped as a dependency here since `design-report` already covers PDF output for this workspace.
 
+## Step 5: Derive a lecture version (slides + lecture guide) from the finished chapters
+
+Only after a chapter has passed Step 3's Reviewer (`CLEAR`) — a lecture built on an unreviewed draft just propagates the same gaps into a second medium. Reuses `STYLE.md`'s structure rather than inventing a separate lecture outline:
+
+1. **Slide deck outline per chapter** — 장 열기(포지셔닝 슬라이드) → 핵심 개념(본문의 다이어그램을 슬라이드로 재사용, 새로 그리지 않음) → 실습 데모(Step 3에서 검증된 코드 그대로, 챕터에 없던 코드를 강의용으로 새로 짜지 않음) → Q&A 대비(장마무리의 트러블슈팅 체크리스트를 예상 질문 슬라이드로 재사용).
+2. **강의안 문서** — 장별 예상 소요시간, 실습 진행 순서, 청중이 막힐 만한 지점(같은 트러블슈팅 체크리스트 기반)에서 질문을 유도할 포인트.
+3. **File generation** — hand off to `design-report`'s Step 2 (PPTX for the deck, DOCX for the lecture guide) exactly as Step 4 already does for the manuscript's DOCX/PDF — check what's actually available in the host/session before promising a format, per that skill's own instructions. Do not reimplement office-file generation here.
+4. 강의 버전은 원고와 같은 사실 기반을 공유한다 — Step 3의 Researcher가 확인한 소스를 그대로 쓰고, 슬라이드용으로 새 주장이나 숫자를 따로 만들지 않는다 (LAW 0).
+
 ## What this skill does not do
 
-Researcher 단계를 건너뛰고 곧장 Writer로 가지 않는다 — 사실 확인 없는 챕터는 산출물로 인정하지 않는다. 저작권 있는 제3자 콘텐츠를 원고에 그대로 붙여넣지 않는다. `book-distiller`(기존 책 → Claude 스킬 변환)와는 정반대 방향이며, `writing`(프로스 윤문만) 이나 `design-report`(포맷팅만)의 역할을 대체하지 않고 오케스트레이션만 한다. 원고 완성 이후의 출판·유통 단계는 이 스킬의 범위 밖이다.
+Researcher 단계를 건너뛰고 곧장 Writer로 가지 않는다 — 사실 확인 없는 챕터는 산출물로 인정하지 않는다. Reviewer를 통과하지 못한 챕터로 Step 5 강의자료를 만들지 않는다. 저작권 있는 제3자 콘텐츠를 원고에 그대로 붙여넣지 않는다. `book-distiller`(기존 책 → Claude 스킬 변환)와는 정반대 방향이며, `writing`(프로스 윤문만) 이나 `design-report`(포맷팅만)의 역할을 대체하지 않고 오케스트레이션만 한다. 강의를 대신 진행해주지 않는다 — 자료 제작까지만이 범위다. 원고 완성 이후의 출판·유통 단계는 이 스킬의 범위 밖이다.
