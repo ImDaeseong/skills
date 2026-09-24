@@ -29,6 +29,9 @@ jobs:
       - name: Regression test - validators skip ignored dirs
         shell: powershell
         run: ./scripts/test_validators_ignore_scan.ps1
+      - name: Regression test - behavior contracts and dependency pins
+        shell: powershell
+        run: ./scripts/test_validate_behavior_and_dependencies.ps1
       - name: Check for OWASP/CWE-mapped security and network hotspots
         shell: powershell
         run: ./scripts/check_security_hotspots.ps1

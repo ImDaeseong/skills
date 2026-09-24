@@ -40,7 +40,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/EveryInc/charlie-cfo-skill` into `~/Desktop/skills/charlie-cfo-skill` now (MIT, safety-audited above), or stop. If approved:
 
 ```bash
-git clone --depth 1 https://github.com/EveryInc/charlie-cfo-skill.git ~/Desktop/skills/charlie-cfo-skill
+git clone https://github.com/EveryInc/charlie-cfo-skill.git ~/Desktop/skills/charlie-cfo-skill
+git -C ~/Desktop/skills/charlie-cfo-skill checkout --detach 429f61bc0eb728cbc88db22cb1b1b1be6f21cafb
 CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill
 ```
 

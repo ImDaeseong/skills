@@ -80,7 +80,7 @@ try {
         @('footage-editor/SKILL.md', 'never paste the key into chat', 'ask them to paste one', 'keep API keys out'),
         @('founder-finance/SKILL.md', 'Static instructions can still carry prompt injection;', 'No hidden trigger-and-payload possible;', 'static-text safety overclaim'),
         @('sales-desk/SKILL.md', 'SALES_SKILL_MD="$HOME/.claude/skills/sales/SKILL.md"', 'SALES_SKILL_MD=""', 'exact installed entrypoint'),
-        @('diagram-forge/SKILL.md', 'rerun the resolver above to set ARCHIFY_DIR before Step 2', '', 'resolve its directory after installation'),
+        @('diagram-forge/SKILL.md', 'ARCHIFY_DIR=~/Desktop/skills/archify-src/archify', 'ARCHIFY_DIR=', 'pin its install and resolve'),
         @('footage-editor/SKILL.md', 'those boundaries retain precedence', 'its instructions take precedence over anything summarized here', 'must preserve host')
     )) {
         $path = Join-Path $fixture $case[0]

@@ -41,7 +41,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/AgriciDaniel/claude-shorts` into `~/Desktop/skills/claude-shorts` now (MIT wrapper, Remotion dependency license-gated per Attribution above), or stop. If approved:
 
 ```bash
-git clone --depth 1 https://github.com/AgriciDaniel/claude-shorts.git ~/Desktop/skills/claude-shorts
+git clone https://github.com/AgriciDaniel/claude-shorts.git ~/Desktop/skills/claude-shorts
+git -C ~/Desktop/skills/claude-shorts checkout --detach a369fad9d84287edbb8fa3ab515f268e770f683b
 ```
 
 `claude-shorts/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.

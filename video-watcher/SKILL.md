@@ -44,7 +44,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/bradautomates/claude-video` into `~/Desktop/skills/claude-video` now (MIT, safety-audited above), or stop. If the user approves:
 
 ```bash
-git clone --depth 1 https://github.com/bradautomates/claude-video.git ~/Desktop/skills/claude-video
+git clone https://github.com/bradautomates/claude-video.git ~/Desktop/skills/claude-video
+git -C ~/Desktop/skills/claude-video checkout --detach 83da59fa78c3eee9e20f515fe75c438bb5166efd
 ```
 
 `claude-video/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.

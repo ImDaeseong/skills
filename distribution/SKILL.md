@@ -40,10 +40,11 @@ fi
 
 ```
 
-**If not found, ask the user (AskUserQuestion)**: clone `https://github.com/coreyhaines31/marketingskills` into `~/Desktop/skills/marketingskills` now, or proceed with a lighter WebFetch-only pass (fetch individual `SKILL.md` files live from the `main` branch on raw.githubusercontent.com instead of cloning). If the user approves the clone:
+**If not found, ask the user (AskUserQuestion)**: clone `https://github.com/coreyhaines31/marketingskills` into `~/Desktop/skills/marketingskills` now, or proceed with a lighter WebFetch-only pass using the commit pinned in `../runtime-dependencies.lock.json` (never the mutable `main` branch). If the user approves the clone:
 
 ```bash
 git clone https://github.com/coreyhaines31/marketingskills.git ~/Desktop/skills/marketingskills
+git -C ~/Desktop/skills/marketingskills checkout --detach 5b2c0007766c6a1cf1d53fd8fc73e979e0821022
 ```
 
 Note in `.gitignore` (already covers `last30days/`; add `marketingskills/` alongside it the first time this skill is used) — this is a local runtime copy, not tracked content.

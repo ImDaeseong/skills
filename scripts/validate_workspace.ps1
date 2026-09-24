@@ -5,6 +5,12 @@ param(
 
 $errors = [System.Collections.Generic.List[string]]::new()
 
+$behaviorValidation = & powershell.exe -NoProfile -File (Join-Path $PSScriptRoot 'validate_behavior_and_dependencies.ps1') -Root $Root 2>&1
+if ($LASTEXITCODE -ne 0) {
+    $behaviorValidation | ForEach-Object { Write-Error $_ }
+    throw 'behavior and dependency validation failed'
+}
+
 # Exclude gitignored runtime-dependency clones (e.g. last30days/, marketingskills/) from
 # the workspace scan - these are third-party skills cloned on demand per README, not this
 # workspace's own skills, and must not be validated against this repo's own policy.
@@ -193,7 +199,7 @@ foreach ($token in @('Financial-action safety guard', 'self-reported', 'backtest
 }
 
 $readmeText = Get-Content -LiteralPath (Join-Path $Root 'README.md') -Raw -Encoding utf8
-foreach ($token in @('USAGE.md', 'ATTRIBUTION.md', 'NOTICE.md', 'LICENSE', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'scripts/test_validators_ignore_scan.ps1', 'GitHub Actions')) {
+foreach ($token in @('USAGE.md', 'ATTRIBUTION.md', 'NOTICE.md', 'LICENSE', 'runtime-dependencies.lock.json', 'evaluations/behavior-contracts.json', 'scripts/install-git-hooks.ps1', 'scripts/validate_workspace.ps1', 'scripts/validate_links.ps1', 'scripts/test_validators_ignore_scan.ps1', 'scripts/test_validate_behavior_and_dependencies.ps1', 'GitHub Actions')) {
     if (-not $readmeText.Contains($token)) { $errors.Add("README usage or safety documentation is stale: $token") }
 }
 
@@ -254,8 +260,8 @@ if (-not $salesText.Contains('SALES_SKILL_MD="$HOME/.claude/skills/sales/SKILL.m
     $errors.Add('sales-desk must resolve the exact installed entrypoint')
 }
 $diagramText = Get-Content -LiteralPath (Join-Path $Root 'diagram-forge/SKILL.md') -Raw -Encoding utf8
-if (-not $diagramText.Contains('rerun the resolver above to set ARCHIFY_DIR before Step 2')) {
-    $errors.Add('diagram-forge must resolve its directory after installation')
+if (-not $diagramText.Contains('ARCHIFY_DIR=~/Desktop/skills/archify-src/archify') -or -not $diagramText.Contains('checkout --detach 9e35d2b0b39b155553ba9fcfe0b4f2a5198dd993')) {
+    $errors.Add('diagram-forge must pin its install and resolve the runtime directory')
 }
 
 # Documentation regressions found by the five-document source audit.

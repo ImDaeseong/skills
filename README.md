@@ -32,9 +32,10 @@ powershell.exe -NoProfile -File scripts/install-git-hooks.ps1
 powershell.exe -NoProfile -File scripts/validate_workspace.ps1
 powershell.exe -NoProfile -File scripts/validate_links.ps1
 powershell.exe -NoProfile -File scripts/test_validators_ignore_scan.ps1
+powershell.exe -NoProfile -File scripts/test_validate_behavior_and_dependencies.ps1
 ```
 
-PASS는 저장소 검사 통과를 뜻합니다. 실제 작업 결과와 외부 도구의 동작은 별도로 확인합니다.
+PASS는 저장소 검사 통과를 뜻합니다. `evaluations/behavior-contracts.json`은 대표 요청의 기대·금지 행동을 기록하고, `runtime-dependencies.lock.json`은 실행 시 복제하는 외부 저장소의 승인 커밋을 고정합니다. 실제 모델 결과와 외부 도구의 동작은 별도로 확인합니다.
 
 ## 출처·라이선스
 

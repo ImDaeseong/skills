@@ -42,7 +42,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/browser-use/video-use` into `~/Desktop/skills/video-use` now (MIT, ElevenLabs API key required per Attribution above), or stop. If approved:
 
 ```bash
-git clone --depth 1 https://github.com/browser-use/video-use.git ~/Desktop/skills/video-use
+git clone https://github.com/browser-use/video-use.git ~/Desktop/skills/video-use
+git -C ~/Desktop/skills/video-use checkout --detach 9575612f066aa517354790a645fd90f9f95a743b
 VIDEOUSE_DIR=~/Desktop/skills/video-use
 ```
 

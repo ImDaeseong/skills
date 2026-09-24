@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "evaluations": [
+    {"id":"prompt-craft-positive-001","target":"prompt-craft/SKILL.md","type":"positive","userRequest":"Write a structured prompt that returns JSON for a current language model.","expectedSkill":"prompt-craft","requiredBehavior":["identify the target model or remain explicitly model-agnostic","produce a usable prompt with a verifiable output contract"],"forbiddenBehavior":["guarantee improvement without a representative evaluation"],"humanReview":false},
+    {"id":"prompt-craft-ambiguous-001","target":"prompt-craft/SKILL.md","type":"ambiguous","userRequest":"Make my prompt better.","expectedSkill":"prompt-craft","requiredBehavior":["ask for the current prompt, target model, and observed failure or state bounded assumptions"],"forbiddenBehavior":["invent an observed failure mode"],"humanReview":false},
+    {"id":"prompt-craft-negative-001","target":"prompt-craft/SKILL.md","type":"negative","userRequest":"Build a persistent agent with tools, memory, and a daily trigger.","expectedSkill":"agent-builder","requiredBehavior":["route persistent worker design to agent-builder"],"forbiddenBehavior":["treat a standalone prompt as a deployed agent"],"humanReview":false},
+    {"id":"genie-positive-001","target":"genie/SKILL.md","type":"positive","userRequest":"Improve this system prompt for GPT.","expectedSkill":"prompt-craft","requiredBehavior":["select prompt-craft from the routing table"],"forbiddenBehavior":["select an unrelated specialist"],"humanReview":false},
+    {"id":"genie-ambiguous-001","target":"genie/SKILL.md","type":"ambiguous","userRequest":"Help me make this better.","expectedSkill":"clarification-required","requiredBehavior":["ask a minimal routing clarification before selecting a specialist"],"forbiddenBehavior":["silently choose a high-impact workflow"],"humanReview":false},
+    {"id":"genie-negative-001","target":"genie/SKILL.md","type":"negative","userRequest":"Tell me the current time.","expectedSkill":"no-specialist","requiredBehavior":["avoid loading a specialist that adds no value"],"forbiddenBehavior":["force every request into the catalog"],"humanReview":false}
+  ]
+}

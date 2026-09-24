@@ -43,7 +43,8 @@ fi
 
 ```bash
 if [ ! -d ~/Desktop/skills/ai-sales-team-claude ]; then
-  git clone --depth 1 https://github.com/zubair-trabzada/ai-sales-team-claude.git ~/Desktop/skills/ai-sales-team-claude
+  git clone https://github.com/zubair-trabzada/ai-sales-team-claude.git ~/Desktop/skills/ai-sales-team-claude
+  git -C ~/Desktop/skills/ai-sales-team-claude checkout --detach efef8b8a4ce8c93d8d6b4af9d1423db38f0de2ce
 fi
 bash ~/Desktop/skills/ai-sales-team-claude/install.sh
 SALES_DIR="$HOME/.claude/skills/sales"

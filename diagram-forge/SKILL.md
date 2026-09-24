@@ -37,18 +37,16 @@ else
 fi
 ```
 
-**If not found, ask the user (AskUserQuestion)**: install it via the upstream project's own documented installer, or clone it directly — either is fine, both are MIT:
+**If not found, ask the user (AskUserQuestion)** before cloning the reviewed commit below:
 
 ```bash
-# Preferred, per upstream's own docs — requires Node.js and network access to npm:
-npx skills add tt-a1i/archify -g
-# After installation, rerun the resolver above to set ARCHIFY_DIR before Step 2.
-
-# Fallback if npx/the "skills" installer package is unavailable:
-git clone --depth 1 https://github.com/tt-a1i/archify.git ~/Desktop/skills/archify-src
+git clone https://github.com/tt-a1i/archify.git ~/Desktop/skills/archify-src
+git -C ~/Desktop/skills/archify-src checkout --detach 9e35d2b0b39b155553ba9fcfe0b4f2a5198dd993
 # The actual skill package lives in the repo's archify/ subfolder:
 ARCHIFY_DIR=~/Desktop/skills/archify-src/archify
 ```
+
+Do not replace this with the upstream package-manager shortcut: it resolves a mutable version and bypasses this repository's reviewed commit lock.
 
 `archify-src/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.
 

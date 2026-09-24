@@ -40,7 +40,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/virgiliojr94/book-to-skill` into `~/Desktop/skills/book-to-skill` now (MIT, safety-audited above), or stop. If the user approves:
 
 ```bash
-git clone --depth 1 https://github.com/virgiliojr94/book-to-skill.git ~/Desktop/skills/book-to-skill
+git clone https://github.com/virgiliojr94/book-to-skill.git ~/Desktop/skills/book-to-skill
+git -C ~/Desktop/skills/book-to-skill checkout --detach 80ae087784ddbc21dbbfde355fe5509631e0e322
 ```
 
 `book-to-skill/` is already in this repo's `.gitignore` — it is a local runtime copy, not tracked content.

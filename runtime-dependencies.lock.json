@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-09-24",
+  "dependencies": [
+    {"url":"https://github.com/mvanhorn/last30days-skill.git","commit":"084662b501fb0dba95bd55eff0c258d35e0dc499","license":"MIT"},
+    {"url":"https://github.com/smerchek/claude-epub-skill.git","commit":"7c0723087b9f6ec2352b42b73f61d224b542e059","license":"see ATTRIBUTION.md"},
+    {"url":"https://github.com/virgiliojr94/book-to-skill.git","commit":"80ae087784ddbc21dbbfde355fe5509631e0e322","license":"MIT"},
+    {"url":"https://github.com/tt-a1i/archify.git","commit":"9e35d2b0b39b155553ba9fcfe0b4f2a5198dd993","license":"MIT"},
+    {"url":"https://github.com/coreyhaines31/marketingskills.git","commit":"5b2c0007766c6a1cf1d53fd8fc73e979e0821022","license":"MIT"},
+    {"url":"https://github.com/browser-use/video-use.git","commit":"9575612f066aa517354790a645fd90f9f95a743b","license":"MIT"},
+    {"url":"https://github.com/EveryInc/charlie-cfo-skill.git","commit":"429f61bc0eb728cbc88db22cb1b1b1be6f21cafb","license":"MIT"},
+    {"url":"https://github.com/zubair-trabzada/ai-sales-team-claude.git","commit":"efef8b8a4ce8c93d8d6b4af9d1423db38f0de2ce","license":"MIT"},
+    {"url":"https://github.com/AgriciDaniel/claude-shorts.git","commit":"a369fad9d84287edbb8fa3ab515f268e770f683b","license":"MIT; transitive Remotion terms remain separately gated"},
+    {"url":"https://github.com/bradautomates/claude-video.git","commit":"83da59fa78c3eee9e20f515fe75c438bb5166efd","license":"MIT"}
+  ]
+}

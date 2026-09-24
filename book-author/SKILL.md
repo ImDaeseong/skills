@@ -44,7 +44,8 @@ fi
 **If not found, ask the user (AskUserQuestion)**: clone `https://github.com/smerchek/claude-epub-skill` into `~/Desktop/skills/claude-epub-skill` now (MIT, safety-audited above), or stop. If approved:
 
 ```bash
-git clone --depth 1 https://github.com/smerchek/claude-epub-skill.git ~/Desktop/skills/claude-epub-skill
+git clone https://github.com/smerchek/claude-epub-skill.git ~/Desktop/skills/claude-epub-skill
+git -C ~/Desktop/skills/claude-epub-skill checkout --detach 7c0723087b9f6ec2352b42b73f61d224b542e059
 EPUB_DIR=~/Desktop/skills/claude-epub-skill/markdown-to-epub
 python3 -m pip install -r "$EPUB_DIR/requirements.txt"
 ```

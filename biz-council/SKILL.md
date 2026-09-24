@@ -61,6 +61,7 @@ fi
 
 ```bash
 git clone https://github.com/mvanhorn/last30days-skill.git ~/Desktop/skills/last30days
+git -C ~/Desktop/skills/last30days checkout --detach 084662b501fb0dba95bd55eff0c258d35e0dc499
 LAST30DAYS_SKILL_DIR=$(find ~/Desktop/skills/last30days -maxdepth 3 -iname "SKILL.md" -path "*last30days*" 2>/dev/null | head -1 | xargs dirname)
 echo "Cloned and resolved at: $LAST30DAYS_SKILL_DIR"
 ```
