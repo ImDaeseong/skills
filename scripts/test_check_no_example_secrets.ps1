@@ -78,3 +78,4 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Output "PASS: check_no_example_secrets pattern set catches a planted secret and stays quiet on clean text (4 case(s))."
+exit 0
