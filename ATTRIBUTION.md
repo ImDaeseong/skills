@@ -354,6 +354,10 @@ New skill (2026-07-21) — evaluated after a request wanting prompt-writing tech
 | **brexhq/prompt-engineering** | [github.com/brexhq/prompt-engineering](https://github.com/brexhq/prompt-engineering) | 2026-09-06 source check; historical evaluation | MIT; see source audit | Evaluated, not adopted — last pushed 2023-10-23, roughly three years stale as of this check, predating the current model generation this skill needs to stay current against. |
 | **Vendor-official prompting docs (Anthropic, OpenAI, Google)** | n/a — not GitHub repos | Historical; [LOW-EVIDENCE] | n/a | Cited as the freshness authority Step 3 requires: neither GitHub guide above updates on the same cadence as a new model release, so a request naming a specific current model must be checked against that vendor's own current docs before trusting a technique's continued relevance. |
 
+## publication-readiness
+
+Original methodology added 2026-09-24 after a real manuscript passed automated structure and EPUB checks while rights, professional editing, representative-reader observation, dedicated-reader rendering, and sales-channel records still remained unresolved. The reusable contribution is the separation of artifact validity from commercial release approval; it does not copy a third-party publishing checklist or platform-specific policy. Current platform requirements must be read from the platform's own official documentation at assessment time rather than frozen into the skill.
+
 ## Why the originals aren't kept locally
 
 Full upstream checkouts used at runtime are kept outside Git tracking and restored on demand. This does not prove that every tracked paragraph was independently authored. Consult the source audit and applicable upstream terms before copying or redistributing original or adapted material.

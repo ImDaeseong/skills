@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 30 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 31 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -125,6 +125,12 @@
       "source": "./book-author",
       "skills": ["./"],
       "description": "Ghostwrites a nonfiction technical book from the author's own accumulated material via a voice-fingerprint + chapter template, a per-chapter Researcher-Writer-Editor-Reviewer pipeline, and DOCX/PDF/EPUB compilation."
+    },
+    {
+      "name": "publication-readiness",
+      "source": "./publication-readiness",
+      "skills": ["./"],
+      "description": "Assesses whether a book or ebook is commercially ready by separating artifact validity from rights, editorial, human-reader, rendering/accessibility, and channel-package approval."
     },
     {
       "name": "book-distiller",

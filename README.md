@@ -2,7 +2,7 @@
 
 **🤔 [쉬운 설명 보기](https://htmlpreview.github.io/?https://github.com/ImDaeseong/skills/blob/main/ELI5.html)** — 비개발자를 위한 한 페이지 요약
 
-GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선·보완하는 개인 저장소입니다. Claude Code/Cowork용 전문 스킬 30개와 라우터 `genie`, 총 31개를 관리합니다.
+GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선·보완하는 개인 저장소입니다. Claude Code/Cowork용 전문 스킬 31개와 라우터 `genie`, 총 32개를 관리합니다.
 
 ## 사용
 
@@ -15,7 +15,7 @@ GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선�
 | 분야 | 스킬 |
 |---|---|
 | 사업·분석 | `biz-council`, `biz-ops`, `ai-adoption-scout`, `filing-analyst`, `erp-fundamentals`, `sales-desk`, `founder-finance` |
-| 글·문서·도식 | `writing`, `curator`, `social-carousel`, `design-report`, `book-author`, `book-distiller`, `diagram-forge`, `explain-for-audience` |
+| 글·문서·도식 | `writing`, `curator`, `social-carousel`, `design-report`, `book-author`, `publication-readiness`, `book-distiller`, `diagram-forge`, `explain-for-audience` |
 | 영상 | `video-producer`, `image-motion-graphics`, `video-watcher`, `shorts-clipper`, `footage-editor` |
 | 개발·에이전트 | `agent-builder`, `vibe-coder`, `game-dev`, `prompt-craft`, `personal-memory` |
 | 마케팅·업무 소통 | `distribution`, `managing-up`, `judgment-on-request` |

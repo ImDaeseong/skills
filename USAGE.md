@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 31 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 32 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -183,6 +183,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** Raw material (past conversation exports, notes, drafts, existing project source code) and, if available, writing samples for voice matching.
 **Get back:** A `STYLE.md` chapter template (concept-first opening + diagrams + verified code + troubleshooting checklist + back-matter appendix, synthesized from real AI-engineering-book style research), an outline ordered by where readers actually get stuck, chapters run through a Researcher→Writer→윤문→Reviewer pipeline (max 3 revision cycles), then compiled to DOCX/PDF (via `design-report`) and EPUB. Optionally, once chapters pass Review, a slide-deck outline + lecture guide derived from the same reviewed content (also via `design-report`, PPTX/DOCX). Manuscript/lecture-material production only — no platform registration/distribution guidance of any kind; see `ATTRIBUTION.md`'s scope-narrowing history.
 **Runtime dependency: `claude-epub-skill`** ([github.com/smerchek/claude-epub-skill](https://github.com/smerchek/claude-epub-skill), cloned to `~/Desktop/skills/claude-epub-skill` on first use, MIT license, source-audited 2026-09-22 — see [`ATTRIBUTION.md`](ATTRIBUTION.md)). Needs Python 3 with `ebooklib`/`markdown2`/`Pygments` (installed from its own `requirements.txt`). Distinct from `writing` (prose polish only, no book structure/compile) and `book-distiller` (existing book → Claude skill, opposite direction).
+
+## publication-readiness
+
+**Trigger:** "출판 가능한가", "출판 준비도 확인", "판매해도 되나", "publish-ready", "is this ebook ready to publish", "final pre-publication review".
+**Give it:** The current manuscript and release candidate, intended format/channel, plus any available validation reports, rights ledger, editorial record, reader-test results, rendering/accessibility checks, and channel checklist.
+**Get back:** A read-only, evidence-linked verdict — `READY FOR THE NAMED CHANNEL`, `TECHNICALLY VALID, RELEASE HOLD`, or `NOT READY` — with six independent gates for artifact integrity, rights/privacy, editorial quality, representative readers, dedicated-reader/accessibility rendering, and channel package. Missing human evidence stays HOLD; automated build success is never treated as publication approval.
+**Dependency:** None. It may verify changeable platform requirements from current official documentation. Distinct from `book-author` (creates/revises the manuscript) and `distribution` (promotion/channel strategy); it does not upload or publish without separate explicit authorisation.
 
 ## book-distiller
 
