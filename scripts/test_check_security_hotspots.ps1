@@ -72,3 +72,4 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Output "PASS: check_security_hotspots rules and qa:allow suppression behave as pinned (10 case(s))."
+exit 0
