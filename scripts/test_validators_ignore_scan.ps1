@@ -75,6 +75,10 @@ try {
         @('README.md', [string]$skillCount, '999', 'README skill total is stale'),
         @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),
         @('biz-ops/SKILL.md', 'founder-finance', 'deferred-finance', 'biz-ops must route'),
+        # 2026-09-26 독립 리뷰 발견: PowerShell -ne는 기본적으로 대소문자를
+        # 구분하지 않아서, frontmatter name과 폴더명이 대소문자만 다르면
+        # 이 검사를 그대로 통과했다.
+        @('writing/SKILL.md', 'name: writing', 'name: Writing', 'name/folder mismatch'),
         @('founder-finance/SKILL.md', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill', '', 'missing post-clone'),
         @('footage-editor/SKILL.md', 'VIDEOUSE_DIR=~/Desktop/skills/video-use', '', 'missing post-clone'),
         @('footage-editor/SKILL.md', 'never paste the key into chat', 'ask them to paste one', 'keep API keys out'),

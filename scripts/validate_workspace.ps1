@@ -50,7 +50,11 @@ $skillFiles = Get-ScopedFiles -Root $Root -IgnoredTopLevelDirs $ignoredTopLevelD
 foreach ($file in $skillFiles) {
     $text = Get-Content -LiteralPath $file.FullName -Raw
     $name = [regex]::Match($text, '(?m)^name:\s*([^\r\n]+)').Groups[1].Value.Trim()
-    if ($name -ne $file.Directory.Name) { $errors.Add("name/folder mismatch: $($file.FullName)") }
+    # -cne: PowerShell's default -ne is case-insensitive, which would let a
+    # case-only mismatch (e.g. "Founder-Finance" folder, "founder-finance"
+    # frontmatter) pass here even though it breaks on a case-sensitive
+    # filesystem/consumer (2026-09-26 independent review).
+    if ($name -cne $file.Directory.Name) { $errors.Add("name/folder mismatch: $($file.FullName)") }
     if ($text -notmatch '\.\./_shared/CORE-LAWS\.md') { $errors.Add("missing CORE-LAWS reference: $($file.FullName)") }
     if ($text -notmatch '(?m)^Follow `\.\./_shared/CORE-LAWS\.md` in full\.') { $errors.Add("CORE-LAWS must be followed in full: $($file.FullName)") }
 }
@@ -94,13 +98,21 @@ $requiredTools = @{
     'explain-for-audience' = @('Read', 'AskUserQuestion')
     'judgment-on-request'  = @('Read')
 }
+# PowerShell hashtable literals compare string keys case-insensitively by
+# default, so ContainsKey()/indexing below would silently match a
+# case-only-different folder name (e.g. "Founder-Finance" vs
+# "founder-finance") instead of flagging it (2026-09-26 independent
+# review). Rebuild with an ordinal (case-sensitive) comparer.
+$requiredToolsOrdinal = [System.Collections.Hashtable]::new([System.StringComparer]::Ordinal)
+foreach ($key in $requiredTools.Keys) { $requiredToolsOrdinal[$key] = $requiredTools[$key] }
+$requiredTools = $requiredToolsOrdinal
 foreach ($file in $skillFiles) {
     $lines = Get-Content -LiteralPath $file.FullName
     $allowedTools = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
     $inAllowedTools = $false
     foreach ($line in $lines) {
-        if ($line -eq 'allowed-tools:') { $inAllowedTools = $true; continue }
-        if ($inAllowedTools -and $line -eq '---') { break }
+        if ($line -ceq 'allowed-tools:') { $inAllowedTools = $true; continue }
+        if ($inAllowedTools -and $line -ceq '---') { break }
         if ($inAllowedTools -and $line -match '^\s*-\s+(.+?)\s*$') { [void]$allowedTools.Add($Matches[1]) }
     }
     if (-not $requiredTools.ContainsKey($file.Directory.Name)) { $errors.Add("required-tools policy missing for skill: $($file.Directory.Name)") }
@@ -127,12 +139,16 @@ foreach ($match in $routeMatches) {
     $resolvedPath = [IO.Path]::GetFullPath((Join-Path (Split-Path $routeFile) $relativePath))
     if (-not (Test-Path -LiteralPath $resolvedPath)) { $errors.Add("route path does not exist: $relativePath") }
 }
-$specialists = $skillFiles.Directory.Name | Where-Object { $_ -ne 'genie' }
+$specialists = $skillFiles.Directory.Name | Where-Object { $_ -cne 'genie' }
+# -cnotin: default -notin is case-insensitive, which would let a
+# case-only-different route/folder name pair (e.g. route "founder-finance"
+# vs folder "Founder-Finance") pass as matched instead of being flagged as
+# unrouted/orphaned (2026-09-26 independent review).
 foreach ($skill in $specialists) {
-    if ($skill -notin $routes) { $errors.Add("unrouted specialist: $skill") }
+    if ($skill -cnotin $routes) { $errors.Add("unrouted specialist: $skill") }
 }
 foreach ($route in $routes) {
-    if ($route -notin $specialists) { $errors.Add("orphan route: $route") }
+    if ($route -cnotin $specialists) { $errors.Add("orphan route: $route") }
 }
 
 $marketplacePath = Join-Path $Root '.claude-plugin\marketplace.json'
@@ -143,10 +159,10 @@ if (-not (Test-Path -LiteralPath $marketplacePath)) {
     $marketplacePlugins = $marketplace.plugins.name
     $allSkillNames = $skillFiles.Directory.Name
     foreach ($skill in $allSkillNames) {
-        if ($skill -notin $marketplacePlugins) { $errors.Add("skill missing from marketplace.json: $skill") }
+        if ($skill -cnotin $marketplacePlugins) { $errors.Add("skill missing from marketplace.json: $skill") }
     }
     foreach ($plugin in $marketplacePlugins) {
-        if ($plugin -notin $allSkillNames) { $errors.Add("marketplace.json plugin has no matching skill folder: $plugin") }
+        if ($plugin -cnotin $allSkillNames) { $errors.Add("marketplace.json plugin has no matching skill folder: $plugin") }
     }
 }
 
