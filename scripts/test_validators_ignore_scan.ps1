@@ -79,6 +79,7 @@ try {
         # 구분하지 않아서, frontmatter name과 폴더명이 대소문자만 다르면
         # 이 검사를 그대로 통과했다.
         @('writing/SKILL.md', 'name: writing', 'name: Writing', 'name/folder mismatch'),
+        @('image-motion-graphics/SKILL.md', 'references/CORE-LAWS.md', 'references/missing-CORE-LAWS.md', 'missing CORE-LAWS reference'),
         @('founder-finance/SKILL.md', 'CHARLIE_DIR=~/Desktop/skills/charlie-cfo-skill', '', 'missing post-clone'),
         @('footage-editor/SKILL.md', 'VIDEOUSE_DIR=~/Desktop/skills/video-use', '', 'missing post-clone'),
         @('footage-editor/SKILL.md', 'never paste the key into chat', 'ask them to paste one', 'keep API keys out'),
@@ -94,6 +95,15 @@ try {
             [IO.File]::WriteAllText($path, $original.Replace($case[1], $case[2]))
             Assert-Validator 'validate_workspace.ps1' $false $case[3]
         } finally { [IO.File]::WriteAllText($path, $original) }
+    }
+
+    $packagedLaws = Join-Path $fixture 'image-motion-graphics\references\CORE-LAWS.md'
+    $packagedBytes = [IO.File]::ReadAllBytes($packagedLaws)
+    try {
+        Remove-Item -LiteralPath $packagedLaws -Force
+        Assert-Validator 'validate_workspace.ps1' $false 'missing packaged CORE-LAWS file'
+    } finally {
+        [IO.File]::WriteAllBytes($packagedLaws, $packagedBytes)
     }
     Write-Output "PASS: $checks controls; validators skip inaccessible runtime/cache directories and detect link/adoption/initialization/safety regressions."
 } finally {

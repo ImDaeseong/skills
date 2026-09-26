@@ -12,7 +12,9 @@ allowed-tools:
 
 Create a reproducible one-scene pipeline from concept or still image to layered PSD/AEP and a reviewed render.
 
-Follow `../_shared/CORE-LAWS.md` in full.
+Follow the packaged [core production laws](references/CORE-LAWS.md) in full. This
+copy is bundled with the skill so standalone installation does not break the
+required reference.
 
 ## 1. Lock the requested endpoint
 

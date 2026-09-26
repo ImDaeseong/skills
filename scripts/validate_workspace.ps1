@@ -55,8 +55,14 @@ foreach ($file in $skillFiles) {
     # frontmatter) pass here even though it breaks on a case-sensitive
     # filesystem/consumer (2026-09-26 independent review).
     if ($name -cne $file.Directory.Name) { $errors.Add("name/folder mismatch: $($file.FullName)") }
-    if ($text -notmatch '\.\./_shared/CORE-LAWS\.md') { $errors.Add("missing CORE-LAWS reference: $($file.FullName)") }
-    if ($text -notmatch '(?m)^Follow `\.\./_shared/CORE-LAWS\.md` in full\.') { $errors.Add("CORE-LAWS must be followed in full: $($file.FullName)") }
+    $sharedLaws = $text -match '(?m)^Follow `\.\./_shared/CORE-LAWS\.md` in full\.'
+    $packagedLaws = $text -match '(?m)^Follow the packaged \[core production laws\]\(references/CORE-LAWS\.md\) in full\.'
+    if (-not $sharedLaws -and -not $packagedLaws) {
+        $errors.Add("missing CORE-LAWS reference: $($file.FullName)")
+    }
+    if ($packagedLaws -and -not (Test-Path -LiteralPath (Join-Path $file.Directory.FullName 'references\CORE-LAWS.md'))) {
+        $errors.Add("missing packaged CORE-LAWS file: $($file.FullName)")
+    }
 }
 
 $laws = Get-Content -LiteralPath (Join-Path $Root '_shared\CORE-LAWS.md') -Raw
