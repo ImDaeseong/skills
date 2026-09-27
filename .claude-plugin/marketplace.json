@@ -121,6 +121,12 @@
       "description": "Drafts a message to a manager/lead about a specific decision, with real trade-off options instead of a flat refusal, grounded in HBR's 'Managing Your Boss' and Frei's critique of solutions-only reporting."
     },
     {
+      "name": "structure-to-manuscript",
+      "source": "./structure-to-manuscript",
+      "skills": ["./"],
+      "description": "Separates long-book structure from prose generation through an approved outline.json handoff contract and deterministic consistency checks."
+    },
+    {
       "name": "book-author",
       "source": "./book-author",
       "skills": ["./"],

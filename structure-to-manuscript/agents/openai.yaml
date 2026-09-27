@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structure to Manuscript"
+  short_description: "Separate book structure from consistent manuscript writing"
+  default_prompt: "Use $structure-to-manuscript to turn my book idea into an approved structure and then a logically consistent manuscript."

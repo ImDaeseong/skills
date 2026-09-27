@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 32 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 33 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -176,6 +176,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The actual situation (what triggered this), the real technical/operational risk in specific terms, what decision you want your manager to make, and — if you know it — what your manager is actually accountable for this cycle. If you don't know the last one, say so; the skill drafts around the acknowledged gap instead of inventing a plausible-sounding KPI.
 **Get back:** A draft message with 2-3 trade-off options (each with a real cost/risk attached, not vague terms), opening on the shared goal in your manager's own terms and ending with a specific one-line ask — not a flat refusal, and not a template with unfilled placeholders. Every number in the draft traces back to what you stated.
 **Dependency:** None — self-contained, no external library or API. Distinct from `writing` (general tone/voice editing, not manager-specific negotiation).
+
+## structure-to-manuscript
+
+**Trigger:** "책 구조부터 잡아줘", "원고 구조와 집필을 분리해 줘", "ChatGPT로 구조를 만들고 Claude로 원고를 써 줘", "outline.json으로 책을 설계해 줘", "structure to manuscript".
+**Give it:** 대상 독자, 책이 해결할 중심 문제, 완독 후 결과, 분량·문체·출판 형식, 사용할 수 있는 근거 자료나 출처 범위.
+**Get back:** 사용자가 승인할 `outline.json`, ChatGPT 구조 레이어에서 Claude 글쓰기 레이어로 넘길 인계 묶음, 장별 `manuscript/NN_slug.md`, 구조·의존관계·용어·분량·TODO를 검사하는 로컬 명령. 구조 승인 전에는 집필하지 않으며 의미적 일관성과 사실성은 사람 검토로 남긴다.
+**Dependency:** Python 3만 사용하며 외부 모델 API를 자동 호출하지 않는다. 장별 집필·윤문·EPUB 제작까지 원하는 경우 `book-author`가 후속 작업을 담당하고, 완성 파일의 상업 배포 판정은 `publication-readiness`가 담당한다.
 
 ## book-author
 

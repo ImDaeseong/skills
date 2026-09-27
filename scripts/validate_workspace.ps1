@@ -88,6 +88,7 @@ $requiredTools = @{
     'personal-memory'  = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'prompt-craft'     = @('Read', 'Write', 'Edit', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'publication-readiness' = @('Read', 'Bash', 'WebSearch', 'WebFetch', 'AskUserQuestion')
+    'structure-to-manuscript' = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'social-carousel'  = @('Read', 'Write', 'Bash', 'WebFetch', 'WebSearch', 'AskUserQuestion')
     'vibe-coder'       = @('Read', 'Write', 'Bash', 'AskUserQuestion')
     'video-producer'   = @('Read', 'Write', 'Bash', 'AskUserQuestion')
