@@ -1,0 +1,6 @@
+interface:
+  display_name: "Book Design Audit"
+  short_description: "책 PDF·EPUB의 시각 편집 품질을 전 페이지 검수"
+  default_prompt: "Use $book-design-audit to inspect this book's typography, layout, figures, and reflow, separating defects from publisher decisions."
+policy:
+  allow_implicit_invocation: true

@@ -358,6 +358,10 @@ New skill (2026-07-21) — evaluated after a request wanting prompt-writing tech
 
 Original methodology added 2026-09-24 after a real manuscript passed automated structure and EPUB checks while rights, professional editing, representative-reader observation, dedicated-reader rendering, and sales-channel records still remained unresolved. The reusable contribution is the separation of artifact validity from commercial release approval; it does not copy a third-party publishing checklist or platform-specific policy. Current platform requirements must be read from the platform's own official documentation at assessment time rather than frozen into the skill.
 
+## book-design-audit
+
+Original methodology added 2026-09-29 for repeatable pre-publisher visual QA of PDF and EPUB books. The workflow combines full-page rendering, page-class coverage, defect-versus-judgment classification, and format-specific reflow checks. Its standards references point to W3C WCAG 2.2 and EPUB Accessibility 1.1; its readability references are cited with explicit limits because screen and Latin-script study results do not establish universal Korean print settings. No third-party skill text or proprietary publishing checklist is copied.
+
 ## Why the originals aren't kept locally
 
 Full upstream checkouts used at runtime are kept outside Git tracking and restored on demand. This does not prove that every tracked paragraph was independently authored. Consult the source audit and applicable upstream terms before copying or redistributing original or adapted material.

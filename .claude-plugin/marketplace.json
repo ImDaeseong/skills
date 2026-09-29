@@ -4,7 +4,7 @@
   "owner": {
     "name": "ImDaeseong"
   },
-  "description": "Claude Skills workspace: a genie router plus 31 specialist skills for research, design, coding discipline, memory, and content work.",
+  "description": "Claude Skills workspace: a genie router plus 33 specialist skills for research, design, coding discipline, memory, and content work.",
   "plugins": [
     {
       "name": "genie",
@@ -203,6 +203,12 @@
       "source": "./judgment-on-request",
       "skills": ["./"],
       "description": "Evaluates an opinion or proposal with a full silent judgment, answers with only the verdict and strongest reason, and unpacks the reasoning chain one layer deeper each time the user actually asks why."
+    },
+    {
+      "name": "book-design-audit",
+      "source": "./book-design-audit",
+      "skills": ["./"],
+      "description": "Audits a rendered book PDF or EPUB for typography, layout, figures, captions, and reflow while separating defects from publisher decisions."
     }
   ]
 }

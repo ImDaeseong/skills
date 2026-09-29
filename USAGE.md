@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 33 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 34 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -197,6 +197,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The current manuscript and release candidate, intended format/channel, plus any available validation reports, rights ledger, editorial record, reader-test results, rendering/accessibility checks, and channel checklist.
 **Get back:** A read-only, evidence-linked verdict — `READY FOR THE NAMED CHANNEL`, `TECHNICALLY VALID, RELEASE HOLD`, or `NOT READY` — with six independent gates for artifact integrity, rights/privacy, editorial quality, representative readers, dedicated-reader/accessibility rendering, and channel package. Missing human evidence stays HOLD; automated build success is never treated as publication approval.
 **Dependency:** None. It may verify changeable platform requirements from current official documentation. Distinct from `book-author` (creates/revises the manuscript) and `distribution` (promotion/channel strategy); it does not upload or publish without separate explicit authorisation.
+
+## book-design-audit
+
+**Trigger:** "책 디자인 검수", "PDF 내부 배치 확인", "폰트와 그림 점검", "book layout audit", "EPUB reflow review", "출판사 제출 전 시각 검수".
+**Give it:** The exact PDF or EPUB candidate, intended medium and audience, and source files or target trim/device specifications when available.
+**Get back:** A full-artifact visual QA report separating observable defects, evidence-supported readability risks, aesthetic recommendations, publisher decisions, and unverified device/human checks. PDF pages are rendered before judgment; EPUB claims require a real reader when available.
+**Dependency:** A PDF renderer/inspector or EPUB reader available in the host environment. Distinct from `publication-readiness`, which makes the broader commercial-release verdict, and from `book-author`, which creates or substantially rewrites the manuscript.
 
 ## book-distiller
 
