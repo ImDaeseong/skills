@@ -74,6 +74,12 @@ Write `BOOK_DESIGN_AUDIT.md` beside the project unless the user names another lo
 
 When fixes are authorised, preserve the original, modify the canonical source rather than patching the generated PDF where practical, rebuild, rerender affected pages plus adjacent pages, and rerun artifact validators. Stop when agreed defects pass; do not polish indefinitely.
 
+When the visual-audit report is bound to the artifact hash, use an explicit
+two-pass rebuild after source edits: build a candidate, treat the expected stale
+hash as an evidence checkpoint rather than a layout defect, render and inspect
+the candidate, update the report identity, verify the evidence gate directly,
+then rerun the deterministic full build and confirm the artifact is identical.
+
 ## Pre-delivery verification
 
 Before reporting completion, re-read this skill and confirm:
