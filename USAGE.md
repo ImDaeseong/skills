@@ -202,7 +202,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 **Trigger:** "책 디자인 검수", "PDF 내부 배치 확인", "폰트와 그림 점검", "book layout audit", "EPUB reflow review", "출판사 제출 전 시각 검수".
 **Give it:** The exact PDF or EPUB candidate, intended medium and audience, and source files or target trim/device specifications when available.
-**Get back:** A full-artifact visual QA report separating observable defects, evidence-supported readability risks, aesthetic recommendations, publisher decisions, and unverified device/human checks. PDF pages are rendered before judgment; EPUB claims require a real reader when available.
+**Get back:** A full-artifact visual QA report separating observable defects, evidence-supported readability risks, aesthetic recommendations, publisher decisions, and unverified device/human checks. PDF pages are rendered before judgment; EPUB claims require a real reader when available. When the report is bound to the artifact hash, source edits make it stale by design, so it uses an explicit two-pass rebuild (candidate build, inspect, update report identity, verify the evidence gate, deterministic rerun).
 **Dependency:** A PDF renderer/inspector or EPUB reader available in the host environment. Distinct from `publication-readiness`, which makes the broader commercial-release verdict, and from `book-author`, which creates or substantially rewrites the manuscript.
 
 ## book-distiller
