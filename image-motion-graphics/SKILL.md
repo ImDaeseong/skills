@@ -77,7 +77,7 @@ Animate non-background layers from the nearest suitable frame edge to their mani
 
 For a stop-motion feel, quantize foreground and atmosphere animation timing to the selected low frame rate. After arrival, allow only extremely small rotational drift around approximately one degree. Keep the background motion-locked: its position, scale, rotation, and anchor point must remain identical for the entire composition. Do not apply whole-frame pan, zoom, integer-pixel crop animation, handheld simulation, wiggle, or low-frame-rate transforms to the background. If camera motion is explicitly requested, render it with smooth subpixel interpolation at the delivery frame rate while keeping stop-motion quantization confined to independent foreground layers. Exclude layers whose inherited parent motion already supplies sufficient movement.
 
-Treat rain, reflections, and light as atmosphere rather than rigid objects: vary their timing gently without obscuring the subject. For a music video, align major entrances or lighting changes to structural song moments only when audio or timestamps are available.
+Treat rain, reflections, and light as atmosphere rather than rigid objects: vary their timing gently without obscuring the subject. For a music video, align major entrances or lighting changes to structural song moments only when audio or timestamps are available. Derive timing markers from audio analysis or use user-provided timestamps rather than relying on unauditable by-ear guesses, and keep aligned events in song order. This is a production rule informed by research that aligns visual events or motion keyframes to musical beats and, in MV-Crafter, constrains the synchronization to remain monotonic ([MV-Crafter, arXiv:2504.17267](https://arxiv.org/abs/2504.17267); [MVAA, arXiv:2506.18881](https://arxiv.org/abs/2506.18881); authors' abstracts read 2026-10-08).
 
 ## 8. Render and verify
 
@@ -91,7 +91,7 @@ Run the bounded verification loop required by CORE-LAWS. Produce fresh evidence 
 - sampled background landmarks remain at identical pixel coordinates from beginning to end unless the user explicitly requested smooth camera motion;
 - child layers do not receive duplicated motion;
 - entrance order, opacity, duration, and frame rate match the manifest;
-- sampled beginning, middle, and ending frames contain no exposed reconstruction holes;
+- sampled beginning, middle, and ending frames, plus at least one frame inside each layer entrance, contain no exposed reconstruction holes or overlapping/clipped layers;
 - the rendered clip is watched or inspected as frames, not accepted from an exit code alone.
 
 Stop at HOLD when editable-format creation or visual review cannot be performed in the current environment. Return the completed earlier-stage assets and the precise remaining manual step.

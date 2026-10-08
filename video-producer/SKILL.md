@@ -30,7 +30,9 @@ Ask (AskUserQuestion) if not already clear from the request:
 2. What's the output shape — pick the closest match rather than treating every request as a full custom build: **intro/outro**, **scene transition**, **background composite** (subject onto a generated/replaced background), **B-roll + text-highlight overlay**, **logo reveal / lower third**, **motion-graphic infographic**, or **animated talking-head segment**.
 3. Does it need voiceover or stock footage sourced automatically, or is the visual/text content already complete?
 
-Don't default to the heaviest tool (a full auto-pipeline) when the actual need is a simple rendered clip from content that already exists. **Default to restraint**: per the same source, the strongest results come from mostly human-made content (footage, voice, edit) with AI VFX added as a small enhancement layer — not from generating the whole piece with AI. If the request is "make the whole video with AI," say that's a different, weaker-quality mode than "add an AI effect to my existing edit," and confirm which one is actually wanted.
+For multi-shot code-rendered work, write a shot-by-shot storyboard (per shot: on-screen content, text, duration, transition) before writing render code. If the request leaves creative choices open, get those choices confirmed; otherwise treat the fully specified request as approval. This is a local workflow rule, supported by but broader than Code2Video: its planner–coder–critic system reported a 40% improvement over direct code generation on educational-video evaluation, not on every video genre ([arXiv:2510.01174](https://arxiv.org/abs/2510.01174), authors' abstract; read 2026-10-08).
+
+Don't default to the heaviest tool (a full auto-pipeline) when the actual need is a simple rendered clip from content that already exists. **Default to restraint as a local production heuristic**: preserve supplied footage, voice, and edits when they already satisfy the request, and use generated material only for the missing layer. If the request is "make the whole video with AI," explain that it is a different mode with more generated components to review than "add an AI effect to my existing edit," and confirm which one is actually wanted.
 
 ## Step 2: Confirm the renderer is actually available, then route to it
 
@@ -49,6 +51,10 @@ Once availability is confirmed:
 ## Step 3: Render, then verify by watching it, not by reading the code
 
 Per this workspace's established render-verification discipline (see `design-report` Step 1.8) — a video that looks correct in the HTML/config and a video that actually renders correctly are different claims. Check the actual rendered output (frame samples, duration, whether text/data bound correctly) before calling it done, not just that the render command exited without error.
+
+LLM-written educational-animation code can render element overlap, misalignment, and broken continuity that cannot be reliably detected from the code alone ([arXiv:2605.15585](https://arxiv.org/abs/2605.15585), authors' abstract; read 2026-10-08). Treat that finding as a reason to sample frames inside each transition for all code-rendered video, not as evidence that every render has those defects. Look for overlap, text clipped at the frame edge, and unreadable text.
+
+Re-running the same prompt may not reproduce the same output reliably: outputs can vary under settings expected to be deterministic, and temperature 0 does not guarantee deterministic generated code ([arXiv:2408.04667](https://arxiv.org/abs/2408.04667), [arXiv:2308.02828](https://arxiv.org/abs/2308.02828); authors' abstracts read 2026-10-08). Treat the approved storyboard and code as the artifact: for later fixes, edit that code rather than regenerating from the prompt.
 
 ---
 
