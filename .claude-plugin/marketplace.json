@@ -136,7 +136,7 @@
       "name": "publication-readiness",
       "source": "./publication-readiness",
       "skills": ["./"],
-      "description": "Assesses whether a book or ebook is commercially ready by separating artifact validity from rights, editorial, human-reader, rendering/accessibility, and channel-package approval."
+      "description": "Assesses whether a book or ebook is commercially ready by separating artifact validity from rights, editorial, content-truth, technical-currency, human-reader, rendering/accessibility, and channel-package approval."
     },
     {
       "name": "book-distiller",

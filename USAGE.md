@@ -193,9 +193,9 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## publication-readiness
 
-**Trigger:** "출판 가능한가", "출판 준비도 확인", "판매해도 되나", "publish-ready", "is this ebook ready to publish", "final pre-publication review".
+**Trigger:** "출판 가능한가", "출판 준비도 확인", "판매해도 되나", "사실·논문 확인", "낡은 기술인가", "최신성 점검", "publish-ready", "is this ebook ready to publish", "final pre-publication review".
 **Give it:** The current manuscript and release candidate, intended format/channel, plus any available validation reports, rights ledger, editorial record, reader-test results, rendering/accessibility checks, and channel checklist.
-**Get back:** A read-only, evidence-linked verdict — `READY FOR THE NAMED CHANNEL`, `TECHNICALLY VALID, RELEASE HOLD`, or `NOT READY` — with six independent gates for artifact integrity, rights/privacy, editorial quality, representative readers, dedicated-reader/accessibility rendering, and channel package. Missing human evidence stays HOLD; automated build success is never treated as publication approval.
+**Get back:** A read-only, evidence-linked verdict — `READY FOR THE NAMED CHANNEL`, `TECHNICALLY VALID, RELEASE HOLD`, or `NOT READY` — with eight independent gates for artifact integrity, rights/privacy, editorial quality, content truth (primary-source checks of numbers, papers, links), technical currency (versions, end-of-life and deprecation dates, dated ledger), representative readers, dedicated-reader/accessibility rendering, and channel package. Missing human evidence stays HOLD; automated build success is never treated as publication approval.
 **Dependency:** None. It may verify changeable platform requirements from current official documentation. Distinct from `book-author` (creates/revises the manuscript) and `distribution` (promotion/channel strategy); it does not upload or publish without separate explicit authorisation.
 
 ## book-design-audit
