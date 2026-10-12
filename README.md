@@ -1,8 +1,8 @@
 # skills
 
-**설계 문서:** [DESIGN.md](DESIGN.md) — 스킬 패키징, 라우팅, 검증과 라이선스 경계
+> **핵심:** 검토된 재사용 스킬을 출처·라이선스·검증 계약과 함께 배포합니다.
 
-**🤔 [쉬운 설명 보기](https://htmlpreview.github.io/?https://github.com/ImDaeseong/skills/blob/main/ELI5.html)** — 비개발자를 위한 한 페이지 요약
+[쉬운 설명](ELI5.html) · [구조와 설계](DESIGN.md)
 
 GitHub의 공개 스킬과 자료를 선별해 그대로 사용하거나 개선·보완하는 개인 저장소입니다. Claude Code/Cowork용 전문 스킬 33개와 라우터 `genie`, 총 34개를 관리합니다.
 
