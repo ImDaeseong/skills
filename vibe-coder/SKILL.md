@@ -85,6 +85,7 @@ Per the converged shape across all four primary references (see Attribution):
 ## Step 4: Execution discipline
 
 - **Keep docs current via Context7** (see Attribution) if configured — an agent working from stale training-data knowledge of a library's API is a common, avoidable failure mode. Check whether it's actually set up as an MCP server before assuming it's available; if not, say so rather than silently proceeding on possibly-outdated API assumptions.
+- **Generate any server with its exposure boundary stated, not left to defaults** — bind `127.0.0.1`, cap request-body size, bound per-request resources, rate-limit before exposing it beyond localhost; generated servers commonly bind `0.0.0.0` and read bodies uncapped (observed in this workspace, 25 findings across 5 repos on 2026-10-24). Volumetric DDoS is an ISP/cloud-level control app code cannot supply. Run `qa_manager/scripts/check_exposure_hotspots.py` on the repo; sources in `qa_manager/SECURITY_NETWORK_QA_STANDARD.md`.
 - **Run long-lived processes (dev servers, watchers) as background tasks** so the agent can read logs directly during debugging instead of the user copy-pasting terminal output back and forth.
 - **Use git worktrees to isolate parallel work streams** when more than one task is running concurrently — prevents one in-flight change from corrupting another's working tree.
 - **Subagent-driven execution with inspection at each step**, not one uninspected end-to-end run — per superpowers' model, review happens as each engineering task completes, not only at the very end.
