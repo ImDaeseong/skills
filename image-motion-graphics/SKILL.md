@@ -26,7 +26,7 @@ Accept either entry point:
 
 - **Concept entry:** song, lyrics, or script. Translate the emotional arc into one scene before generating the key visual.
 - **Image entry:** user-provided still. Preserve its composition unless the user requests a redesign.
-- **Song package entry:** lyrics plus MP3 or WAV. Read embedded metadata when present, measure the real audio duration, map lyric sections to the timeline, create the key visual when none is supplied, and continue through the requested final render.
+- **Song package entry:** lyrics plus MP3 or WAV. Read embedded metadata when present, measure the real audio duration, map lyric sections to the timeline, create the key visual when none is supplied, and continue through the requested final render. When timing comes from beat or tempo estimation, accept an estimate only above a normalized periodicity-confidence threshold, check the audio duration against the complete scene timeline before copying assets, and keep regression fixtures for noise and duration mismatch next to the clean click-track case.
 
 ## 2. Confirm the production tools
 
