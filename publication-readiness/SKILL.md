@@ -80,6 +80,10 @@ Do not merge these gates into an average score. A high-risk HOLD in rights, priv
 - If the book links to a code repository, check the promised paths, that the release tag points at a commit containing what the book describes (count lag only for commits that change linked files), and that the examples run in a clean copy on a currently supported runtime.
 - Store each validator result with the hash of the artifact it checked, in one record file that prose points to, and make the build reproducible so unchanged sources give identical bytes. Otherwise a rebuild silently invalidates every stored PASS.
 - Call a paid API only with explicit approval, stating model, number of calls, and cost. A mock proves the surrounding code, not that the real model satisfies the validator.
+- A matching hash proves byte identity only. Also cross-check that the evidence names the same subject and the decision that relies on it, and verify "matches the source" against the named source, not a derived copy.
+- Authority to decide does not create facts: a rights or permission claim stays HOLD until its evidence exists, even when someone delegated the judgment.
+- When an outside party owns the truth (platform account screens, human sign-off), automate capturing and invalidating the evidence, never the verdict.
+- A vulnerability exception baseline must also fail on identity or severity drift, and a provider/model identifier change counts as done only when the source, the rendered artifacts, and a stale-identifier check agree.
 
 ## Evidence discipline
 
