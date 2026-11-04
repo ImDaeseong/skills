@@ -21,7 +21,7 @@ Follow `../_shared/CORE-LAWS.md` in full.
 |---|---|---|
 | 의류·모자·티셔츠 | `references/apparel.md` | 작성됨 (확인됨/미확인 구분) |
 | 화장품 | `references/cosmetics.md` | 작성됨 (확인됨/미확인 구분) |
-| 마사지 | `references/massage.md` | 작성됨 (핵심 경계는 미확인, 담당 기관 문의 필수) |
+| 마사지 | `references/massage.md` | 작성됨 (마사지가 안마사 업무로 정의됨을 확인, 자격 없는 사람의 허용 범위는 미확인 — 담당 기관 문의 필수) |
 
 파일이 없는 업종을 물으면 "아직 검증된 자료가 없다"고 말하고 기억으로 답하지 않는다. 그 업종의 법령은 법제처(law.go.kr)에서 직접 확인하도록 안내한다.
 
