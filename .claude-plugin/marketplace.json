@@ -181,6 +181,12 @@
       "description": "Bootstrapped-founder cash discipline — runway/burn-rate, unit economics, hiring payback, driver-based forecasting — by wrapping charlie-cfo-skill (MIT) as a runtime dependency."
     },
     {
+      "name": "kr-launch-compliance-check",
+      "source": "./kr-launch-compliance-check",
+      "skills": ["./"],
+      "description": "Korean-market pre-launch regulatory checklist per industry, with statute, check date, and verified status per item."
+    },
+    {
       "name": "pm-delivery-ops",
       "source": "./pm-delivery-ops",
       "skills": ["./"],

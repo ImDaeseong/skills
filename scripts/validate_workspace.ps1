@@ -100,6 +100,7 @@ $requiredTools = @{
     'diagram-forge'    = @('Read', 'Bash', 'AskUserQuestion')
     'sales-desk'       = @('Read', 'Bash', 'AskUserQuestion')
     'founder-finance'  = @('Read', 'Bash', 'AskUserQuestion')
+    'kr-launch-compliance-check' = @('Read', 'WebSearch', 'AskUserQuestion')
     'writing'          = @('Read', 'Write', 'Edit', 'Grep', 'Glob', 'AskUserQuestion')
     'pm-delivery-ops'      = @('Read', 'Write', 'AskUserQuestion')
     'job-posting-tracker'  = @('Read', 'Write', 'AskUserQuestion', 'WebSearch')

@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 34 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 35 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -48,6 +48,13 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Give it:** The product/idea and its target audience.
 **Get back:** 3-5 concrete, named channel angles (not "try social media"), each with why the audience is already there, the trust-building move before any ask, and which `marketingskills` specialist to use for execution detail.
 **Runtime dependency: `marketingskills`** (cloned to `~/Desktop/skills/marketingskills` on first use, MIT). Read the selected specialist and its dependencies before execution; compatibility depends on the host and any tools that specialist uses. No platform execution test was performed in this document audit.
+
+## kr-launch-compliance-check
+
+**Trigger:** "의류 사업 규제", "티셔츠 판매 신고", "모자 KC 인증", "통신판매업 신고", "what permits do I need to sell X in Korea".
+**Give it:** The industry (apparel/caps/t-shirts, cosmetics, or massage) and what exactly you plan to sell.
+**Get back:** A table of statute, check date, and verified/unverified status per item, plus the questions that decide which items apply. Not legal advice; unverified items are marked, not guessed.
+**Dependency:** None. Reads statutes from law.go.kr (rendered in a browser).
 
 ## curator
 
