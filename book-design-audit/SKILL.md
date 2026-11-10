@@ -80,6 +80,17 @@ hash as an evidence checkpoint rather than a layout defect, render and inspect
 the candidate, update the report identity, verify the evidence gate directly,
 then rerun the deterministic full build and confirm the artifact is identical.
 
+Add automated checks for headings stranded as the last line of a page, pages
+holding only a heading plus one line, and pages with a single line; treat a page
+count change above 3% after a structural revision as a warning. Run regeneration
+first in a short-path copy that includes sibling folders and external tool paths,
+and recheck any backup you made right after making it and after each major step.
+Markdown batch-edit tools must track code-fence state and skip fenced lines,
+with a before/after diff confirming only intended lines changed. Separate
+reader-facing rights or edition information from internal workflow controls:
+keep pre-release enforcement in filenames, package metadata, review bundles, and
+release gates, and add a visible page only when the reader needs the information.
+
 ## Pre-delivery verification
 
 Before reporting completion, re-read this skill and confirm:
