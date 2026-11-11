@@ -106,6 +106,7 @@ $requiredTools = @{
     'job-posting-tracker'  = @('Read', 'Write', 'AskUserQuestion', 'WebSearch')
     'explain-for-audience' = @('Read', 'AskUserQuestion')
     'judgment-on-request'  = @('Read')
+    'comfort-writer'       = @('Read')
 }
 # PowerShell hashtable literals compare string keys case-insensitively by
 # default, so ContainsKey()/indexing below would silently match a

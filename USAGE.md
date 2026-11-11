@@ -6,7 +6,7 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 
 ## How invocation works
 
-1. **Install first.** Point your agent host's skills directory at this repo's 35 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
+1. **Install first.** Point your agent host's skills directory at this repo's 36 skill folders (for Claude Code: symlink or copy each folder under `~/.claude/skills/`). Keep `_shared/` beside the installed skill folders: their `../_shared/` references require that layout. A `SKILL.md` file sitting in this repo alone is not "installed" — the host has to be pointed at it before it can trigger.
 2. **Two ways to invoke:**
    - **Don't know which skill you need?** Call `genie` (or say "지니야") with your request in plain language. `genie` reads `_shared/ROUTING.md` and tells you which specialist skill to invoke — it does not do the work itself.
    - **Know the skill name?** Trigger it directly by using one of its trigger phrases (see each section below) or by naming it explicitly ("biz-council로 이 아이디어 검증해줘").
@@ -262,6 +262,15 @@ One section per skill: how to invoke it, what to give it, what you get back, and
 **Trigger:** "이거 어떻게 생각해", "내 의견 어때", "판단해줘", "왜 그렇게 생각해", "근거는", "확신도는", "what do you think of this", "judge this idea", "why do you think that".
 **Give it:** An opinion, proposal, or decision you want judged.
 **Get back:** A short verdict plus its single strongest reason — not a full reasoning dump. The full chain (hypothesis, evidence, counter-argument, confidence) was actually formed first but stays hidden until you ask "why"/"근거는" (reveals the reasoning chain) or "확신도는"/"how sure" (reveals the counter-argument, confidence, and what would change the verdict). Per CHI 2026's study on answer-first/on-demand rationale disclosure. Distinct from `prompt-craft`'s always-visible Chain-of-Thought and from `committee`'s multiple parallel expert personas.
+
+---
+
+## comfort-writer
+
+**Trigger:** "위로 한 줄 써 줘", "짧은 공감 문장", "생활 유머 써 줘", "짧은 시", "이 문장을 다정하게 다듬어 줘".
+**Give it:** 독자와 상황, 원하는 종류·분량, 기존 문장이 있으면 그 문장. 정보가 부족하면 최소한만 확인하거나 제한된 가정을 밝힌다.
+**Get back:** 구체적인 일상 장면에서 시작하고 훈계·진단·관계 압박을 피한 한국어 초안. 허구 화자의 말투와 안전 경계를 적용하며, 실제 위로·유머·문학성은 사람 검토 대상으로 남긴다.
+**Dependency:** 없음. 비공개 앱 코드나 사용자 자료를 포함하지 않고 재사용 가능한 창작 절차만 일반화했다. 일반적인 산문 편집은 `writing`, 위기·의학 상담은 해당 안전 절차를 사용한다.
 
 ---
 

@@ -362,6 +362,10 @@ Original methodology added 2026-09-24 after a real manuscript passed automated s
 
 Original methodology added 2026-09-29 for repeatable pre-publisher visual QA of PDF and EPUB books. The workflow combines full-page rendering, page-class coverage, defect-versus-judgment classification, and format-specific reflow checks. Its standards references point to W3C WCAG 2.2 and EPUB Accessibility 1.1; its readability references are cited with explicit limits because screen and Latin-script study results do not establish universal Korean print settings. No third-party skill text or proprietary publishing checklist is copied.
 
+## comfort-writer
+
+Original methodology generalized on 2026-11-12 from a private local Korean writing project. The public package retains only the reusable scene-first writing process, fictional voice cards, non-manipulative boundaries, and human-review gate. It excludes private app code, prompts, user material, source corpus, and project identifiers; no third-party skill text or private source text was copied. The repository MIT license applies.
+
 ## Why the originals aren't kept locally
 
 Full upstream checkouts used at runtime are kept outside Git tracking and restored on demand. This does not prove that every tracked paragraph was independently authored. Consult the source audit and applicable upstream terms before copying or redistributing original or adapted material.

@@ -211,6 +211,12 @@
       "description": "Evaluates an opinion or proposal with a full silent judgment, answers with only the verdict and strongest reason, and unpacks the reasoning chain one layer deeper each time the user actually asks why."
     },
     {
+      "name": "comfort-writer",
+      "source": "./comfort-writer",
+      "skills": ["./"],
+      "description": "Creates or refines short Korean comfort, empathy, everyday humor, and poetry with concrete scenes, fictional voices, non-manipulative boundaries, and a human-review gate."
+    },
+    {
       "name": "book-design-audit",
       "source": "./book-design-audit",
       "skills": ["./"],
