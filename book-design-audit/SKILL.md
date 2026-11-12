@@ -91,6 +91,19 @@ reader-facing rights or edition information from internal workflow controls:
 keep pre-release enforcement in filenames, package metadata, review bundles, and
 release gates, and add a visible page only when the reader needs the information.
 
+Text-layer extraction and validators verify structure only. Read rendered pages
+for every page class before reporting a pass: a system font can draw backslashes
+as won signs, and Markdown emphasis can survive as literal asterisks next to a
+Korean particle while the build and EPUBCheck pass. Turn each defect found by eye
+into a deterministic check (no emphasis markers left in rendered text outside
+code). For narrow-width checks, render inside a fixed-width iframe in a wider
+wrapper, because a headless window enforces a minimum width and crops instead of
+reflowing; this is still not an EPUB reader. Compare accessibility metadata with
+the evidence ledger and use the standards-defined unknown value until the audit
+exists, since a package validator cannot establish that a declaration is true.
+Generate numbered all-page contact sheets inside the PDF build, delete stale
+sheets first, and keep a fixture whose page count crosses the per-sheet boundary.
+
 ## Pre-delivery verification
 
 Before reporting completion, re-read this skill and confirm:
