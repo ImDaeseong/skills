@@ -96,11 +96,12 @@ for every page class before reporting a pass: a system font can draw backslashes
 as won signs, and Markdown emphasis can survive as literal asterisks next to a
 Korean particle while the build and EPUBCheck pass. Turn each defect found by eye
 into a deterministic check (no emphasis markers left in rendered text outside
-code). For narrow-width checks, render inside a fixed-width iframe in a wider
+code) and check the code font's backslash glyph on a rendered page. For narrow-width checks, render inside a fixed-width iframe in a wider
 wrapper, because a headless window enforces a minimum width and crops instead of
 reflowing; this is still not an EPUB reader. Compare accessibility metadata with
 the evidence ledger and use the standards-defined unknown value until the audit
-exists, since a package validator cannot establish that a declaration is true.
+exists, since a package validator cannot establish that a declaration is true; add a
+regression check that blocks an unsupported PASS-like declaration.
 Generate numbered all-page contact sheets inside the PDF build, delete stale
 sheets first, and keep a fixture whose page count crosses the per-sheet boundary.
 
