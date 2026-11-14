@@ -66,6 +66,10 @@ try {
     Assert-Validator 'validate_links.ps1' $true ''
     Remove-Item -LiteralPath $probe
 
+    # Korean literals are built from code points because this script is read without a BOM.
+    $gae = [regex]::Unescape('\uAC1C'); $seukil = [regex]::Unescape('\uC2A4\uD0AC'); $jeonmun = [regex]::Unescape('\uC804\uBB38'); $chong = [regex]::Unescape('\uCD1D')
+    $fileGuideName = [regex]::Unescape('\uD30C\uC77C\uC124\uBA85') + '.md'
+    $memoryGuideName = [regex]::Unescape('\uBA54\uBAA8\uB9AC') + '.md'
     foreach ($case in @(
         @('USAGE.md', "this repo's $skillCount skill folders", "this repo's 999 skill folders", 'USAGE installation skill total is stale'),
         @('USAGE.md', 'Keep `_shared/` beside', 'Keep dependencies elsewhere', 'preserve shared dependencies'),
@@ -73,6 +77,11 @@ try {
         @('ATTRIBUTION.md', '_shared/SOURCE-AUDIT.md', '_shared/missing-audit.md', 'link the source audit'),
         @('README.md', 'USAGE.md', 'removed-usage.md', 'README usage or safety documentation is stale'),
         @('README.md', [string]$skillCount, '999', 'README skill total is stale'),
+        # 2026-11-15 audit: prose skill counts outside README/USAGE went stale unnoticed.
+        @('.claude-plugin/marketplace.json', "genie router plus $($skillCount - 1) specialist skills", 'genie router plus 999 specialist skills', 'skill count claim is stale: marketplace.json description'),
+        @('.claude-plugin/marketplace.json', 'genie router plus', 'genie router and', 'skill count claim sentence missing: marketplace.json description'),
+        @($fileGuideName, "$skillCount$gae $seukil", "999$gae $seukil", 'skill count claim is stale: Korean file guide README row'),
+        @($memoryGuideName, "$gae $jeonmun $seukil, $chong $skillCount$gae", "$gae $jeonmun $seukil, $chong 999$gae", 'skill count claim is stale: Korean memory guide skill total'),
         @('USAGE.md', 'Planning, manufacturing, and literal ERP/SCM/CRM software-system integration', 'Planning, manufacturing, sales, and financial operations', 'still defers'),
         @('biz-ops/SKILL.md', 'founder-finance', 'deferred-finance', 'biz-ops must route'),
         # 2026-09-26 독립 리뷰 발견: PowerShell -ne는 기본적으로 대소문자를

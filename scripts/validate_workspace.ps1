@@ -295,6 +295,33 @@ if (-not $diagramText.Contains('ARCHIFY_DIR=~/Desktop/skills/archify-src/archify
 if (-not $usageText.Contains("this repo's $($skillFiles.Count) skill folders")) {
     $errors.Add('USAGE installation skill total is stale')
 }
+# Skill-count claims in prose that the checks above do not cover. A stale number here
+# survived the earlier marketplace/README guards (2026-11-15 audit), so each claim is
+# parsed and compared with the real count. A missing sentence is an error too, so a
+# rewrite cannot silently drop the check. Korean text is matched by code point because
+# this script is read without a BOM.
+$specialistCount = @($specialists).Count
+$countClaims = @(
+    @{ Label = 'marketplace.json description'; Path = (Join-Path $Root '.claude-plugin\marketplace.json'); Pattern = 'genie router plus (\d+) specialist skills'; Expect = @($specialistCount) },
+    @{ Label = 'Korean file guide README row'; NamePattern = '^\uD30C\uC77C\uC124\uBA85\.md$'; Pattern = '(?m)^\|\s*`README\.md`\s*\|[^|]*?(\d+)\uAC1C \uC2A4\uD0AC'; Expect = @($skillFiles.Count) },
+    @{ Label = 'Korean memory guide skill total'; NamePattern = '^\uBA54\uBAA8\uB9AC\.md$'; Pattern = '(\d+)\uAC1C \uC804\uBB38 \uC2A4\uD0AC, \uCD1D (\d+)\uAC1C'; Expect = @($specialistCount, $skillFiles.Count) }
+)
+foreach ($claim in $countClaims) {
+    $claimPath = $claim.Path
+    if (-not $claimPath) {
+        $found = Get-ChildItem -LiteralPath $Root -File | Where-Object { $_.Name -match $claim.NamePattern } | Select-Object -First 1
+        if ($found) { $claimPath = $found.FullName }
+    }
+    if (-not $claimPath -or -not (Test-Path -LiteralPath $claimPath)) { $errors.Add("skill count claim file missing: $($claim.Label)"); continue }
+    $claimText = Get-Content -LiteralPath $claimPath -Raw -Encoding utf8
+    $claimMatch = [regex]::Match($claimText, $claim.Pattern)
+    if (-not $claimMatch.Success) { $errors.Add("skill count claim sentence missing: $($claim.Label)"); continue }
+    for ($i = 0; $i -lt $claim.Expect.Count; $i++) {
+        if ([int]$claimMatch.Groups[$i + 1].Value -ne [int]$claim.Expect[$i]) {
+            $errors.Add("skill count claim is stale: $($claim.Label) says $($claimMatch.Groups[$i + 1].Value), actual $($claim.Expect[$i])")
+        }
+    }
+}
 if (-not $usageText.Contains('Keep `_shared/` beside')) {
     $errors.Add('USAGE installation must preserve shared dependencies')
 }
