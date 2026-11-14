@@ -213,6 +213,12 @@ New skill (2026-08-21) — the second half of the same tutorial's workflow (see 
 
 **Source-code safety audit (LAW 1 point 5), 2026-08-21:** `SKILL.md`, `install.sh`, and `setup.sh` were read directly (fetched from the repo's `main` branch) before adoption. `install.sh` only copies files locally. `setup.sh` creates a Python venv and installs `faster-whisper`/`mediapipe`/`opencv-python`/`torch` (CPU or CUDA, GPU-detected) via `pip`, plus the Remotion project's npm dependencies — no `curl | sh` from an untrusted source, no destructive commands. The pipeline runs entirely locally (`ffmpeg`, local Whisper, local Remotion render) with no third-party API calls at all, so there is no data-exfiltration surface beyond tools the user already installs. No hidden trigger-and-payload found.
 
+## image-motion-graphics (lyric text layer)
+
+| Project | Link | Review record | License | Role |
+|---|---|---|---|---|
+| **852wa/JIZURA** | [github.com/852wa/JIZURA](https://github.com/852wa/JIZURA) | Cloned and run 2026-11-15 (v0.13.0, commit 4c8278c); README and `LICENSE` read directly | MIT, © hakoniwa | External tool only (not vendored). Browser lyric-motion generator; Step 9 of `image-motion-graphics` uses its transparent-PNG export as a text layer. Does not auto-align lyrics to audio. |
+
 ## footage-editor
 
 New skill (2026-09-06) — evaluated after a request to check whether `browser-use/video-use` could be reflected into this workspace. Confirmed genuinely non-duplicative against both `video-producer` (script/asset-list → rendered video) and `image-motion-graphics` (one still image → PSD/AEP): neither starts from already-shot raw camera footage, which is exactly what `video-use` edits. Adopted as a runtime dependency (wrapped, not vendored), the same discipline as `video-watcher`→`claude-video`.

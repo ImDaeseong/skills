@@ -96,6 +96,17 @@ Run the bounded verification loop required by CORE-LAWS. Produce fresh evidence 
 
 Stop at HOLD when editable-format creation or visual review cannot be performed in the current environment. Return the completed earlier-stage assets and the precise remaining manual step.
 
+## 9. Optional: animated lyric text layer (external tool, JIZURA)
+
+When the user wants moving lyric typography over the finished background, use JIZURA ([852wa/JIZURA](https://github.com/852wa/JIZURA), MIT, © hakoniwa; Korean UI at `/ko/`) as an external browser tool. Do not copy or fork its code. It does not align lyrics to audio: timing comes from an imported LRC/SRT/VTT file, tap-sync (Space per line), or beat detection, so the user must supply or tap the timestamps. Browser operation is manual for the user unless a browser-automation tool is already installed.
+
+1. Prepare an LRC (`[mm:ss.xx]lyric` per line) from the user's timestamps; JIZURA can also export the timing it ends up with (`LRC`).
+2. In JIZURA, import the LRC and audio, then export **투명 PNG (ZIP·배경 없음)**. Frames are RGBA, 1920x1080, 30 fps.
+3. Composite the frame sequence over the finished background, matching the delivery frame rate rather than the 12 fps stop-motion rate (the text layer is not part of the motion-locked background rules): `ffmpeg -i background.mp4 -framerate 30 -i jizura_%05d.png -filter_complex "[0][1]overlay=format=auto:shortest=1" out.mp4`.
+4. Check three things before delivery: the lyric lines land on the audio, the text color reads against the actual background (some styles emit dark glyphs), and the decorative HUD text some styles add is wanted.
+
+Verified 2026-11-15 against JIZURA 0.13.0 (commit 4c8278c) with four Korean lyric lines: LRC import and export, correct Hangul rendering, an alpha channel that survives compositing, and a 278-frame sequence composited to a 1920x1080, 30 fps, 9.27 s video over a solid color. Not verified: MP4 export from JIZURA, audio-aligned timing against a real song, and compositing over a real video background. If a skipped item matters for the task, run it first and report the result.
+
 ## Evaluation scenarios
 
 Before a major revision, check the skill against these requests:
